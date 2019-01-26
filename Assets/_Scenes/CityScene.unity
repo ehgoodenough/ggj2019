@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657826, g: 0.49641263, b: 0.57481676, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -179,7 +179,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
 --- !u!1001 &583266488
 PrefabInstance:
@@ -250,6 +250,75 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 431cf4c685a9ea249b3c654a87d59866, type: 3}
+--- !u!1001 &1128928516
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 6503391886999639565, guid: 4c4ca51cdc9634120947f981294e4c48,
+        type: 3}
+      propertyPath: m_Name
+      value: DoorToHome
+      objectReference: {fileID: 0}
+    - target: {fileID: 6503391886999639566, guid: 4c4ca51cdc9634120947f981294e4c48,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 81.249504
+      objectReference: {fileID: 0}
+    - target: {fileID: 6503391886999639566, guid: 4c4ca51cdc9634120947f981294e4c48,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 18.950775
+      objectReference: {fileID: 0}
+    - target: {fileID: 6503391886999639566, guid: 4c4ca51cdc9634120947f981294e4c48,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -19.6
+      objectReference: {fileID: 0}
+    - target: {fileID: 6503391886999639566, guid: 4c4ca51cdc9634120947f981294e4c48,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6503391886999639566, guid: 4c4ca51cdc9634120947f981294e4c48,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6503391886999639566, guid: 4c4ca51cdc9634120947f981294e4c48,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6503391886999639566, guid: 4c4ca51cdc9634120947f981294e4c48,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6503391886999639566, guid: 4c4ca51cdc9634120947f981294e4c48,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6503391886999639566, guid: 4c4ca51cdc9634120947f981294e4c48,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6503391886999639566, guid: 4c4ca51cdc9634120947f981294e4c48,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6503391886999639566, guid: 4c4ca51cdc9634120947f981294e4c48,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 4c4ca51cdc9634120947f981294e4c48, type: 3}
 --- !u!1 &1303672053
 GameObject:
   m_ObjectHideFlags: 0
@@ -339,7 +408,7 @@ Transform:
   m_LocalScale: {x: 2, y: 2, z: 2}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1399988777
 PrefabInstance:
@@ -406,6 +475,11 @@ PrefabInstance:
     - target: {fileID: 8936142915063238566, guid: cb1811ec7b8376146bd1a4e064b08c03,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2578118873149337411, guid: cb1811ec7b8376146bd1a4e064b08c03,
+        type: 3}
+      propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
