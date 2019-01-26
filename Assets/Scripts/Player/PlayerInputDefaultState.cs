@@ -33,8 +33,11 @@ public class PlayerInputDefaultState : State
         // Handle Movement & Looking
         if (focusedInteractable == null || !focusedInteractable.IsInteractionRestrictingMovement())
         {
-            float forward = player.GetAxis("Move Vertical"); // Input.GetAxisRaw("Vertical");
-            float strafe = player.GetAxis("Move Horizontal"); // Input.GetAxisRaw("Horizontal");
+            float keyboardVertical = Input.GetAxisRaw("Vertical");
+            float keyboardHorizontal = Input.GetAxisRaw("Horizontal");
+
+            float forward = Mathf.Abs(keyboardVertical) > 0 ? keyboardVertical : player.GetAxis("Move Vertical");
+            float strafe = Mathf.Abs(keyboardHorizontal) > 0 ? keyboardHorizontal : player.GetAxis("Move Horizontal");
 
             Vector3 moveVector = Vector3.forward * forward + Vector3.right * strafe;
             movement.Move(moveVector.normalized);
