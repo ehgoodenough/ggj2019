@@ -12,12 +12,16 @@
 		_LuminancePower("Luminance power", Float) = 2
 		_LuminanceLevels("Luminance levels", Float) = 3
 		_LuminanceLerp("Luminance lerp", Float) = .5
+
+		// for wave effect
+		_ScanDistance("Scan Distance", float) = 0
+		_EffectPos("Effect Position", Vector) = (1,1,1,1)
 			
     }
     SubShader
     {
         // No culling or depth
-        Cull Off ZWrite Off ZTest Always
+        Cull Off ZTest Always
 
         Pass
         {
@@ -31,12 +35,14 @@
             {
                 float4 vertex : POSITION;
                 float2 uv : TEXCOORD0;
+				float4 ray : TEXCOORD1;
             };
 
             struct v2f
             {
                 float2 uv : TEXCOORD0;
                 float4 vertex : SV_POSITION;
+				float4 interpolatedRay : TEXCOORD1;
             };
 
             v2f vert (appdata v)
@@ -44,6 +50,7 @@
                 v2f o;
                 o.vertex = UnityObjectToClipPos(v.vertex);
                 o.uv = v.uv;
+				o.interpolatedRay = v.ray;
                 return o;
             }
 
@@ -59,8 +66,19 @@
 			float _LuminanceLerp;
 			float _LuminanceLevels;
 
+			float4 _EffectOrigin;
+			float _ScanDistance;
+
             fixed4 frag (v2f i) : SV_Target
             {
+				// saturation wave stuff
+				float rawDepth = DecodeFloatRG(tex2D(_CameraDepthTexture, i.uv));
+				float linearDepth = Linear01Depth(rawDepth);
+				float4 wsDir = linearDepth * i.interpolatedRay;
+				float3 wsPos = _WorldSpaceCameraPos + wsDir;
+
+				float dist = distance(wsPos, _EffectOrigin);
+
 				fixed4 texCol = tex2D(_MainTex, i.uv);
 				
 				float darkness = (1 - Luminance(texCol.rgb));
@@ -84,7 +102,9 @@
 				float colorBufferSample = tex2D(_ColorBuffer, i.uv).r;
 
 				fixed4 halftoneColor = lerp(fixed4(1, 1, 1, 1) * dotCol * steppedLuminance, floor(Luminance(pow((texCol.rgb), _LuminancePower)) / inc) * inc, _LuminanceLerp);
-				return colorBufferSample > .5 && depthDifference < -.001 ? lerp(dotCol, texCol, .95) : halftoneColor;
+				fixed4 modifiedColor = colorBufferSample > .5 && depthDifference < -.001 ? lerp(dotCol, texCol, .95) : halftoneColor;
+
+				return lerp(texCol, modifiedColor, step(_ScanDistance, dist));
             }
             ENDCG
         }
