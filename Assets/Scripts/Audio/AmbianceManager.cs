@@ -25,13 +25,8 @@ public class AmbianceManager : MonoBehaviour
 
     void Start()
     {
-        cityMusicInstance = FMODUnity.RuntimeManager.CreateInstance(CityMusicEvent);
         thunderAmbianceInstance = FMODUnity.RuntimeManager.CreateInstance(ThunderAmbianceEvent);
-
         homeMusicInstance = FMODUnity.RuntimeManager.CreateInstance(HomeMusicEvent);
-
-        cityMusicInstance.set3DAttributes(FMODUnity.RuntimeUtils.To3DAttributes(transform.position));
-        FMODUnity.RuntimeManager.AttachInstanceToGameObject(cityMusicInstance, gameObject.transform, rb);
 
         thunderAmbianceInstance.start();
 
@@ -41,6 +36,7 @@ public class AmbianceManager : MonoBehaviour
 
     private void OnEnterHome(EnterHomeEvent e) {
         cityMusicInstance.stop(FMOD.Studio.STOP_MODE.IMMEDIATE);
+        cityMusicInstance.release();
         FMOD.Studio.ParameterInstance param;
         thunderAmbianceInstance.getParameter("Location", out param);
         param.setValue(100);
@@ -50,11 +46,11 @@ public class AmbianceManager : MonoBehaviour
 
     private void OnEnterCity(EnterCityEvent e)
     {
+        cityMusicInstance = FMODUnity.RuntimeManager.CreateInstance(CityMusicEvent);
         homeMusicInstance.stop(FMOD.Studio.STOP_MODE.IMMEDIATE);
         FMOD.Studio.ParameterInstance param;
         thunderAmbianceInstance.getParameter("Location", out param);
         param.setValue(0);
-        cityMusicInstance.setTimelinePosition(0);
         cityMusicInstance.start();
     }
 }
