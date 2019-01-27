@@ -5,27 +5,8 @@ using Rewired;
 
 [RequireComponent(typeof(PlayerMovement))]
 [RequireComponent(typeof(PlayerView))]
-public class PlayerInputDefaultState : State
+public class PlayerInputDefaultState : PlayerInputStateBase
 {
-    private int playerId = 0; // The Rewired player id
-    private Player player; // The Rewired Player
-
-    private PlayerMovement movement;
-    private PlayerView playerView;
-    private InteractionDetector interactionDetector;
-    private PickupHolder pickupHolder;
-
-    protected override void DoAwake()
-    {
-        player = ReInput.players.GetPlayer(playerId);
-
-        movement = GetComponent<PlayerMovement>();
-        playerView = GetComponent<PlayerView>();
-
-        interactionDetector = GetComponentInChildren<InteractionDetector>();
-        pickupHolder = GetComponentInChildren<PickupHolder>();
-    }
-
     public override void DoUpdate()
     {
         Interactable focusedInteractable = interactionDetector.GeInteractableInFocus(); // Note: the held item is never focused
