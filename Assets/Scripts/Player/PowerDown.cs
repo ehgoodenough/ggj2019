@@ -11,19 +11,21 @@ public class PowerDown : MonoBehaviour
 
     private GlitchEffect glitchEffect;
 
-    private void Awake()
+    //private void Awake()
+    //{
+    //    glitchEffect = FindObjectOfType<GlitchEffect>();
+    //    Init();
+    //}
+
+    //private void OnLevelWasLoaded(int level)
+    //{
+    //    Init();
+    //}
+
+    public void Init()
     {
         glitchEffect = FindObjectOfType<GlitchEffect>();
-        Init();
-    }
 
-    private void OnLevelWasLoaded(int level)
-    {
-        Init();
-    }
-
-    void Init()
-    {
         glitchEffect.enabled = false;
         textCanvasGrewp.alpha = 0;
         fadeCanvasGrewp.alpha = 0;

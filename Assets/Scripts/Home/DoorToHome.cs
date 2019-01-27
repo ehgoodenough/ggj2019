@@ -41,6 +41,8 @@ public class DoorToHome : Interactable
 
     IEnumerator EnterHome(Pickupable heldItem)
     {
+        sceneTransitionFade = GameObject.Find("SceneTransitionFade").GetComponent<CanvasGroup>();
+
         Debug.Log("Entering home");
         sceneTransitionFade.alpha = 0;
         while (sceneTransitionFade.alpha < 1)
