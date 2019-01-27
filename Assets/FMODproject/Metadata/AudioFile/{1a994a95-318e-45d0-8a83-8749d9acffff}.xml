@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.01.10.00">
+    <object class="AudioFile" id="{1a994a95-318e-45d0-8a83-8749d9acffff}">
+        <property name="assetPath">
+            <value>Dorg_Footstep_14.wav</value>
+        </property>
+        <property name="frequencyInKHz">
+            <value>96</value>
+        </property>
+        <property name="channelCount">
+            <value>2</value>
+        </property>
+        <property name="length">
+            <value>1.0408645833333334</value>
+        </property>
+        <relationship name="masterAssetFolder">
+            <destination>{299d1c0e-dce9-4986-b071-d608f78c5e66}</destination>
+        </relationship>
+    </object>
+</objects>

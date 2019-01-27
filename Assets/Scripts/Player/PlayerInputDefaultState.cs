@@ -40,7 +40,8 @@ public class PlayerInputDefaultState : State
             float strafe = Mathf.Abs(keyboardHorizontal) > 0 ? keyboardHorizontal : player.GetAxis("Move Horizontal");
 
             Vector3 moveVector = Vector3.forward * forward + Vector3.right * strafe;
-            movement.Move(moveVector.normalized);
+            moveVector = moveVector.sqrMagnitude > 1f ? moveVector.normalized : moveVector;
+            movement.Move(moveVector);
         }
 
         if (focusedInteractable == null || !focusedInteractable.IsInteractionRestrictingView())

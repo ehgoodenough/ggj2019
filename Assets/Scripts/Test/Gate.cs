@@ -16,10 +16,13 @@ public class Gate : MonoBehaviour
 
     private void OpenGate()
     {
-        Debug.Log("Open Gate");
-        isOpen = true;
-        startYPosition = transform.position.y;
-        StartCoroutine(OpenGateAnimation());
+        Debug.Log("OpenGate()");
+        if (!isOpen)
+        {
+            isOpen = true;
+            startYPosition = transform.position.y;
+            StartCoroutine(OpenGateAnimation());
+        }
     }
 
     private IEnumerator OpenGateAnimation()

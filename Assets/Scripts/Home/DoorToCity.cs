@@ -9,11 +9,11 @@ public class DoorToCity : Interactable
     // from the house to the city outside.
     public override bool CanInteractWith(Pickupable heldItem)
     {
-        return heldItem == null;
+        return heldItem == null; // Maybe we can bring other objects in and out?
     }
 
     public override void Interact(Pickupable heldItem)
     {
-        SceneManager.LoadScene("CityScene");
+        EventBus.PublishEvent(new LeaveHomeEvent(heldItem));
     }
 }

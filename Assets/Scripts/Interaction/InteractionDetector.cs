@@ -16,6 +16,9 @@ public class InteractionDetector : MonoBehaviour
         playerCamera = GetComponentInParent<Camera>();
         // Debug.Log("playerCamera: " + playerCamera);
         pickupHolder = GetComponent<PickupHolder>();
+
+        EventBus.Subscribe<ExitHomeEvent>(OnExitHomeEvent);
+        EventBus.Subscribe<ExitCityEvent>(OnExitCityEvent);
     }
 
     private void Update()
@@ -43,6 +46,8 @@ public class InteractionDetector : MonoBehaviour
             SortInteractablesInRange();
             foreach (Interactable interactable in interactablesInRange)
             {
+                if (!interactable) continue;
+
                 Pickupable pickupable = interactable.GetComponent<Pickupable>();
 
                 // Ignore the currently held item
@@ -134,5 +139,18 @@ public class InteractionDetector : MonoBehaviour
         {
             OutlineManager.Instance.UnapplyOutline(interactableInFocus.gameObject);
         }
+    }
+
+    
+    private void OnExitCityEvent(ExitCityEvent e)
+    {
+        Debug.Log("InteractionDetector.OnExitCityEvent");
+        interactablesInRange.Clear();
+    }
+
+    private void OnExitHomeEvent(ExitHomeEvent e)
+    {
+        // Debug.Log("InteractionDetector.OnLeaveHomeEvent");
+        interactablesInRange.Clear();
     }
 }

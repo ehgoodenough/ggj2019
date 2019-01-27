@@ -8,6 +8,17 @@
 [Bb]uilds/
 [Ll]ogs/
 
+# FMOD
+Assets/FMODStudioCache.asset
+Assets/FMODStudioCache.asset.meta
+Assets/StreamingAssets/
+!Assets/FMODproject/[Bb]uild/
+fmod.log
+fmod_editor.log
+Assets/FMODproject/.cache/
+Assets.FMODproject/.unsaved/
+Assets.FMODproject/.user
+
 # Never ignore Asset meta data
 ![Aa]ssets/**/*.meta
 
@@ -52,3 +63,4 @@ sysinfo.txt
 
 # Crashlytics generated file
 crashlytics-build.properties
+/Assets/StreamingAssets/Master Bank.strings.bank.meta
