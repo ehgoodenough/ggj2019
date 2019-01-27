@@ -254,7 +254,7 @@ Light:
     m_CustomResolution: -1
     m_Strength: 1
     m_Bias: 0.05
-    m_NormalBias: 0.4
+    m_NormalBias: 0
     m_NearPlane: 0.2
   m_Cookie: {fileID: 0}
   m_DrawHalo: 0
@@ -658,6 +658,16 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2789683484328515343, guid: 535c82aa71d3a3447bb261ba8d989b43,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: b5dc7dead49165e419c5528e6d2ee138, type: 2}
+    - target: {fileID: 2789683484328515347, guid: 535c82aa71d3a3447bb261ba8d989b43,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: f87d943b8c867af4ab7689ea9228ec73, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 535c82aa71d3a3447bb261ba8d989b43, type: 3}
 --- !u!1001 &855667110585820141
