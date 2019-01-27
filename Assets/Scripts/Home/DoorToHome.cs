@@ -19,6 +19,7 @@ public class DoorToHome : Interactable
         if(heldItem is ObjectivePickupable) {
             ObjectivePickupable objectiveItem = (ObjectivePickupable)heldItem;
             GameProgress.CompleteObjective(objectiveItem.type);
+            Object.Destroy(heldItem.gameObject);
         }
 
         EventBus.PublishEvent(new ReturnHomeEvent(heldItem));
