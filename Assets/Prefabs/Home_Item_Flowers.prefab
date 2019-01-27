@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 124920811863276855}
   - component: {fileID: 124920811863276854}
   - component: {fileID: 1552714615439292057}
+  - component: {fileID: 2592233055704966406}
   m_Layer: 0
   m_Name: Home_Item_Flowers
   m_TagString: Untagged
@@ -105,5 +106,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9e02b863558f448e18587507257d2bc9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isHome: 1
+  location: 0
   type: 1
+--- !u!208 &2592233055704966406
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 124920811863276852}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 0
+  m_Extents: {x: 0.5, y: 1, z: 0.5}
+  m_MoveThreshold: 0.1
+  m_Carve: 0
+  m_CarveOnlyStationary: 1
+  m_Center: {x: 0, y: 0, z: 0}
+  m_TimeToStationary: 0.5
