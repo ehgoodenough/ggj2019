@@ -31,7 +31,10 @@ public class ColorEffect : MonoBehaviour
         colorBufferCam.RenderWithShader(colorBufferShader, "");
         colorBufferCam.SetTargetBuffers(colorBuffer.colorBuffer, depthBuffer.depthBuffer);
 
-        halftoneMat.SetVector("_EffectOrigin", saturationWaveOrigin.position);
+        if (saturationWaveOrigin)
+        {
+            halftoneMat.SetVector("_EffectOrigin", saturationWaveOrigin.position);
+        }
 
         halftoneMat.SetTexture("_ColorBuffer", colorBuffer);
         halftoneMat.SetTexture("_DepthBuffer", depthBuffer);

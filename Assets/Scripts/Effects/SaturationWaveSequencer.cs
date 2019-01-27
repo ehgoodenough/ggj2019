@@ -8,6 +8,8 @@ public class SaturationWaveSequencer : MonoBehaviour
     public float scanEffectRate = 2f;
     public float effectDistanceLimit = 20f;
 
+    bool effectIsActive = false;
+
     [SerializeField]
     private float currentHomeSaturationLevel;
     [SerializeField]
@@ -28,6 +30,7 @@ public class SaturationWaveSequencer : MonoBehaviour
 
     private void Awake()
     {
+        colorEffectMat.SetFloat("_ScanDistance", 0);
         colorEffectMat.SetFloat("_SaturationLevel", 0);
         colorEffectMat.SetFloat("_TargetSaturationLevel", saturationIncrement);
     }
@@ -36,19 +39,23 @@ public class SaturationWaveSequencer : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.KeypadEnter))
         {
-            IncreaseSaturationLevel();
+            // For testing.
+            // IncreaseSaturationLevel();
         }
     }
 
     public void IncreaseSaturationLevel()
     {
-        Debug.Log("increase that shit");
-        colorEffectMat.SetFloat("_TargetSaturationLevel", currentHomeSaturationLevel + saturationIncrement);
-        StartCoroutine(DoEffect());
+        if (!effectIsActive)
+        {
+            colorEffectMat.SetFloat("_TargetSaturationLevel", currentHomeSaturationLevel + saturationIncrement);
+            StartCoroutine(DoEffect());
+        }
     }
 
     IEnumerator DoEffect()
     {
+        effectIsActive = true;
         float currentScanDistance = 0;
 
         while (currentScanDistance < effectDistanceLimit)
@@ -61,5 +68,7 @@ public class SaturationWaveSequencer : MonoBehaviour
         currentHomeSaturationLevel += saturationIncrement;
         colorEffectMat.SetFloat("_SaturationLevel", currentHomeSaturationLevel);
         colorEffectMat.SetFloat("_ScanDistance", 0);
+        Debug.Log("donezo");
+        effectIsActive = false;
     }
 }
