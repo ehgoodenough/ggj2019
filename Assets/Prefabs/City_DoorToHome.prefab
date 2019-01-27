@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 6503391886999639560}
   - component: {fileID: 6503391886999639567}
   m_Layer: 0
-  m_Name: DoorToHome
+  m_Name: City_DoorToHome
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -104,3 +104,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: af1e148530b33477d971618507658888, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  doorOpenEvent: event:/SFX/Interactables/Door_Open
+  doorCloseEvent: event:/SFX/Interactables/Door_Close
