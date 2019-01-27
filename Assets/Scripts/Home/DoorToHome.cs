@@ -5,6 +5,8 @@ using UnityEngine;
 
 public class DoorToHome : Interactable
 {
+    public CanvasGroup sceneTransitionFade;
+    public float fadeDuration = 1f;
     // public Transform Item1;
     // public Transform Item2;
     // public Transform Item3;
@@ -32,7 +34,23 @@ public class DoorToHome : Interactable
             Object.Destroy(heldItem.gameObject);
         }
 
-        EventBus.PublishEvent(new ReturnHomeEvent(heldItem));
+        StartCoroutine(EnterHome(heldItem));
+        //EventBus.PublishEvent(new ReturnHomeEvent(heldItem));
         FMODUnity.RuntimeManager.PlayOneShotAttached(doorOpenEvent, FindObjectOfType<PlayerMovement>().gameObject);
+    }
+
+    IEnumerator EnterHome(Pickupable heldItem)
+    {
+        sceneTransitionFade = GameObject.Find("SceneTransitionFade").GetComponent<CanvasGroup>();
+
+        Debug.Log("Entering home");
+        sceneTransitionFade.alpha = 0;
+        while (sceneTransitionFade.alpha < 1)
+        {
+            sceneTransitionFade.alpha += Time.deltaTime / fadeDuration;
+            yield return null;
+        }
+
+        EventBus.PublishEvent(new ReturnHomeEvent(heldItem));
     }
 }

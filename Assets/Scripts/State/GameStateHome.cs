@@ -4,6 +4,9 @@ using UnityEngine.SceneManagement;
 
 public class GameStateHome : State
 {
+    public CanvasGroup sceneTransitionFade;
+    public float fadeDuration = 1f;
+
     public Transform playerStart;
     public Transform dogStart;
 
@@ -66,5 +69,16 @@ public class GameStateHome : State
         SceneManager.LoadScene("RobertCityScene");
         // SceneManager.LoadScene("CityScene");
         stateMachine.ChangeState(cityState);
+    }
+
+    IEnumerator FadeIn()
+    {
+        sceneTransitionFade = GameObject.Find("SceneTransitionFade").GetComponent<CanvasGroup>();
+
+        while (sceneTransitionFade.alpha > 0)
+        {
+            sceneTransitionFade.alpha -= Time.deltaTime / fadeDuration;
+            yield return null;
+        }
     }
 }
