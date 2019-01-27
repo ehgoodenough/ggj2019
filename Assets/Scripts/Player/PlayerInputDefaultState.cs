@@ -17,6 +17,8 @@ public class PlayerInputDefaultState : State
 
     private StateMachine gameStateMachine;
 
+    private Photo photo;
+
     protected override void DoAwake()
     {
         Debug.Log("PlayerInputStateBase.DoAwake()");
@@ -27,6 +29,8 @@ public class PlayerInputDefaultState : State
         playerView = GetComponent<PlayerView>();
         interactionDetector = GetComponentInChildren<InteractionDetector>();
         pickupHolder = GetComponentInChildren<PickupHolder>();
+
+        photo = GetComponentInChildren<Photo>();
 
         gameStateMachine = FindObjectOfType<GameStateTitleScreen>().GetComponent<StateMachine>();
     }
@@ -45,6 +49,17 @@ public class PlayerInputDefaultState : State
             {
                 Debug.Log("StartGame");
                 EventBus.PublishEvent(new StartGameEvent());
+            }
+        }
+        else
+        {
+            if (Input.GetKey("space") || player.GetAxis("ShowPhoto") > 0)
+            {
+                photo.ShowPhoto();
+            }
+            else
+            {
+                photo.HidePhoto();
             }
         }
 
