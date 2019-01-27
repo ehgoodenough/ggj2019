@@ -19,6 +19,7 @@
 		_ScanSmoothAmount("Scan Smooth Amount", float) = 0
 		_EdgeNoiseTex("Edge Noise Texture", 2D) = "white" {}
 		_EdgeScale("Edge Scale", float) = 0
+		_EdgeScaleX("Edge Scale X", float) = 0
     }
     SubShader
     {
@@ -73,6 +74,38 @@
 			float _ScanSmoothAmount;
 			sampler2D _EdgeNoiseTex;
 			float _EdgeScale;
+			float _EdgeScaleX;
+
+			// 2D Random
+			float random(fixed2 st) {
+				return frac(sin(dot(st.xy,
+					fixed2(12.9898, 78.233)))
+					* 43758.5453123);
+			}
+
+			// 2D Noise based on Morgan McGuire @morgan3d
+			// https://www.shadertoy.com/view/4dS3Wd
+			float noise(fixed2 st) {
+				fixed2 i = floor(st);
+				fixed2 f = frac(st);
+
+				// Four corners in 2D of a tile
+				float a = random(i);
+				float b = random(i + fixed2(1.0, 0.0));
+				float c = random(i + fixed2(0.0, 1.0));
+				float d = random(i + fixed2(1.0, 1.0));
+
+				// Smooth Interpolation
+
+				// Cubic Hermine Curve.  Same as SmoothStep()
+				fixed2 u = f * f*(3.0 - 2.0*f);
+				// u = smoothstep(0.,1.,f);
+
+				// Mix 4 coorners percentages
+				return lerp(a, b, u.x) +
+					(c - a)* u.y * (1.0 - u.x) +
+					(d - b) * u.x * u.y;
+			}
 
             fixed4 frag (v2f i) : SV_Target
             {
@@ -112,7 +145,9 @@
 				fixed4 modifiedColor = colorBufferSample > .5 && depthDifference < -.001 ? lerp(dotCol, texCol, .95) : halftoneColor;
 
 				float noiseLookup = atan2(wsPos.z - _EffectOrigin.z, wsPos.x - _EffectOrigin.x);
-				dist += (tex2D(_EdgeNoiseTex, fixed2(noiseLookup * .5, .5 + _Time.x)) * 2 - 1) * _EdgeScale;
+				_EdgeScale *= clamp((_ScanDistance - 1)/6, 0, 1);
+				dist += noise(fixed2(noiseLookup * _EdgeScaleX, _Time.y)) * _EdgeScale;
+				//dist += (tex2D(_EdgeNoiseTex, fixed2(noiseLookup * _EdgeScaleX, .5)) * 2 - 1) * _EdgeScale;
 
 				// TODO: replace texCol with a dynamic value based on current saturation level.
 				return lerp(lerp(dotCol, texCol, .95), modifiedColor, smoothstep(_ScanDistance, _ScanDistance + _ScanSmoothAmount, dist));
