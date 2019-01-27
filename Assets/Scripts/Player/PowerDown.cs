@@ -49,6 +49,9 @@ public class PowerDown : MonoBehaviour
 
     IEnumerator FadeOut()
     {
+        Destroy(GameObject.Find("BootupText"));
+        Debug.Log("IT'S Gone");
+
         while (textCanvasGrewp.alpha < 1)
         {
             textCanvasGrewp.alpha += Time.deltaTime / textFadeDuration;

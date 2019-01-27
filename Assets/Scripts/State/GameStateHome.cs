@@ -47,10 +47,11 @@ public class GameStateHome : State
     protected override void DoEnter()
     {
         Debug.Log("GameStateHome.DoEnter()");
+        StartCoroutine(FadeIn());
+
         EventBus.PublishEvent(new EnterHomeEvent(this));
 
         Debug.Log("start dat coroutine");
-        StartCoroutine(FadeIn());
         FindObjectOfType<GlitchEffect>().enabled = false;
     }
 
