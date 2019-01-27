@@ -13,6 +13,13 @@ public static class GameProgress
         }
     }
     public static HashSet<ObjectivePickupable.Type> completedObjectives = new HashSet<ObjectivePickupable.Type>();
+    public static int NumObjectivesComplete
+    {
+        get
+        {
+            return completedObjectives.Count;
+        }
+    }
 
     public static bool IsIdCollected(string id)
     {

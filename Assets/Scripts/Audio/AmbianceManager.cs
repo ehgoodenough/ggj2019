@@ -40,6 +40,8 @@ public class AmbianceManager : MonoBehaviour
         FMOD.Studio.ParameterInstance param;
         thunderAmbianceInstance.getParameter("Location", out param);
         param.setValue(100);
+        homeMusicInstance.getParameter("Collection_Phase", out param);
+        param.setValue(30 * GameProgress.NumObjectivesComplete);
         homeMusicInstance.setTimelinePosition(0);
         homeMusicInstance.start();
     }

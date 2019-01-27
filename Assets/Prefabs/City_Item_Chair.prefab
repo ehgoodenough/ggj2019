@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 5170463012197334296}
   - component: {fileID: 5170463012197334293}
   - component: {fileID: 5170463012197334292}
+  - component: {fileID: 8808253645408120177}
   m_Layer: 11
   m_Name: City_Item_Chair
   m_TagString: Untagged
@@ -122,4 +123,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pickingUpClip: {fileID: 0}
+  type: 0
+--- !u!114 &8808253645408120177
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5170463012197334299}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9e02b863558f448e18587507257d2bc9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  location: 1
   type: 0
