@@ -16,7 +16,11 @@ public class Collectable : MonoBehaviour
 
     void OnCollisionEnter(Collision collision)
     {
-        GameProgress.Collect(id);
-        gameObject.SetActive(false);
+        InteractionDetector interactor = collision.gameObject.GetComponent<InteractionDetector>();
+        if (interactor)
+        {
+            GameProgress.Collect(id);
+            gameObject.SetActive(false);
+        }
     }
 }
