@@ -12,9 +12,9 @@ GameObject:
   - component: {fileID: 4915613368350672073}
   - component: {fileID: 4915613368350672072}
   - component: {fileID: 4915613368350672075}
-  - component: {fileID: 4915613368350672074}
+  - component: {fileID: 7577463843378849924}
   m_Layer: 0
-  m_Name: Art-in-Home
+  m_Name: Home_Item_Art
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -92,7 +92,7 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 0.5
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &4915613368350672074
+--- !u!114 &7577463843378849924
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -101,7 +101,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 4915613368350672069}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 63e42a2ce1af24bbd94e2a9b75b298a4, type: 3}
+  m_Script: {fileID: 11500000, guid: 9e02b863558f448e18587507257d2bc9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isHome: 1
   type: 2
