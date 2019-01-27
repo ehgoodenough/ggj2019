@@ -11,28 +11,21 @@ public class SaturationWaveSequencer : MonoBehaviour
     bool effectIsActive = false;
 
     [SerializeField]
-    private float currentHomeSaturationLevel;
-    [SerializeField]
     private float saturationIncrement = .2f; // TODO: should be 1 / numItems
 
-    void ExitHome()
+    [SubscribeGlobal]
+    void ExitHome(LeaveHomeEvent e) // change to OnDestroy, if we're just changing scenes?
     {
         StopCoroutine(DoEffect());
         colorEffectMat.SetFloat("_ScanDistance", 0);
         colorEffectMat.SetFloat("_SaturationLevel", 0);
     }
 
-    void EnterHome()
-    {
-        colorEffectMat.SetFloat("_ScanDistance", 0);
-        colorEffectMat.SetFloat("_SaturationLevel", currentHomeSaturationLevel);
-    }
-
     private void Awake()
     {
         colorEffectMat.SetFloat("_ScanDistance", 0);
-        colorEffectMat.SetFloat("_SaturationLevel", 0);
-        colorEffectMat.SetFloat("_TargetSaturationLevel", saturationIncrement);
+        colorEffectMat.SetFloat("_SaturationLevel", GameProgress.homeSaturationLevel);
+        colorEffectMat.SetFloat("_TargetSaturationLevel", GameProgress.homeSaturationLevel + saturationIncrement);
     }
 
     private void Update()
@@ -40,7 +33,7 @@ public class SaturationWaveSequencer : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.KeypadEnter))
         {
             // For testing.
-            // IncreaseSaturationLevel();
+            IncreaseSaturationLevel();
         }
     }
 
@@ -48,7 +41,7 @@ public class SaturationWaveSequencer : MonoBehaviour
     {
         if (!effectIsActive)
         {
-            colorEffectMat.SetFloat("_TargetSaturationLevel", currentHomeSaturationLevel + saturationIncrement);
+            colorEffectMat.SetFloat("_TargetSaturationLevel", GameProgress.homeSaturationLevel + saturationIncrement);
             StartCoroutine(DoEffect());
         }
     }
@@ -65,8 +58,8 @@ public class SaturationWaveSequencer : MonoBehaviour
             yield return null;
         }
 
-        currentHomeSaturationLevel += saturationIncrement;
-        colorEffectMat.SetFloat("_SaturationLevel", currentHomeSaturationLevel);
+        GameProgress.homeSaturationLevel += saturationIncrement;
+        colorEffectMat.SetFloat("_SaturationLevel", GameProgress.homeSaturationLevel);
         colorEffectMat.SetFloat("_ScanDistance", 0);
         Debug.Log("donezo");
         effectIsActive = false;
