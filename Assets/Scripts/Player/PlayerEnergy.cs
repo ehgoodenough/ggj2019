@@ -101,6 +101,10 @@ public class PlayerEnergy : MonoBehaviour
     private void HandleDepleting()
     {
         currentEnergy = Mathf.Clamp(currentEnergy - CalculateDepletionAmount(Time.deltaTime), 0f, currentMaxEnergy);
+        if (currentEnergy == 0)
+        {
+            FindObjectOfType<PowerDown>().Init();
+        }
     }
 
     private float CalculateDepletionAmount(float depletionTime)

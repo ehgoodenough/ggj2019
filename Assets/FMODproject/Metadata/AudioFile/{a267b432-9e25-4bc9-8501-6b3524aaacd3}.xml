@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.01.10.00">
+    <object class="AudioFile" id="{a267b432-9e25-4bc9-8501-6b3524aaacd3}">
+        <property name="assetPath">
+            <value>Can_Almost_See.wav</value>
+        </property>
+        <property name="frequencyInKHz">
+            <value>44.0999985</value>
+        </property>
+        <property name="channelCount">
+            <value>2</value>
+        </property>
+        <property name="length">
+            <value>2.5515646258503399</value>
+        </property>
+        <relationship name="masterAssetFolder">
+            <destination>{299d1c0e-dce9-4986-b071-d608f78c5e66}</destination>
+        </relationship>
+    </object>
+</objects>

@@ -164,6 +164,7 @@ MonoBehaviour:
   updateDestinationFrequency: 1
   startFollowingHysteresis: 2
   footstepEvent: event:/SFX/Ambience/Dorg_Footsteps
+  indoorFootstepEvent: event:/SFX/Ambience/Dorg_Indoor_Steps
   strideLength: 2
   lastFootstepLocation: {x: 0, y: 0, z: 0}
 --- !u!1001 &7513206047593369988

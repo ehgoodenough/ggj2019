@@ -6,14 +6,31 @@ using UnityEngine.SceneManagement;
 
 public class CinematicPlayer : MonoBehaviour
 {
+    public PlayableAsset openingCinematicPlayable;
+    public PlayableAsset closingCinematicPlayable;
+
     public bool openingCinematicPlayed = false;
+
+    PlayableDirector director;
+
+    private void Awake()
+    {
+        director = FindObjectOfType<PlayableDirector>();
+    }
 
     public void PlayOpeningCinematicIfNecessary()
     {
         if (!openingCinematicPlayed)
         {
-            FindObjectOfType<PlayableDirector>().Play();
+            director.playableAsset = openingCinematicPlayable;
+            director.Play();
             openingCinematicPlayed = true;
         }
+    }
+
+    public void PlayFinalCinematic()
+    {
+        director.playableAsset = closingCinematicPlayable;
+        director.Play();
     }
 }

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.01.10.00">
+    <object class="AudioFile" id="{1f0c2bf1-b51f-460c-8a3e-f682964ee6eb}">
+        <property name="assetPath">
+            <value>Cant_Wait.wav</value>
+        </property>
+        <property name="frequencyInKHz">
+            <value>44.0999985</value>
+        </property>
+        <property name="channelCount">
+            <value>2</value>
+        </property>
+        <property name="length">
+            <value>2.5046938775510204</value>
+        </property>
+        <relationship name="masterAssetFolder">
+            <destination>{299d1c0e-dce9-4986-b071-d608f78c5e66}</destination>
+        </relationship>
+    </object>
+</objects>

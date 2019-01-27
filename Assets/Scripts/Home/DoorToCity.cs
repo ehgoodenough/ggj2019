@@ -2,9 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine.SceneManagement;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class DoorToCity : Interactable
 {
+    public CanvasGroup sceneTransitionFade;
+    public float fadeDuration = 1f;
     [FMODUnity.EventRef]
     public string doorOpenEvent;
     [FMODUnity.EventRef]
@@ -32,7 +35,23 @@ public class DoorToCity : Interactable
 
     public override void Interact(Pickupable heldItem)
     {
-        EventBus.PublishEvent(new LeaveHomeEvent(heldItem));
+        //EventBus.PublishEvent(new LeaveHomeEvent(heldItem));
+        StartCoroutine(EnterCity(heldItem));
         FMODUnity.RuntimeManager.PlayOneShotAttached(doorOpenEvent, FindObjectOfType<PlayerMovement>().gameObject);
+    }
+
+    IEnumerator EnterCity(Pickupable heldItem)
+    {
+        sceneTransitionFade = GameObject.Find("SceneTransitionFade").GetComponent<CanvasGroup>();
+
+        Debug.Log("Entering city");
+        sceneTransitionFade.alpha = 0;
+        while (sceneTransitionFade.alpha < 1)
+        {
+            sceneTransitionFade.alpha += Time.deltaTime / fadeDuration;
+            yield return null;
+        }
+
+        EventBus.PublishEvent(new LeaveHomeEvent(heldItem));
     }
 }

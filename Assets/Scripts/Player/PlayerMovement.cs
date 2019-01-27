@@ -8,6 +8,8 @@ public class PlayerMovement : MonoBehaviour
 
     [FMODUnity.EventRef]
     public string footstepEvent;
+    [FMODUnity.EventRef]
+    public string indoorFootstepEvent;
     public float strideLength = 5.0f;
 
     private float currentSpeed = 0f;
@@ -15,6 +17,7 @@ public class PlayerMovement : MonoBehaviour
     private Rigidbody rb;
     private Vector3 lastFootstepLocation;
     private bool muteFootsteps = true;
+    private bool outside = false;
 
     // private NavMeshAgent agent;
 
@@ -91,6 +94,7 @@ public class PlayerMovement : MonoBehaviour
         this.transform.position = e.homeState.playerStart.position;
         this.transform.rotation = e.homeState.playerStart.rotation;
         muteFootsteps = false;
+        outside = false;
         // Debug.Log("position: " + this.transform.position);
     }
 
@@ -108,6 +112,7 @@ public class PlayerMovement : MonoBehaviour
         this.transform.position = e.cityState.playerStart.position;
         this.transform.rotation = e.cityState.playerStart.rotation;
         muteFootsteps = false;
+        outside = true;
         // Debug.Log("position: " + this.transform.position);
 
     }
@@ -120,6 +125,12 @@ public class PlayerMovement : MonoBehaviour
     private void PlayFootstep()
     {
         lastFootstepLocation = transform.position;
-        FMODUnity.RuntimeManager.PlayOneShot(footstepEvent, transform.position);
+        if (outside)
+        {
+            FMODUnity.RuntimeManager.PlayOneShot(footstepEvent, transform.position);
+        } else
+        {
+            FMODUnity.RuntimeManager.PlayOneShot(indoorFootstepEvent, transform.position);
+        }
     }
 }
