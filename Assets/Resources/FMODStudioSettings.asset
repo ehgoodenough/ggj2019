@@ -19,7 +19,7 @@ MonoBehaviour:
   SourceBankPathUnformatted: Assets\FMODproject\Build
   AutomaticEventLoading: 1
   AutomaticSampleLoading: 0
-  ImportType: 1
+  ImportType: 0
   TargetAssetPath: 
   LoggingLevel: 2
   SpeakerModeSettings:
