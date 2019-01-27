@@ -22,6 +22,9 @@
 		_EdgeScaleX("Edge Scale X", float) = 0
 		_SaturationLevel("Saturation Level", float) = 0
 		_TargetSaturationLevel("Target saturation Level", float) = 0
+		_EdgeGlowStrength("Edge glow strength", float) = 0
+		_EdgeSpeed("Edge speed", float) = 0
+		_EdgeGlowExp("Edge glow exp", float) = 0
     }
     SubShader
     {
@@ -77,6 +80,9 @@
 			sampler2D _EdgeNoiseTex;
 			float _EdgeScale;
 			float _EdgeScaleX;
+			float _EdgeGlowStrength;
+			float _EdgeSpeed;
+			float _EdgeGlowExp;
 
 			float _SaturationLevel; 
 			float _TargetSaturationLevel;
@@ -154,10 +160,17 @@
 
 				float noiseLookup = atan2(wsPos.z - _EffectOrigin.z, wsPos.x - _EffectOrigin.x);
 				_EdgeScale *= clamp((_ScanDistance - 1)/6, 0, 1);
-				dist += noise(fixed2(noiseLookup * _EdgeScaleX, _Time.y)) * _EdgeScale;
+				dist += noise(fixed2(noiseLookup * _EdgeScaleX, _Time.y * _EdgeSpeed)) * _EdgeScale;
 
-				return lerp(lerp(halftoneEffectColor, fullColor, _TargetSaturationLevel), lerp(halftoneEffectColor, fullColor, _SaturationLevel), smoothstep(_ScanDistance, _ScanDistance + _ScanSmoothAmount, dist));
-            }
+				float glowAmount = 0;
+				if (_ScanDistance > dist) {
+					float distanceFromEdge = _ScanDistance - dist;
+					float glowSize = 8;
+					float normalized = 1 - clamp(distanceFromEdge / glowSize, 0, 1);
+					glowAmount = pow(normalized, _EdgeGlowExp);
+				}
+
+				return lerp(lerp(halftoneEffectColor, fullColor, _TargetSaturationLevel + glowAmount * _EdgeGlowStrength), lerp(halftoneEffectColor, fullColor, _SaturationLevel + glowAmount * _EdgeGlowStrength), smoothstep(_ScanDistance, _ScanDistance + _ScanSmoothAmount, dist));            }
             ENDCG
         }
     }

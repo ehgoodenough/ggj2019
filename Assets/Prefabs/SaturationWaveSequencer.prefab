@@ -45,10 +45,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   colorEffectMat: {fileID: 2100000, guid: 9a7fb0512ca96f442acd8c82deefbdea, type: 2}
-  scanEffectRate: 25
+  scanEffectRate: 12
   effectDistanceLimit: 75
-  currentHomeSaturationLevel: 0
-  saturationIncrement: 0.2
+  saturationIncrement: 0.33333334
 --- !u!114 &6961618790253089509
 MonoBehaviour:
   m_ObjectHideFlags: 0

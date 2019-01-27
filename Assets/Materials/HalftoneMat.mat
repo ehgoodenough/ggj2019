@@ -78,8 +78,12 @@ Material:
     - _DotSizeBase: 0.15
     - _DotSizeMult: 1
     - _DstBlend: 0
-    - _EdgeScale: 4
-    - _EdgeScaleX: 4.59
+    - _EdgeGlowExp: 3
+    - _EdgeGlowSpeed: 1.5
+    - _EdgeGlowStrength: 1
+    - _EdgeScale: 6
+    - _EdgeScaleX: 8
+    - _EdgeSpeed: 1.5
     - _GlossMapScale: 1
     - _Glossiness: 0.5
     - _GlossyReflections: 1
@@ -92,14 +96,14 @@ Material:
     - _NumLevels: 4
     - _OcclusionStrength: 1
     - _Parallax: 0.02
-    - _SaturationLevel: 0.8
+    - _SaturationLevel: 0.6666667
     - _ScaleIncrement: 0.7
-    - _ScanDistance: 38.462284
+    - _ScanDistance: 0
     - _ScanSmoothAmount: 0.75
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
     - _SrcBlend: 1
-    - _TargetSaturationLevel: 1
+    - _TargetSaturationLevel: 0.6666667
     - _UVSec: 0
     - _ZWrite: 1
     m_Colors:

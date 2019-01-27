@@ -11,7 +11,7 @@ public class SaturationWaveSequencer : MonoBehaviour
     bool effectIsActive = false;
 
     [SerializeField]
-    private float saturationIncrement = .2f; // TODO: should be 1 / numItems
+    private float saturationIncrement = 1f/3f; // TODO: should be 1 / numItems
 
     [SubscribeGlobal]
     void ExitHome(LeaveHomeEvent e) // change to OnDestroy, if we're just changing scenes?
