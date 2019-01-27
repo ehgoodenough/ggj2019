@@ -12,6 +12,8 @@ public class RobotDogAI : MonoBehaviour
 
     [FMODUnity.EventRef]
     public string footstepEvent;
+    [FMODUnity.EventRef]
+    public string indoorFootstepEvent;
     public float strideLength = 5.0f;
 
     private NavMeshAgent agent;
@@ -22,6 +24,7 @@ public class RobotDogAI : MonoBehaviour
     [SerializeField]
     private Vector3 lastFootstepLocation;
     private bool muteFootsteps = false;
+    private bool outside = false;
 
     void Awake()
     {
@@ -97,6 +100,7 @@ public class RobotDogAI : MonoBehaviour
         // this.transform.rotation = e.homeState.dogStart.rotation;
         // Debug.Log("Position: " + this.transform.position);
         muteFootsteps = false;
+        outside = false;
     }
 
     private void OnExitHomeEvent(ExitHomeEvent e)
@@ -111,6 +115,7 @@ public class RobotDogAI : MonoBehaviour
         // PlaceOnNavMesh(e.cityState.dogStart.position);
         // this.transform.rotation = e.cityState.dogStart.rotation;
         muteFootsteps = false;
+        outside = true;
     }
 
     private void OnExitCityEvent(ExitCityEvent e)
@@ -128,6 +133,13 @@ public class RobotDogAI : MonoBehaviour
     private void PlayFootstep()
     {
         lastFootstepLocation = transform.position;
-        FMODUnity.RuntimeManager.PlayOneShot(footstepEvent, transform.position);
+        if (outside)
+        {
+            FMODUnity.RuntimeManager.PlayOneShot(footstepEvent, transform.position);
+        }
+        else
+        {
+            FMODUnity.RuntimeManager.PlayOneShot(indoorFootstepEvent, transform.position);
+        }
     }
 }

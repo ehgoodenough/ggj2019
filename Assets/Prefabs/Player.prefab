@@ -217,8 +217,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 9
   footstepEvent: event:/SFX/Ambience/Robot_Footsteps
+  indoorFootstepEvent: event:/SFX/Ambience/Robot_Indoor_Steps
   strideLength: 3
-  lastFootstepLocation: {x: 0, y: 0, z: 0}
 --- !u!114 &8936142915063238572
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -315,6 +315,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dba6d930c932b464b9d98da8ae462888, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  openingCinematicPlayed: 0
 --- !u!1 &8936142915627543873
 GameObject:
   m_ObjectHideFlags: 0
@@ -719,18 +720,6 @@ PrefabInstance:
       propertyPath: m_Pivot.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 625840491, guid: b587635b2678440438de4cf5fae550a3, type: 3}
-      propertyPath: textCanvasGrewp
-      value: 
-      objectReference: {fileID: 3047077378901196353}
-    - target: {fileID: 625840491, guid: b587635b2678440438de4cf5fae550a3, type: 3}
-      propertyPath: fadeCanvasGrewp
-      value: 
-      objectReference: {fileID: 3047077379059720628}
-    - target: {fileID: 770363285, guid: b587635b2678440438de4cf5fae550a3, type: 3}
-      propertyPath: m_Alpha
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 1091864122, guid: b587635b2678440438de4cf5fae550a3, type: 3}
       propertyPath: m_SceneBindings.Array.data[0].value
       value: 
@@ -745,6 +734,18 @@ PrefabInstance:
       objectReference: {fileID: 9081872692348742867}
     - target: {fileID: 1091864122, guid: b587635b2678440438de4cf5fae550a3, type: 3}
       propertyPath: m_InitialState
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 625840491, guid: b587635b2678440438de4cf5fae550a3, type: 3}
+      propertyPath: textCanvasGrewp
+      value: 
+      objectReference: {fileID: 3047077378901196353}
+    - target: {fileID: 625840491, guid: b587635b2678440438de4cf5fae550a3, type: 3}
+      propertyPath: fadeCanvasGrewp
+      value: 
+      objectReference: {fileID: 3047077379059720628}
+    - target: {fileID: 770363285, guid: b587635b2678440438de4cf5fae550a3, type: 3}
+      propertyPath: m_Alpha
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
@@ -792,6 +793,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 8936142915627543902}
     m_Modifications:
+    - target: {fileID: 5173505497214926241, guid: d9a5b2dee9415ef40b8074de83b6690a,
+        type: 3}
+      propertyPath: m_Name
+      value: Photo
+      objectReference: {fileID: 0}
     - target: {fileID: 5173505497214926270, guid: d9a5b2dee9415ef40b8074de83b6690a,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -846,11 +852,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5173505497214926241, guid: d9a5b2dee9415ef40b8074de83b6690a,
-        type: 3}
-      propertyPath: m_Name
-      value: Photo
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 5173505497274948296, guid: d9a5b2dee9415ef40b8074de83b6690a, type: 3}
