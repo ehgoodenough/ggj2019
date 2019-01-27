@@ -60,6 +60,8 @@ public class GameStateTitleScreen : State
 
     IEnumerator RevealTitle()
     {
+        if (!titleCanvas) yield return null;
+
         while (titleCanvas.alpha < 1)
         {
             titleCanvas.alpha += Time.deltaTime / titleFadeDuration;
