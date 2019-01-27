@@ -88,7 +88,6 @@ GameObject:
   - component: {fileID: 8936142915063238572}
   - component: {fileID: 8936142915063238575}
   - component: {fileID: 8936142915063238544}
-  - component: {fileID: 9103234419924093135}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -238,18 +237,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9a46f75f6569da94bb6d5de3f12453ef, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &9103234419924093135
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8936142915063238545}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3c756e5bd291f5c4a870e002f26db29a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &8936142915627543873
 GameObject:
   m_ObjectHideFlags: 0
@@ -263,8 +250,6 @@ GameObject:
   - component: {fileID: 8936142915627543872}
   - component: {fileID: 5787259648860762149}
   - component: {fileID: 2578118873149337411}
-  - component: {fileID: 1802807303}
-  - component: {fileID: 1802807304}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -337,7 +322,7 @@ AudioListener:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8936142915627543873}
-  m_Enabled: 0
+  m_Enabled: 1
 --- !u!114 &5787259648860762149
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -352,8 +337,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   colorBufferShader: {fileID: 4800000, guid: 86d88b3061e5bf84c8f49d91901ae22e, type: 3}
   halftoneMat: {fileID: 2100000, guid: 9a7fb0512ca96f442acd8c82deefbdea, type: 2}
-  scanDistance: 0
-  saturationWaveOrigin: {fileID: 0}
 --- !u!114 &2578118873149337411
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -368,42 +351,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   outlineBufferShader: {fileID: 4800000, guid: 86d88b3061e5bf84c8f49d91901ae22e, type: 3}
   outlineMat: {fileID: 2100000, guid: b49ab6cecaeccb44bac4797dfd962d78, type: 2}
---- !u!114 &1802807303
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8936142915627543873}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9a6610d2e704f1648819acc8d7460285, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Event: event:/MX/PGL_MX
-  PlayEvent: 1
-  StopEvent: 0
-  CollisionTag: 
-  AllowFadeout: 1
-  TriggerOnce: 0
-  Preload: 0
-  Params: []
-  OverrideAttenuation: 0
-  OverrideMinDistance: 1
-  OverrideMaxDistance: 20
---- !u!114 &1802807304
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8936142915627543873}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 86c6556701af9e04380698b89f691b6e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  ListenerNumber: 0
 --- !u!1 &8936142915909803627
 GameObject:
   m_ObjectHideFlags: 0
