@@ -17,8 +17,8 @@ public class InteractionDetector : MonoBehaviour
         // Debug.Log("playerCamera: " + playerCamera);
         pickupHolder = GetComponent<PickupHolder>();
 
-        EventBus.Subscribe<LeaveHomeEvent>(OnLeaveHomeEvent);
-        EventBus.Subscribe<ReturnHomeEvent>(OnReturnHomeEvent);
+        EventBus.Subscribe<ExitHomeEvent>(OnExitHomeEvent);
+        EventBus.Subscribe<ExitCityEvent>(OnExitCityEvent);
     }
 
     private void Update()
@@ -142,13 +142,13 @@ public class InteractionDetector : MonoBehaviour
     }
 
     
-    private void OnReturnHomeEvent(ReturnHomeEvent e)
+    private void OnExitCityEvent(ExitCityEvent e)
     {
-        Debug.Log("InteractionDetector.OnReturnHomeEvent");
+        Debug.Log("InteractionDetector.OnExitCityEvent");
         interactablesInRange.Clear();
     }
 
-    private void OnLeaveHomeEvent(LeaveHomeEvent e)
+    private void OnExitHomeEvent(ExitHomeEvent e)
     {
         // Debug.Log("InteractionDetector.OnLeaveHomeEvent");
         interactablesInRange.Clear();

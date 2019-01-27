@@ -30,6 +30,10 @@ public struct EnterCityEvent
     public EnterCityEvent(GameStateCity cityState) { this.cityState = cityState; }
 }
 
+public struct ExitHomeEvent { }
+
+public struct ExitCityEvent { }
+
 public struct LeaveHomeEvent
 {
     public Pickupable heldItem;

@@ -17,7 +17,7 @@ public class RobotDogAI : MonoBehaviour
 
     private void Awake()
     {
-        Debug.Log("RobotDogAI.Awake()");
+        // Debug.Log("RobotDogAI.Awake()");
         // Debug.Log("Robot Dog Position: " + this.transform.position);
         agent = GetComponent<NavMeshAgent>();
         startFollowingDistance = agent.stoppingDistance + startFollowingHysteresis;
@@ -34,7 +34,7 @@ public class RobotDogAI : MonoBehaviour
 
     private void Start()
     {
-        Debug.Log("RobotDogAI.Start()");
+        // Debug.Log("RobotDogAI.Start()");
         Debug.Assert(player != null, "Robot Dog AI needs to have a reference to the player transform");
 
         nextPosition = GetNextPositionOnNavMesh(player.transform.position);

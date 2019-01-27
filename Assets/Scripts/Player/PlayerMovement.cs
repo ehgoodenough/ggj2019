@@ -5,6 +5,7 @@ public class PlayerMovement : MonoBehaviour
 {
     public float speed;
 
+    private float currentSpeed = 0f;
     private Vector3 movementVector;
     private Rigidbody rb;
 
@@ -26,6 +27,7 @@ public class PlayerMovement : MonoBehaviour
 
     void FixedUpdate()
     {
+        currentSpeed = movementVector.magnitude * speed;
         Vector3 moveDirection = transform.forward * movementVector.z * speed + transform.right * movementVector.x * speed;
         rb.MovePosition(transform.position + moveDirection * Time.deltaTime);
         rb.AddForce(Physics.gravity, ForceMode.Acceleration);
@@ -39,6 +41,11 @@ public class PlayerMovement : MonoBehaviour
     public void AddToYaw(float yaw)
     {
         transform.rotation *= Quaternion.AngleAxis(yaw, Vector3.up);
+    }
+
+    public float GetCurrentSpeed()
+    {
+        return currentSpeed;
     }
 
     private void OnEnterHomeEvent(EnterHomeEvent e)

@@ -89,6 +89,7 @@ GameObject:
   - component: {fileID: 8936142915063238575}
   - component: {fileID: 8936142915063238544}
   - component: {fileID: 6892974737152207010}
+  - component: {fileID: 5712217969411750149}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -251,6 +252,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3c756e5bd291f5c4a870e002f26db29a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &5712217969411750149
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8936142915063238545}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f0d76ef4bd2a16745b542c23040de154, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  startingEnergy: 25
+  initialMaxEnergy: 50
+  incrementMaxAmount: 10
+  rechargingRate: 1
+  baselineDepletionRate: 0.1
+  maxDepletionRate: 0.5
 --- !u!1 &8936142915627543873
 GameObject:
   m_ObjectHideFlags: 0
@@ -351,7 +370,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   colorBufferShader: {fileID: 4800000, guid: 86d88b3061e5bf84c8f49d91901ae22e, type: 3}
   halftoneMat: {fileID: 2100000, guid: 9a7fb0512ca96f442acd8c82deefbdea, type: 2}
-  scanDistance: 0
   saturationWaveOrigin: {fileID: 0}
 --- !u!114 &2578118873149337411
 MonoBehaviour:

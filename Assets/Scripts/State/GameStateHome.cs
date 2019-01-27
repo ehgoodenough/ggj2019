@@ -22,7 +22,7 @@ public class GameStateHome : State
 
     protected override void DoStart()
     {
-        Debug.Log("GameStateHome.DoStart()");
+        // Debug.Log("GameStateHome.DoStart()");
 
         /*
         if (playerObj == null)
@@ -55,6 +55,7 @@ public class GameStateHome : State
     protected override void DoExit()
     {
         // Do something on the last frame while Exiting the state
+        EventBus.PublishEvent(new ExitHomeEvent());
     }
 
     private void OnLeaveHomeEvent(LeaveHomeEvent e)
