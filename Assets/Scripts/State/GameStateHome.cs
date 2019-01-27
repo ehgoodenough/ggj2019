@@ -82,7 +82,7 @@ public class GameStateHome : State
         CanvasGroup powerDownTextCanvasGroup = GameObject.Find("PowerDownText").GetComponent<CanvasGroup>();
 
         powerDownTextCanvasGroup.alpha = 0;
-        while (sceneTransitionFade.alpha > 0
+        while (sceneTransitionFade.alpha > 0)
         {
             sceneTransitionFade.alpha -= Time.deltaTime / fadeDuration;
             if (otherCanvasGroup)
