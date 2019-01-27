@@ -14,14 +14,14 @@
 		_LuminanceLerp("Luminance lerp", Float) = .5
 
 		// for wave effect
-		_ScanDistance("Scan Distance", float) = 0
+		//_ScanDistance("Scan Distance", float) = 0
 		_EffectPos("Effect Position", Vector) = (1,1,1,1)
 		_ScanSmoothAmount("Scan Smooth Amount", float) = 0
 		_EdgeNoiseTex("Edge Noise Texture", 2D) = "white" {}
 		_EdgeScale("Edge Scale", float) = 0
 		_EdgeScaleX("Edge Scale X", float) = 0
-		_SaturationLevel("Saturation Level", float) = 0
-		_TargetSaturationLevel("Target saturation Level", float) = 0
+		//_SaturationLevel("Saturation Level", float) = 0
+		//_TargetSaturationLevel("Target saturation Level", float) = 0
 		_EdgeGlowStrength("Edge glow strength", float) = 0
 		_EdgeSpeed("Edge speed", float) = 0
 		_EdgeGlowExp("Edge glow exp", float) = 0
@@ -151,7 +151,7 @@
 				float depthDifference = tex2D(_CameraDepthTexture, i.uv).r - tex2D(_DepthBuffer, i.uv).r;
 				float colorBufferSample = tex2D(_ColorBuffer, i.uv).r;
 
-				fixed4 dotsColor = lerp(fixed4(1, 1, 1, 1) * dotCol * steppedLuminance, floor(Luminance(pow((texCol.rgb), _LuminancePower)) / inc) * inc, _LuminanceLerp);
+				fixed4 dotsColor = lerp(fixed4(1, 1, 1, 1) * dotCol * steppedLuminance, round(Luminance(pow((texCol.rgb), _LuminancePower)) / inc) * inc, _LuminanceLerp);
 
 				// ignore items on the color layer
 				fixed4 halftoneEffectColor = colorBufferSample > .5 && depthDifference < -.001 ? lerp(dotCol, texCol, .95) : dotsColor;
