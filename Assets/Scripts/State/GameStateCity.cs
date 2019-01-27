@@ -4,6 +4,9 @@ using UnityEngine.SceneManagement;
 
 public class GameStateCity : State
 {
+    public CanvasGroup sceneTransitionFade;
+    public float fadeDuration = 1f;
+
     public Transform playerStart;
     public Transform dogStart;
 
@@ -29,6 +32,7 @@ public class GameStateCity : State
     {
         // Do stuff here that should always happen when you first enter the city game state
         EventBus.PublishEvent(new EnterCityEvent(this));
+        StartCoroutine(FadeIn());
     }
 
     public override void DoUpdate()
@@ -50,5 +54,16 @@ public class GameStateCity : State
         // SceneManager.UnloadSceneAsync("RobertCityScene");
         SceneManager.LoadScene("RobertHomeScene");
         stateMachine.ChangeState(homeState);
+    }
+
+    IEnumerator FadeIn()
+    {
+        sceneTransitionFade = GameObject.Find("SceneTransitionFade").GetComponent<CanvasGroup>();
+
+        while (sceneTransitionFade.alpha > 0)
+        {
+            sceneTransitionFade.alpha -= Time.deltaTime / fadeDuration;
+            yield return null;
+        }
     }
 }
