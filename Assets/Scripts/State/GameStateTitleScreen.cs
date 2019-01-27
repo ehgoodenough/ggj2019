@@ -17,6 +17,8 @@ public class GameStateTitleScreen : State
     {
         homeState = stateMachine.GetState<GameStateHome>();
         cityState = stateMachine.GetState<GameStateCity>();
+
+        EventBus.Subscribe<StartGameEvent>(OnGameStartEvent);
     }
 
     protected override void DoStart()
@@ -44,13 +46,6 @@ public class GameStateTitleScreen : State
     public override void DoUpdate()
     {
         // Do something on each frame in Update when the title screen game state is active
-        if (Input.GetKeyDown(KeyCode.Return))
-        {
-            // Debug.Log("About to Enter Home State");
-            // SceneManager.UnloadSceneAsync("RobertTitleScene");
-            SceneManager.LoadScene("RobertHomeScene");
-            stateMachine.ChangeState(homeState);
-        }
     }
 
     protected override void DoExit()
@@ -66,6 +61,16 @@ public class GameStateTitleScreen : State
         {
             titleCanvas.alpha += Time.deltaTime / titleFadeDuration;
             yield return null;
+            while (titleCanvas == null)
+            {
+                yield return null;
+            }
         }
+    }
+
+    private void OnGameStartEvent(StartGameEvent e)
+    {
+        SceneManager.LoadScene("RobertHomeScene");
+        stateMachine.ChangeState(homeState);
     }
 }

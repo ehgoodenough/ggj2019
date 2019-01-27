@@ -45,3 +45,7 @@ public struct ReturnHomeEvent
     public Pickupable heldItem;
     public ReturnHomeEvent(Pickupable heldItem) { this.heldItem = heldItem; }
 }
+
+public struct PowerDownEvent { }
+
+public struct StartGameEvent { }

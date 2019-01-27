@@ -5,10 +5,49 @@ using Rewired;
 
 [RequireComponent(typeof(PlayerMovement))]
 [RequireComponent(typeof(PlayerView))]
-public class PlayerInputDefaultState : PlayerInputStateBase
+public class PlayerInputDefaultState : State
 {
+    private int playerId = 0; // The Rewired player id
+    private Player player; // The Rewired Player
+
+    private PlayerMovement movement;
+    private PlayerView playerView;
+    private InteractionDetector interactionDetector;
+    private PickupHolder pickupHolder;
+
+    private StateMachine gameStateMachine;
+
+    protected override void DoAwake()
+    {
+        Debug.Log("PlayerInputStateBase.DoAwake()");
+
+        player = ReInput.players.GetPlayer(playerId);
+
+        movement = GetComponent<PlayerMovement>();
+        playerView = GetComponent<PlayerView>();
+        interactionDetector = GetComponentInChildren<InteractionDetector>();
+        pickupHolder = GetComponentInChildren<PickupHolder>();
+
+        gameStateMachine = FindObjectOfType<GameStateTitleScreen>().GetComponent<StateMachine>();
+    }
+
+    protected override void DoEnter()
+    {
+        base.DoEnter();
+        Debug.Log("PlayerInputDefaultState.DoEnter()");
+    }
+
     public override void DoUpdate()
     {
+        if (gameStateMachine.currentState.GetType() == typeof(GameStateTitleScreen))
+        {
+            if (Input.GetKeyDown(KeyCode.Return) || player.GetButtonDown("Interact"))
+            {
+                Debug.Log("StartGame");
+                EventBus.PublishEvent(new StartGameEvent());
+            }
+        }
+
         Interactable focusedInteractable = interactionDetector.GeInteractableInFocus(); // Note: the held item is never focused
 
         // Handle Movement & Looking
