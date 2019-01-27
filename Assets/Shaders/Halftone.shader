@@ -16,6 +16,7 @@
 		// for wave effect
 		_ScanDistance("Scan Distance", float) = 0
 		_EffectPos("Effect Position", Vector) = (1,1,1,1)
+		_ScanSmoothAmount("Scan Smooth Amount", float) = 0
 			
     }
     SubShader
@@ -68,6 +69,7 @@
 
 			float4 _EffectOrigin;
 			float _ScanDistance;
+			float _ScanSmoothAmount;
 
             fixed4 frag (v2f i) : SV_Target
             {
@@ -102,9 +104,15 @@
 				float colorBufferSample = tex2D(_ColorBuffer, i.uv).r;
 
 				fixed4 halftoneColor = lerp(fixed4(1, 1, 1, 1) * dotCol * steppedLuminance, floor(Luminance(pow((texCol.rgb), _LuminancePower)) / inc) * inc, _LuminanceLerp);
+
+				// ignore items on the color layer
 				fixed4 modifiedColor = colorBufferSample > .5 && depthDifference < -.001 ? lerp(dotCol, texCol, .95) : halftoneColor;
 
-				return lerp(texCol, modifiedColor, step(_ScanDistance, dist));
+				float noiseLookup = atan2(wsPos.y - _EffectOrigin.y, wsPos.x - _EffectOrigin.x);
+				//dist += ();
+
+				// TODO: replace texCol with a dynamic value based on current saturation level.
+				return lerp(lerp(dotCol, texCol, .95), modifiedColor, smoothstep(_ScanDistance, _ScanDistance + _ScanSmoothAmount, dist));
             }
             ENDCG
         }
