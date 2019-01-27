@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.AI;
 
 [RequireComponent(typeof(Rigidbody))]
 public class PlayerMovement : MonoBehaviour
@@ -15,6 +16,8 @@ public class PlayerMovement : MonoBehaviour
     private Vector3 lastFootstepLocation;
     private bool muteFootsteps = true;
 
+    // private NavMeshAgent agent;
+
     private void Awake()
     {
         // Debug.Log("PlayerMovement.Awake()");
@@ -23,6 +26,9 @@ public class PlayerMovement : MonoBehaviour
         EventBus.Subscribe<EnterCityEvent>(OnEnterCityEvent);
         EventBus.Subscribe<ExitHomeEvent>(OnExitHomeEvent);
         EventBus.Subscribe<ExitCityEvent>(OnExitCityEvent);
+
+        // agent = GetComponent<NavMeshAgent>();
+        // agent.speed = speed;
     }
 
     void Start()
@@ -37,6 +43,21 @@ public class PlayerMovement : MonoBehaviour
     {
         currentSpeed = movementVector.magnitude * speed;
         Vector3 moveDirection = transform.forward * movementVector.z * speed + transform.right * movementVector.x * speed;
+
+        /* Yup, this doesn't work
+        if (moveDirection.magnitude > 0f)
+        {
+            Debug.Log("Move");
+            NavMeshHit hit;
+            if (NavMesh.SamplePosition(transform.position + moveDirection * Time.deltaTime, out hit, 2f, 0))
+            {
+                Debug.Log("Found Sample Position");
+                agent.Warp(hit.position);
+                // agent.SetDestination(hit.position);
+            }
+        }
+        */
+
         rb.MovePosition(transform.position + moveDirection * Time.deltaTime);
         rb.AddForce(Physics.gravity, ForceMode.Acceleration);
 
