@@ -20,6 +20,7 @@ public class GameStateCity : State
     protected override void DoEnter()
     {
         // Do stuff here that should always happen when you first enter the city game state
+        EventBus.PublishEvent(new EnterCityEvent());
     }
 
     public override void DoUpdate()

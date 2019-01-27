@@ -20,6 +20,7 @@ public class GameStateHome : State
     protected override void DoEnter()
     {
         // Do something on the first frame when Entering the state
+        EventBus.PublishEvent(new EnterCityEvent());
     }
 
     public override void DoUpdate()

@@ -18,8 +18,12 @@ public struct ReturnHomeEvent
     public ReturnHomeEvent(Pickupable heldItem) { this.heldItem = heldItem; }
 }
 
+public struct EnterHomeEvent { }
+
 public struct LeaveHomeEvent
 {
     public Pickupable heldItem;
     public LeaveHomeEvent(Pickupable heldItem) { this.heldItem = heldItem; }
 }
+
+public struct EnterCityEvent { }
