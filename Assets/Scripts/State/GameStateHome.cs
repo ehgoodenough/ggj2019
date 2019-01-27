@@ -13,7 +13,7 @@ public class GameStateHome : State
     protected override void DoAwake()
     {
         // Debug.Log("Home Player Start: " + playerStart.position);
-        // Debug.Log("Home Robot Dog Start: " + dogStart.position);
+        Debug.Log("Home Robot Dog Start: " + dogStart.position);
 
         titleState = stateMachine.GetState<GameStateTitleScreen>();
         cityState = stateMachine.GetState<GameStateCity>();
@@ -22,7 +22,7 @@ public class GameStateHome : State
 
     protected override void DoStart()
     {
-        // Debug.Log("GameStateHome.DoStart()");
+        Debug.Log("GameStateHome.DoStart()");
 
         /*
         if (playerObj == null)
@@ -43,7 +43,7 @@ public class GameStateHome : State
 
     protected override void DoEnter()
     {
-        // Debug.Log("GameStateHome.DoEnter()");
+        Debug.Log("GameStateHome.DoEnter()");
         EventBus.PublishEvent(new EnterHomeEvent(this));
     }
 

@@ -17,7 +17,7 @@ public class RobotDogAI : MonoBehaviour
 
     private void Awake()
     {
-        // Debug.Log("RobotDogAI.Awake()");
+        Debug.Log("RobotDogAI.Awake()");
         // Debug.Log("Robot Dog Position: " + this.transform.position);
         agent = GetComponent<NavMeshAgent>();
         startFollowingDistance = agent.stoppingDistance + startFollowingHysteresis;
@@ -34,7 +34,7 @@ public class RobotDogAI : MonoBehaviour
 
     private void Start()
     {
-        // Debug.Log("RobotDogAI.Start()");
+        Debug.Log("RobotDogAI.Start()");
         Debug.Assert(player != null, "Robot Dog AI needs to have a reference to the player transform");
 
         nextPosition = GetNextPositionOnNavMesh(player.transform.position);
@@ -75,16 +75,17 @@ public class RobotDogAI : MonoBehaviour
     {
         // Debug.Log("RobotDogAI.OnEnterHomeEvent()");
         // Debug.Log("Robot Dog Position: " + this.transform.position);
-        PlaceOnNavMesh(e.homeState.dogStart.position);
-        this.transform.rotation = e.homeState.dogStart.rotation;
+        // PlaceOnNavMesh(e.homeState.dogStart.position);
+        // this.transform.rotation = e.homeState.dogStart.rotation;
+        // Debug.Log("Position: " + this.transform.position);
     }
 
     private void OnEnterCityEvent(EnterCityEvent e)
     {
         // Debug.Log("RobotDogAI.OnEnterCityEvent()");
         // Debug.Log("Robot Dog Position: " + this.transform.position);
-        PlaceOnNavMesh(e.cityState.dogStart.position);
-        this.transform.rotation = e.cityState.dogStart.rotation;
+        // PlaceOnNavMesh(e.cityState.dogStart.position);
+        // this.transform.rotation = e.cityState.dogStart.rotation;
     }
 
     private void PlaceOnNavMesh(Vector3 position)
