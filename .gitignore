@@ -11,6 +11,16 @@
 # Never ignore Asset meta data
 ![Aa]ssets/**/*.meta
 
+# FMOD
+![Aa]ssets/FMODproject/[Bb]uild/
+[Aa]ssets/FMODproject/.cache/
+[Aa]ssets/FMODproject/.unsaved/
+[Aa]ssets/FMODproject/.user/
+[Aa]ssets/FMODStudioCache.asset
+[Aa]ssets/FMODStudioCache.asset.meta
+fmod.log
+fmod_editor.log
+
 # Uncomment this line if you wish to ignore the asset store tools plugin
 # [Aa]ssets/AssetStoreTools*
 
