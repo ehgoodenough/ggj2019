@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using UnityEngine;
+using UnityEngine.Playables;
 
 public class PowerDown : MonoBehaviour
 {
@@ -61,6 +62,8 @@ public class PowerDown : MonoBehaviour
             fadeCanvasGrewp.alpha += Time.deltaTime / textFadeDuration;
             yield return null;
         }
+
+        FindObjectOfType<PlayableDirector>().enabled = false;
         EventBus.PublishEvent(new ReturnHomeEvent());
     }
 }

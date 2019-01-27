@@ -25,6 +25,7 @@ public class CinematicPlayer : MonoBehaviour
     {
         if (!openingCinematicPlayed)
         {
+            Debug.Log("PLAYING CINEMATIC");
             director.playableAsset = openingCinematicPlayable;
             director.Play();
             var bootSound = FMODUnity.RuntimeManager.CreateInstance(bootSoundEvent);
