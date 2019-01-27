@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Collections;
 using UnityEngine;
 
 public class Utils : MonoBehaviour
@@ -13,4 +14,16 @@ public class Utils : MonoBehaviour
             return angleBetweenForwardA.CompareTo(angleBetweenForwardB);
         });
     }
+
+    public static void OnNextFrame(MonoBehaviour mb, System.Action action)
+    {
+        mb.StartCoroutine(OnNextFrameCoroutine(action));
+    }
+
+    private static IEnumerator OnNextFrameCoroutine(System.Action action)
+    {
+        yield return new WaitForEndOfFrame();
+        action();
+    }
+
 }
