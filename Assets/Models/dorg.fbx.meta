@@ -1,0 +1,168 @@
+fileFormatVersion: 2
+guid: f839efe41d6bf674ea96cb4598d44779
+ModelImporter:
+  serializedVersion: 23
+  fileIDToRecycleName:
+    100000: dog
+    100002: //RootNode
+    100004: joint41
+    100006: joint42
+    100008: joint43
+    100010: joint44
+    100012: joint45
+    100014: joint46
+    100016: joint47
+    100018: joint48
+    100020: joint49
+    100022: joint50
+    100024: joint51
+    100026: joint52
+    100028: joint53
+    100030: joint54
+    100032: joint55
+    100034: joint56
+    100036: joint57
+    100038: joint58
+    100040: joint59
+    100042: joint60
+    100044: joint61
+    100046: joint62
+    100048: joint63
+    100050: joint64
+    100052: joint65
+    100054: joint66
+    100056: joint67
+    100058: joint68
+    100060: joint69
+    100062: joint70
+    100064: joint71
+    100066: joint72
+    100068: joint73
+    100070: joint74
+    400000: dog
+    400002: //RootNode
+    400004: joint41
+    400006: joint42
+    400008: joint43
+    400010: joint44
+    400012: joint45
+    400014: joint46
+    400016: joint47
+    400018: joint48
+    400020: joint49
+    400022: joint50
+    400024: joint51
+    400026: joint52
+    400028: joint53
+    400030: joint54
+    400032: joint55
+    400034: joint56
+    400036: joint57
+    400038: joint58
+    400040: joint59
+    400042: joint60
+    400044: joint61
+    400046: joint62
+    400048: joint63
+    400050: joint64
+    400052: joint65
+    400054: joint66
+    400056: joint67
+    400058: joint68
+    400060: joint69
+    400062: joint70
+    400064: joint71
+    400066: joint72
+    400068: joint73
+    400070: joint74
+    2100000: lambert1
+    4300000: dog
+    7400000: Take 001
+    9500000: //RootNode
+    13700000: dog
+  externalObjects: {}
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+    materialLocation: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    importConstraints: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 100
+    meshCompression: 0
+    addColliders: 0
+    useSRGBMaterialColor: 1
+    importVisibility: 1
+    importBlendShapes: 1
+    importCameras: 1
+    importLights: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    preserveHierarchy: 0
+    indexFormat: 0
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+    previousCalculatedGlobalScale: 0.01
+    hasPreviousCalculatedGlobalScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 4
+    legacyComputeAllNormalsFromSmoothingGroupsWhenMeshHasBlendShapes: 0
+    blendShapeNormalImportMode: 1
+    normalSmoothingSource: 0
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
