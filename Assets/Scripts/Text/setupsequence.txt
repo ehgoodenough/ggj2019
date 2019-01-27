@@ -1,0 +1,3 @@
+Bootup.exe
+WakeUp.log... ok
+Set() proc - 48656c6c6f20576f726c64

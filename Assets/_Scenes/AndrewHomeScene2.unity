@@ -1264,6 +1264,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 10
+  footstepEvent: 
+  strideLength: 5
+  lastFootstepLocation: {x: 0, y: 0, z: 0}
 --- !u!54 &8936142914419839523
 Rigidbody:
   m_ObjectHideFlags: 0
