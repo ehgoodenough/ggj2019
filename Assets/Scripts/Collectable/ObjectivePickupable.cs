@@ -7,7 +7,7 @@
         Art
     }
 
-    Type type;
+    public Type type;
 
     public override bool CanInteractWith(Pickupable heldItem)
     {
