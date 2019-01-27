@@ -12,13 +12,17 @@ public struct TestOpenGateEvent
     public TestOpenGateEvent(Button buttonPressed) { this.buttonPressed = buttonPressed; }
 }
 
-public struct ReturnHomeEvent
+public struct EnterHomeEvent
 {
-    public Pickupable heldItem;
-    public ReturnHomeEvent(Pickupable heldItem) { this.heldItem = heldItem; }
+    public GameStateHome homeState;
+    public EnterHomeEvent(GameStateHome homeState) { this.homeState = homeState; }
 }
 
-public struct EnterHomeEvent { }
+public struct EnterCityEvent
+{
+    public GameStateCity cityState;
+    public EnterCityEvent(GameStateCity cityState) { this.cityState = cityState; }
+}
 
 public struct LeaveHomeEvent
 {
@@ -26,4 +30,8 @@ public struct LeaveHomeEvent
     public LeaveHomeEvent(Pickupable heldItem) { this.heldItem = heldItem; }
 }
 
-public struct EnterCityEvent { }
+public struct ReturnHomeEvent
+{
+    public Pickupable heldItem;
+    public ReturnHomeEvent(Pickupable heldItem) { this.heldItem = heldItem; }
+}

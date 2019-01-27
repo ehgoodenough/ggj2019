@@ -4,7 +4,10 @@ using UnityEngine.SceneManagement;
 
 public class GameStateCity : State
 {
-    GameStateHome homeState; // string homeState = "Virginia";
+    public Transform playerStart;
+    public Transform dogStart;
+
+    private GameStateHome homeState; // string homeState = "Virginia";
 
     protected override void DoAwake()
     {
@@ -36,7 +39,8 @@ public class GameStateCity : State
     private void OnReturnHomeEvent(ReturnHomeEvent e)
     {
         // Does the order of LoadScene() and ChangeState() matter?
-        SceneManager.LoadScene("HomeScene");
+        // SceneManager.LoadScene("HomeScene");
+        SceneManager.LoadScene("RobertHomeScene");
         stateMachine.ChangeState(homeState);
     }
 }

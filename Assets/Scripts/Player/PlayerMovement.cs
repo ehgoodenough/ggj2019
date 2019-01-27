@@ -8,6 +8,12 @@ public class PlayerMovement : MonoBehaviour
     private Vector3 movementVector;
     private Rigidbody rb;
 
+    private void Awake()
+    {
+        EventBus.Subscribe<EnterHomeEvent>(OnEnterHomeEvent);
+        EventBus.Subscribe<EnterCityEvent>(OnEnterCityEvent);
+    }
+
     void Start()
     {
         movementVector = Vector3.zero;
@@ -30,5 +36,15 @@ public class PlayerMovement : MonoBehaviour
     public void AddToYaw(float yaw)
     {
         transform.rotation *= Quaternion.AngleAxis(yaw, Vector3.up);
+    }
+
+    private void OnEnterHomeEvent(EnterHomeEvent e)
+    {
+        this.transform.position = e.homeState.playerStart.position;
+    }
+
+    private void OnEnterCityEvent(EnterCityEvent e)
+    {
+        this.transform.position = e.cityState.playerStart.position;
     }
 }
