@@ -6,7 +6,7 @@ using UnityEngine.AI;
 [RequireComponent(typeof(NavMeshAgent))]
 public class RobotDogAI : MonoBehaviour
 {
-    public Transform player;
+    public GameObject player;
     public float updateDestinationFrequency = 1f;
     public float startFollowingHysteresis = 2f;
 
@@ -17,10 +17,16 @@ public class RobotDogAI : MonoBehaviour
 
     private void Awake()
     {
-        Debug.Assert(player != null, "Robot Dog AI needs to have a reference to the player transform");
-
+        // Debug.Log("RobotDogAI.Awake()");
+        // Debug.Log("Robot Dog Position: " + this.transform.position);
         agent = GetComponent<NavMeshAgent>();
         startFollowingDistance = agent.stoppingDistance + startFollowingHysteresis;
+
+        PlaceOnNavMesh(this.transform.position);
+
+        // Debug.Log("Player: " + player);
+        // Debug.Log("PlayerMovement: " + FindObjectOfType<PlayerMovement>());
+        if (player == null) player = FindObjectOfType<PlayerMovement>().gameObject;
 
         EventBus.Subscribe<EnterHomeEvent>(OnEnterHomeEvent);
         EventBus.Subscribe<EnterCityEvent>(OnEnterCityEvent);
@@ -28,7 +34,10 @@ public class RobotDogAI : MonoBehaviour
 
     private void Start()
     {
-        nextPosition = GetNextPositionOnNavMesh(player.position);
+        // Debug.Log("RobotDogAI.Start()");
+        Debug.Assert(player != null, "Robot Dog AI needs to have a reference to the player transform");
+
+        nextPosition = GetNextPositionOnNavMesh(player.transform.position);
         StartCoroutine(FollowPlayer());
     }
 
@@ -37,7 +46,7 @@ public class RobotDogAI : MonoBehaviour
         while (true)
         {
             previousPosition = nextPosition;
-            nextPosition = GetNextPositionOnNavMesh(player.position);
+            nextPosition = GetNextPositionOnNavMesh(player.transform.position);
             yield return new WaitForSeconds(updateDestinationFrequency * 0.5f);
             if (Vector3.Distance(this.transform.position, nextPosition) > startFollowingDistance)
             {
@@ -64,11 +73,24 @@ public class RobotDogAI : MonoBehaviour
 
     private void OnEnterHomeEvent(EnterHomeEvent e)
     {
-        this.transform.position = e.homeState.dogStart.position;
+        // Debug.Log("RobotDogAI.OnEnterHomeEvent()");
+        // Debug.Log("Robot Dog Position: " + this.transform.position);
+        PlaceOnNavMesh(e.homeState.dogStart.position);
+        this.transform.rotation = e.homeState.dogStart.rotation;
     }
 
     private void OnEnterCityEvent(EnterCityEvent e)
     {
-        this.transform.position = e.cityState.dogStart.position;
+        // Debug.Log("RobotDogAI.OnEnterCityEvent()");
+        // Debug.Log("Robot Dog Position: " + this.transform.position);
+        PlaceOnNavMesh(e.cityState.dogStart.position);
+        this.transform.rotation = e.cityState.dogStart.rotation;
+    }
+
+    private void PlaceOnNavMesh(Vector3 position)
+    {
+        NavMeshHit hit;
+        bool positionFound = NavMesh.SamplePosition(position, out hit, 2.5f, 1);
+        this.transform.position = positionFound ? hit.position : this.transform.position; // If cannot find position, stay put
     }
 }

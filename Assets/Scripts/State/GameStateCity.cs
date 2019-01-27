@@ -7,10 +7,15 @@ public class GameStateCity : State
     public Transform playerStart;
     public Transform dogStart;
 
+    private GameStateTitleScreen titleState;
     private GameStateHome homeState; // string homeState = "Virginia";
 
     protected override void DoAwake()
     {
+        // Debug.Log("City Player Start: " + playerStart.position);
+        // Debug.Log("City Robot Dog Start: " + dogStart.position);
+
+        titleState = stateMachine.GetState<GameStateTitleScreen>();
         homeState = stateMachine.GetState<GameStateHome>();
         EventBus.Subscribe<ReturnHomeEvent>(OnReturnHomeEvent);
     }
@@ -23,7 +28,7 @@ public class GameStateCity : State
     protected override void DoEnter()
     {
         // Do stuff here that should always happen when you first enter the city game state
-        EventBus.PublishEvent(new EnterCityEvent());
+        EventBus.PublishEvent(new EnterCityEvent(this));
     }
 
     public override void DoUpdate()
@@ -38,10 +43,11 @@ public class GameStateCity : State
 
     private void OnReturnHomeEvent(ReturnHomeEvent e)
     {
-        Debug.Log("OnReturnHomeEvent");
+        // Debug.Log("GameStateCity.OnReturnHomeEvent");
         // Does the order of LoadScene() and ChangeState() matter?
-        SceneManager.LoadScene("HomeScene");
-        // SceneManager.LoadScene("RobertHomeScene");
+        // SceneManager.LoadScene("HomeScene");
+        // SceneManager.UnloadSceneAsync("RobertCityScene");
+        SceneManager.LoadScene("RobertHomeScene");
         stateMachine.ChangeState(homeState);
     }
 }
