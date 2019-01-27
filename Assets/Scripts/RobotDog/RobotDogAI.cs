@@ -75,16 +75,17 @@ public class RobotDogAI : MonoBehaviour
     {
         // Debug.Log("RobotDogAI.OnEnterHomeEvent()");
         // Debug.Log("Robot Dog Position: " + this.transform.position);
-        PlaceOnNavMesh(e.homeState.dogStart.position);
-        this.transform.rotation = e.homeState.dogStart.rotation;
+        // PlaceOnNavMesh(e.homeState.dogStart.position);
+        // this.transform.rotation = e.homeState.dogStart.rotation;
+        // Debug.Log("Position: " + this.transform.position);
     }
 
     private void OnEnterCityEvent(EnterCityEvent e)
     {
         // Debug.Log("RobotDogAI.OnEnterCityEvent()");
         // Debug.Log("Robot Dog Position: " + this.transform.position);
-        PlaceOnNavMesh(e.cityState.dogStart.position);
-        this.transform.rotation = e.cityState.dogStart.rotation;
+        // PlaceOnNavMesh(e.cityState.dogStart.position);
+        // this.transform.rotation = e.cityState.dogStart.rotation;
     }
 
     private void PlaceOnNavMesh(Vector3 position)

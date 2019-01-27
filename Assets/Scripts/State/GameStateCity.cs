@@ -39,6 +39,7 @@ public class GameStateCity : State
     protected override void DoExit()
     {
         // Do stuff here when you exit the city, but before you enter the home, or another place or game state
+        EventBus.PublishEvent(new ExitCityEvent());
     }
 
     private void OnReturnHomeEvent(ReturnHomeEvent e)
