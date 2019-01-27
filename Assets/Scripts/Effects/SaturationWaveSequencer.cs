@@ -30,11 +30,11 @@ public class SaturationWaveSequencer : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            // For testing.
-            IncreaseSaturationLevel();
-        }
+        // if (Input.GetKeyDown(KeyCode.Space))
+        // {
+        //     // For testing.
+        //     IncreaseSaturationLevel();
+        // }
     }
 
     public void IncreaseSaturationLevel()
