@@ -14,9 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   HasSourceProject: 1
   HasPlatforms: 1
-  sourceProjectPath: 
-  SourceProjectPathUnformatted: 
-  SourceBankPathUnformatted: 
+  sourceProjectPath: D:\test\ggj2019\Assets\FMODproject\GGJ_2019_FMod.fspro
+  SourceProjectPathUnformatted: D:\test\ggj2019\Assets\FMODproject\GGJ_2019_FMod.fspro
+  SourceBankPathUnformatted: D:\test\ggj2019\Assets\FMODproject\Build
   AutomaticEventLoading: 1
   AutomaticSampleLoading: 0
   ImportType: 0
@@ -45,7 +45,9 @@ MonoBehaviour:
     Value: 1
   - Platform: 2
     Value: 0
-  BankDirectorySettings: []
+  BankDirectorySettings:
+  - Platform: 2
+    Value: Desktop
   VirtualChannelSettings:
   - Platform: 1
     Value: 1024
