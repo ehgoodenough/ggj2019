@@ -25,4 +25,19 @@ public class PlayerView : MonoBehaviour
         // Note that looking left / right rotates the whole player object and therefore potentially affects movement direction
         transform.rotation *= Quaternion.AngleAxis(yaw * lookSpeed, Vector3.up);
     }
+
+    public void EnablePlayerCamera()
+    {
+        playerCamera.enabled = true;
+    }
+
+    public void DisablePlayerCamera()
+    {
+        playerCamera.enabled = false;
+    }
+
+    public bool IsPlayerCameraEnabled()
+    {
+        return playerCamera.enabled;
+    }
 }

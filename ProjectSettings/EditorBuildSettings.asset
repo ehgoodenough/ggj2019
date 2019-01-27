@@ -6,7 +6,7 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 0
-    path: 
+    path:
     guid: 00000000000000000000000000000000
   - enabled: 1
     path: Assets/_Scenes/HomeScene.unity
@@ -20,4 +20,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/_Scenes/RobertHomeScene.unity
     guid: 7beb38940a01c4348bbed953494f707f
+  - enabled: 1
+    path: Assets/_Scenes/RobertTitleScreen.unity
+    guid: aec4a19ed49aca44bacb7ffa306f72fc
   m_configObjects: {}
