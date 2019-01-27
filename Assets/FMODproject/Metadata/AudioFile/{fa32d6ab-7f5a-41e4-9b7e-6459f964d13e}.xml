@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.01.10.00">
+    <object class="AudioFile" id="{fa32d6ab-7f5a-41e4-9b7e-6459f964d13e}">
+        <property name="assetPath">
+            <value>Thunder Storm.wav</value>
+        </property>
+        <property name="isStreaming">
+            <value>true</value>
+        </property>
+        <property name="frequencyInKHz">
+            <value>44.0999985</value>
+        </property>
+        <property name="channelCount">
+            <value>2</value>
+        </property>
+        <property name="length">
+            <value>59</value>
+        </property>
+        <relationship name="masterAssetFolder">
+            <destination>{299d1c0e-dce9-4986-b071-d608f78c5e66}</destination>
+        </relationship>
+    </object>
+</objects>

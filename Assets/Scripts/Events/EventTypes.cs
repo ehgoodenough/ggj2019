@@ -1,6 +1,12 @@
 ﻿using UnityEngine;
 using System.Collections.Generic;
 
+public struct TitleScreenStartEvent
+{
+    public GameObject player;
+    public TitleScreenStartEvent(GameObject player) { this.player = player; }
+}
+
 public struct DropItemTriggerEvent {
     public Pickupable itemToDrop;
     public DropItemTriggerEvent(Pickupable item) { this.itemToDrop = item; }
