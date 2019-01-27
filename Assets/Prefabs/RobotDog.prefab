@@ -162,3 +162,6 @@ MonoBehaviour:
   player: {fileID: 0}
   updateDestinationFrequency: 1
   startFollowingHysteresis: 2
+  footstepEvent: event:/SFX/Ambience/Dorg_Footsteps
+  strideLength: 2
+  lastFootstepLocation: {x: 0, y: 0, z: 0}

@@ -10,12 +10,20 @@ public class RobotDogAI : MonoBehaviour
     public float updateDestinationFrequency = 1f;
     public float startFollowingHysteresis = 2f;
 
+    [FMODUnity.EventRef]
+    public string footstepEvent;
+    public float strideLength = 5.0f;
+
     private NavMeshAgent agent;
     private Vector3 nextPosition; // This will be the most recent position of the player
     private Vector3 previousPosition; // This will be the position before the most recent position of the player
     private float startFollowingDistance;
 
-    private void Awake()
+    [SerializeField]
+    private Vector3 lastFootstepLocation;
+    private bool muteFootsteps = false;
+
+    void Awake()
     {
         // Debug.Log("RobotDogAI.Awake()");
         // Debug.Log("Robot Dog Position: " + this.transform.position);
@@ -30,15 +38,26 @@ public class RobotDogAI : MonoBehaviour
 
         EventBus.Subscribe<EnterHomeEvent>(OnEnterHomeEvent);
         EventBus.Subscribe<EnterCityEvent>(OnEnterCityEvent);
+        EventBus.Subscribe<ExitHomeEvent>(OnExitHomeEvent);
+        EventBus.Subscribe<ExitCityEvent>(OnExitCityEvent);
     }
 
-    private void Start()
+    void Start()
     {
         // Debug.Log("RobotDogAI.Start()");
         Debug.Assert(player != null, "Robot Dog AI needs to have a reference to the player transform");
 
         nextPosition = GetNextPositionOnNavMesh(player.transform.position);
         StartCoroutine(FollowPlayer());
+    }
+
+    void Update()
+    {
+        Debug.Log("mute: " + muteFootsteps + " speed: " + Vector3.Magnitude(agent.velocity) + " distance: " + Vector3.Distance(lastFootstepLocation, transform.position));
+        if (!muteFootsteps && Vector3.Magnitude(agent.velocity) > 0 && Vector3.Distance(lastFootstepLocation, transform.position) > strideLength)
+        {
+            PlayFootstep();
+        }
     }
 
     IEnumerator FollowPlayer()
@@ -78,6 +97,12 @@ public class RobotDogAI : MonoBehaviour
         // PlaceOnNavMesh(e.homeState.dogStart.position);
         // this.transform.rotation = e.homeState.dogStart.rotation;
         // Debug.Log("Position: " + this.transform.position);
+        muteFootsteps = false;
+    }
+
+    private void OnExitHomeEvent(ExitHomeEvent e)
+    {
+        muteFootsteps = true;
     }
 
     private void OnEnterCityEvent(EnterCityEvent e)
@@ -86,6 +111,12 @@ public class RobotDogAI : MonoBehaviour
         // Debug.Log("Robot Dog Position: " + this.transform.position);
         // PlaceOnNavMesh(e.cityState.dogStart.position);
         // this.transform.rotation = e.cityState.dogStart.rotation;
+        muteFootsteps = false;
+    }
+
+    private void OnExitCityEvent(ExitCityEvent e)
+    {
+        muteFootsteps = true;
     }
 
     private void PlaceOnNavMesh(Vector3 position)
@@ -93,5 +124,11 @@ public class RobotDogAI : MonoBehaviour
         NavMeshHit hit;
         bool positionFound = NavMesh.SamplePosition(position, out hit, 2.5f, 1);
         this.transform.position = positionFound ? hit.position : this.transform.position; // If cannot find position, stay put
+    }
+
+    private void PlayFootstep()
+    {
+        lastFootstepLocation = transform.position;
+        FMODUnity.RuntimeManager.PlayOneShot(footstepEvent, transform.position);
     }
 }
