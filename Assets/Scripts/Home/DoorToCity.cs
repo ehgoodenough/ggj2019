@@ -36,12 +36,14 @@ public class DoorToCity : Interactable
     public override void Interact(Pickupable heldItem)
     {
         //EventBus.PublishEvent(new LeaveHomeEvent(heldItem));
-        //FMODUnity.RuntimeManager.PlayOneShotAttached(doorOpenEvent, FindObjectOfType<PlayerMovement>().gameObject);
         StartCoroutine(EnterCity(heldItem));
+        FMODUnity.RuntimeManager.PlayOneShotAttached(doorOpenEvent, FindObjectOfType<PlayerMovement>().gameObject);
     }
 
     IEnumerator EnterCity(Pickupable heldItem)
     {
+        sceneTransitionFade = GameObject.Find("SceneTransitionFade").GetComponent<CanvasGroup>();
+
         Debug.Log("Entering city");
         sceneTransitionFade.alpha = 0;
         while (sceneTransitionFade.alpha < 1)
