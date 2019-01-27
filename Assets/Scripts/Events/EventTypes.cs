@@ -47,3 +47,5 @@ public struct ReturnHomeEvent
 }
 
 public struct PowerDownEvent { }
+
+public struct StartGameEvent { }
