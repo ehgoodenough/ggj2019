@@ -285,7 +285,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   CityMusicEvent: event:/MX/PGL_MX
   ThunderAmbianceEvent: event:/SFX/Ambience/Thunder_Storm
-  HomeMusicEvent: event:/MX/In_Home
+  HomeMusicEvent: event:/MX/In_Home_MX
 --- !u!1 &8936142915627543873
 GameObject:
   m_ObjectHideFlags: 0
