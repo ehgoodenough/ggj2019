@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine.SceneManagement;
 using UnityEngine;
+using Rewired;
 
 public class Photo : MonoBehaviour
 {
@@ -9,12 +10,24 @@ public class Photo : MonoBehaviour
 
     private float time = 0;
 
+    private bool showPhoto = false;
+
+    public void ShowPhoto()
+    {
+        showPhoto = true;
+    }
+
+    public void HidePhoto()
+    {
+        showPhoto = false;
+    }
+
     void Update()
     {
         time += Time.deltaTime;
-        const float HOW_LONG_TO_KEEP_IT_UP_AT_START = 1.5f;
-        if(time < HOW_LONG_TO_KEEP_IT_UP_AT_START || Input.GetKey("space")) {
-            if(transform.localRotation.x > 0) {
+        const float HOW_LONG_TO_KEEP_IT_UP_AT_START = 2.5f;
+        if (time < HOW_LONG_TO_KEEP_IT_UP_AT_START || showPhoto) { // Input.GetKey("space")) {
+            if (transform.localRotation.x > 0) {
                 transform.Rotate(new Vector3(-1,0,0) * Time.deltaTime * rotationSpeed);
             }
         } else {

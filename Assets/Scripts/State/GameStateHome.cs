@@ -48,6 +48,10 @@ public class GameStateHome : State
     {
         Debug.Log("GameStateHome.DoEnter()");
         EventBus.PublishEvent(new EnterHomeEvent(this));
+
+        Debug.Log("start dat coroutine");
+        StartCoroutine(FadeIn());
+        FindObjectOfType<GlitchEffect>().enabled = false;
     }
 
     public override void DoUpdate()
@@ -74,10 +78,18 @@ public class GameStateHome : State
     IEnumerator FadeIn()
     {
         sceneTransitionFade = GameObject.Find("SceneTransitionFade").GetComponent<CanvasGroup>();
+        CanvasGroup otherCanvasGroup = GameObject.Find("FadePanel").GetComponent<CanvasGroup>();
+        CanvasGroup powerDownTextCanvasGroup = GameObject.Find("PowerDownText").GetComponent<CanvasGroup>();
 
+        powerDownTextCanvasGroup.alpha = 0;
         while (sceneTransitionFade.alpha > 0)
         {
             sceneTransitionFade.alpha -= Time.deltaTime / fadeDuration;
+            if (otherCanvasGroup)
+            {
+                otherCanvasGroup.alpha -= Time.deltaTime / fadeDuration;
+                //Debug.Log("otherCanvasGroup alpha " + otherCanvasGroup.alpha);
+            }
             yield return null;
         }
     }

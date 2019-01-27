@@ -24,8 +24,6 @@ public class PowerDown : MonoBehaviour
 
     public void Init()
     {
-        glitchEffect = FindObjectOfType<GlitchEffect>();
-
         glitchEffect.enabled = false;
         textCanvasGrewp.alpha = 0;
         fadeCanvasGrewp.alpha = 0;
@@ -34,6 +32,7 @@ public class PowerDown : MonoBehaviour
     [SubscribeGlobal]
     public void HandlePowerDown (PowerDownEvent e)
     {
+        glitchEffect = FindObjectOfType<GlitchEffect>();
         glitchEffect.enabled = true;
         StartCoroutine(FadeOut());
     }
@@ -43,7 +42,7 @@ public class PowerDown : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Keypad8))
         {
             // uncomment to test
-            // HandlePowerDown(new PowerDownEvent());
+            HandlePowerDown(new PowerDownEvent());
         }
     }
 

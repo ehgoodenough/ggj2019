@@ -422,9 +422,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dba6d930c932b464b9d98da8ae462888, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  openingCinematicPlayable: {fileID: 0}
-  closingCinematicPlayable: {fileID: 0}
+  openingCinematicPlayable: {fileID: 11400000, guid: 05f9dc6cafdb95d4db39b617ae91429d,
+    type: 2}
+  closingCinematicPlayable: {fileID: 11400000, guid: af8fc406fdc24584590022121ce9b1c5,
+    type: 2}
   openingCinematicPlayed: 0
+  director: {fileID: 0}
 --- !u!1 &8936142915627543873
 GameObject:
   m_ObjectHideFlags: 0
