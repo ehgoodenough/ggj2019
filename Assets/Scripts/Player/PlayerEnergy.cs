@@ -66,13 +66,13 @@ public class PlayerEnergy : MonoBehaviour
     {
         while (true)
         {
-            Debug.Log("Current Energy: " + currentEnergy);
+            // Debug.Log("Current Energy: " + currentEnergy);
             if (currentEnergyState == EnergyState.Depleting)
             {
                 // Debug.Log("Current Speed: " + movement.GetCurrentSpeed());
                 // Debug.Log("Max Speed: " + movement.speed);
                 // Debug.Log("Normalized Speed: " + (movement.GetCurrentSpeed() / movement.speed));
-                Debug.Log("Depletion Amount: " + CalculateDepletionAmount(logFrequency));
+                // Debug.Log("Depletion Amount: " + CalculateDepletionAmount(logFrequency));
             }
             yield return new WaitForSeconds(logFrequency);
         }
@@ -112,25 +112,25 @@ public class PlayerEnergy : MonoBehaviour
 
     private void OnEnterHomeEvent(EnterHomeEvent e)
     {
-        Debug.Log("PlayerEnergy.OnEnterHomeEvent()");
+        // Debug.Log("PlayerEnergy.OnEnterHomeEvent()");
         currentEnergyState = EnergyState.Recharging;
     }
 
     private void OnEnterCityEvent(EnterCityEvent e)
     {
-        Debug.Log("PlayerEnergy.OnEnterCityEvent()");
+        // Debug.Log("PlayerEnergy.OnEnterCityEvent()");
         currentEnergyState = EnergyState.Depleting;
     }
 
     private void OnExitHomeEvent(ExitHomeEvent e)
     {
-        Debug.Log("PlayerEnergy.OnExitHomeEvent()");
+        // Debug.Log("PlayerEnergy.OnExitHomeEvent()");
         currentEnergyState = EnergyState.Idle;
     }
 
     private void OnExitCityEvent(ExitCityEvent e)
     {
-        Debug.Log("PlayerEnergy.OnExitCityEvent()");
+        // Debug.Log("PlayerEnergy.OnExitCityEvent()");
         currentEnergyState = EnergyState.Idle;
     }
 }
