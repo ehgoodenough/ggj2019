@@ -12,7 +12,6 @@ public class PlayerMovement : MonoBehaviour
     private float currentSpeed = 0f;
     private Vector3 movementVector;
     private Rigidbody rb;
-    [SerializeField]
     private Vector3 lastFootstepLocation;
     private bool muteFootsteps = true;
 
