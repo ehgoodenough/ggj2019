@@ -16,6 +16,8 @@ public class InteractionDetector : MonoBehaviour
         playerCamera = GetComponentInParent<Camera>();
         // Debug.Log("playerCamera: " + playerCamera);
         pickupHolder = GetComponent<PickupHolder>();
+
+        EventBus.Subscribe<ReturnHomeEvent>(OnReturnHomeEvent);
     }
 
     private void Update()
@@ -135,4 +137,12 @@ public class InteractionDetector : MonoBehaviour
             OutlineManager.Instance.UnapplyOutline(interactableInFocus.gameObject);
         }
     }
+
+    /*
+    private void OnReturnHomeEvent(ReturnHomeEvent e)
+    {
+        Debug.Log("InteractionDetector.OnReturnHomeEvent");
+        interactablesInRange.Clear();
+    }
+    */
 }
