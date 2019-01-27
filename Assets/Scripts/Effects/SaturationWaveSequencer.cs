@@ -30,7 +30,7 @@ public class SaturationWaveSequencer : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.KeypadEnter))
+        if (Input.GetKeyDown(KeyCode.Space))
         {
             // For testing.
             IncreaseSaturationLevel();
@@ -61,7 +61,6 @@ public class SaturationWaveSequencer : MonoBehaviour
         GameProgress.homeSaturationLevel += saturationIncrement;
         colorEffectMat.SetFloat("_SaturationLevel", GameProgress.homeSaturationLevel);
         colorEffectMat.SetFloat("_ScanDistance", 0);
-        Debug.Log("donezo");
         effectIsActive = false;
     }
 }

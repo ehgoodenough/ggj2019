@@ -2,6 +2,7 @@
 
 public static class GameProgress
 {
+    public static bool hasJustCompletedObjective = false;
     public static HashSet<string> collectedIds = new HashSet<string>();
     public static float homeSaturationLevel  = 0;
     public static int NumCollected
@@ -30,6 +31,7 @@ public static class GameProgress
 
     public static void CompleteObjective(ObjectivePickupable.Type type)
     {
+        hasJustCompletedObjective = true;
         completedObjectives.Add(type);
     }
 }
