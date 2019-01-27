@@ -584,7 +584,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!81 &767691622
 AudioListener:
   m_ObjectHideFlags: 0
@@ -798,6 +798,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: HUD
       objectReference: {fileID: 0}
+    - target: {fileID: 1001258394, guid: b587635b2678440438de4cf5fae550a3, type: 3}
+      propertyPath: m_Name
+      value: BootUpText
+      objectReference: {fileID: 0}
     - target: {fileID: 2602560496404840861, guid: b587635b2678440438de4cf5fae550a3,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -910,10 +914,6 @@ PrefabInstance:
     - target: {fileID: 770363285, guid: b587635b2678440438de4cf5fae550a3, type: 3}
       propertyPath: m_Alpha
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1001258394, guid: b587635b2678440438de4cf5fae550a3, type: 3}
-      propertyPath: m_Name
-      value: BootUpText
       objectReference: {fileID: 0}
     - target: {fileID: 1001258396, guid: b587635b2678440438de4cf5fae550a3, type: 3}
       propertyPath: m_Enabled
