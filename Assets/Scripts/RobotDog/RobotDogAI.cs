@@ -53,7 +53,6 @@ public class RobotDogAI : MonoBehaviour
 
     void Update()
     {
-        Debug.Log("mute: " + muteFootsteps + " speed: " + Vector3.Magnitude(agent.velocity) + " distance: " + Vector3.Distance(lastFootstepLocation, transform.position));
         if (!muteFootsteps && Vector3.Magnitude(agent.velocity) > 0 && Vector3.Distance(lastFootstepLocation, transform.position) > strideLength)
         {
             PlayFootstep();
