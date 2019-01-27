@@ -3,6 +3,7 @@
 public static class GameProgress
 {
     public static HashSet<string> collectedIds = new HashSet<string>();
+    public static float homeSaturationLevel  = 0;
     public static int NumCollected
     {
         get

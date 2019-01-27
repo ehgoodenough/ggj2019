@@ -20,6 +20,8 @@
 		_EdgeNoiseTex("Edge Noise Texture", 2D) = "white" {}
 		_EdgeScale("Edge Scale", float) = 0
 		_EdgeScaleX("Edge Scale X", float) = 0
+		_SaturationLevel("Saturation Level", float) = 0
+		_TargetSaturationLevel("Target saturation Level", float) = 0
     }
     SubShader
     {
@@ -76,6 +78,9 @@
 			float _EdgeScale;
 			float _EdgeScaleX;
 
+			float _SaturationLevel; 
+			float _TargetSaturationLevel;
+
 			// 2D Random
 			float random(fixed2 st) {
 				return frac(sin(dot(st.xy,
@@ -119,7 +124,8 @@
 
 				fixed4 texCol = tex2D(_MainTex, i.uv);
 				
-				float darkness = (1 - Luminance(texCol.rgb));
+				float luminance = Luminance(texCol.rgb);
+				float darkness = (1 - luminance);
 
 				float scaleIncrement = (1 / _NumLevels);
 
@@ -139,18 +145,18 @@
 				float depthDifference = tex2D(_CameraDepthTexture, i.uv).r - tex2D(_DepthBuffer, i.uv).r;
 				float colorBufferSample = tex2D(_ColorBuffer, i.uv).r;
 
-				fixed4 halftoneColor = lerp(fixed4(1, 1, 1, 1) * dotCol * steppedLuminance, floor(Luminance(pow((texCol.rgb), _LuminancePower)) / inc) * inc, _LuminanceLerp);
+				fixed4 dotsColor = lerp(fixed4(1, 1, 1, 1) * dotCol * steppedLuminance, floor(Luminance(pow((texCol.rgb), _LuminancePower)) / inc) * inc, _LuminanceLerp);
 
 				// ignore items on the color layer
-				fixed4 modifiedColor = colorBufferSample > .5 && depthDifference < -.001 ? lerp(dotCol, texCol, .95) : halftoneColor;
+				fixed4 halftoneEffectColor = colorBufferSample > .5 && depthDifference < -.001 ? lerp(dotCol, texCol, .95) : dotsColor;
+
+				fixed4 fullColor = lerp(dotCol, texCol, .95);
 
 				float noiseLookup = atan2(wsPos.z - _EffectOrigin.z, wsPos.x - _EffectOrigin.x);
 				_EdgeScale *= clamp((_ScanDistance - 1)/6, 0, 1);
 				dist += noise(fixed2(noiseLookup * _EdgeScaleX, _Time.y)) * _EdgeScale;
-				//dist += (tex2D(_EdgeNoiseTex, fixed2(noiseLookup * _EdgeScaleX, .5)) * 2 - 1) * _EdgeScale;
 
-				// TODO: replace texCol with a dynamic value based on current saturation level.
-				return lerp(lerp(dotCol, texCol, .95), modifiedColor, smoothstep(_ScanDistance, _ScanDistance + _ScanSmoothAmount, dist));
+				return lerp(lerp(halftoneEffectColor, fullColor, _TargetSaturationLevel), lerp(halftoneEffectColor, fullColor, _SaturationLevel), smoothstep(_ScanDistance, _ScanDistance + _ScanSmoothAmount, dist));
             }
             ENDCG
         }

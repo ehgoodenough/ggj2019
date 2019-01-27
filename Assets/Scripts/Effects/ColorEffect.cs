@@ -9,7 +9,6 @@ public class ColorEffect : MonoBehaviour
     private RenderTexture depthBuffer;
 
     public Material halftoneMat;
-    public float scanDistance;
 
     public Transform saturationWaveOrigin;
 
@@ -32,8 +31,10 @@ public class ColorEffect : MonoBehaviour
         colorBufferCam.RenderWithShader(colorBufferShader, "");
         colorBufferCam.SetTargetBuffers(colorBuffer.colorBuffer, depthBuffer.depthBuffer);
 
-        halftoneMat.SetVector("_EffectOrigin", saturationWaveOrigin.position);
-        halftoneMat.SetFloat("_ScanDistance", scanDistance);
+        if (saturationWaveOrigin)
+        {
+            halftoneMat.SetVector("_EffectOrigin", saturationWaveOrigin.position);
+        }
 
         halftoneMat.SetTexture("_ColorBuffer", colorBuffer);
         halftoneMat.SetTexture("_DepthBuffer", depthBuffer);

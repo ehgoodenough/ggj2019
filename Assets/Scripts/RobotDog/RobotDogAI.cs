@@ -9,7 +9,6 @@ public class RobotDogAI : MonoBehaviour
     public Transform player;
     public float updateDestinationFrequency = 1f;
     public float startFollowingHysteresis = 2f;
-    // public float stoppingDistance = 8f;
 
     private NavMeshAgent agent;
     private Vector3 nextPosition; // This will be the most recent position of the player
@@ -22,6 +21,9 @@ public class RobotDogAI : MonoBehaviour
 
         agent = GetComponent<NavMeshAgent>();
         startFollowingDistance = agent.stoppingDistance + startFollowingHysteresis;
+
+        EventBus.Subscribe<EnterHomeEvent>(OnEnterHomeEvent);
+        EventBus.Subscribe<EnterCityEvent>(OnEnterCityEvent);
     }
 
     private void Start()
@@ -47,13 +49,6 @@ public class RobotDogAI : MonoBehaviour
 
     private Vector3 GetNextPositionOnNavMesh(Vector3 samplePosition)
     {
-        /*
-        if (Vector3.Distance(samplePosition, this.transform.position) < stoppingDistance)
-        {
-            return this.transform.position;
-        }
-        */
-
         NavMeshHit hit;
         bool positionFound = NavMesh.SamplePosition(samplePosition, out hit, 2.5f, 1);
         return positionFound ? hit.position : this.transform.position; // If cannot find position, stay put
@@ -65,5 +60,15 @@ public class RobotDogAI : MonoBehaviour
         Gizmos.DrawCube(previousPosition, Vector3.one * 0.5f);
         Gizmos.color = Color.green;
         Gizmos.DrawCube(nextPosition, Vector3.one * 0.5f);
+    }
+
+    private void OnEnterHomeEvent(EnterHomeEvent e)
+    {
+        this.transform.position = e.homeState.dogStart.position;
+    }
+
+    private void OnEnterCityEvent(EnterCityEvent e)
+    {
+        this.transform.position = e.cityState.dogStart.position;
     }
 }
