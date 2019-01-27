@@ -14,7 +14,7 @@ public class Collectable : MonoBehaviour
         uniqueIdComponent = gameObject.GetComponent<UniqueId>();
     }
 
-    void OnCollisionEnter(Collision collision)
+    void OnTriggerEnter(Collider collision)
     {
         InteractionDetector interactor = collision.gameObject.GetComponent<InteractionDetector>();
         if (interactor)
