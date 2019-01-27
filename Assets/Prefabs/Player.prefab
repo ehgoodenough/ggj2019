@@ -852,7 +852,8 @@ PrefabInstance:
       propertyPath: m_Name
       value: Photo
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 5173505497274948296, guid: d9a5b2dee9415ef40b8074de83b6690a, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: d9a5b2dee9415ef40b8074de83b6690a, type: 3}
 --- !u!4 &2491628624978336359 stripped
 Transform:
