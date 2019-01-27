@@ -8,6 +8,18 @@
 [Bb]uilds/
 [Ll]ogs/
 
+# FMOD
+Assets/FMODStudioCache.asset
+Assets/FMODStudioCache.asset.meta
+Assets/StreamingAssets/*.bank
+Assets/StreamingAssets/*.bank.meta
+!Assets/FMODproject/[Bb]uild/
+fmod.log
+fmod_editor.log
+Assets/FMODproject/.cache/
+Assets.FMODproject/.unsaved/
+Assets.FMODproject/.user
+
 # Never ignore Asset meta data
 ![Aa]ssets/**/*.meta
 
