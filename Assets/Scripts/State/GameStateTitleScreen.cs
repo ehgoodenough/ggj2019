@@ -21,6 +21,9 @@ public class GameStateTitleScreen : State
 
     protected override void DoStart()
     {
+        Cursor.visible = false;
+        Cursor.lockState = CursorLockMode.Locked;
+
         if (playerObj == null)
         {
             playerObj = Instantiate(playerPrefab); // , playerStart.position, Quaternion.Euler(playerStart.position));
