@@ -87,7 +87,7 @@ Material:
     - _OcclusionStrength: 1
     - _Parallax: 0.02
     - _ScaleIncrement: 0.7
-    - _ScanDistance: 2.87
+    - _ScanDistance: 0
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
     - _SrcBlend: 1
