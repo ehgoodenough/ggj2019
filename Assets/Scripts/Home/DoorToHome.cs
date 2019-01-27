@@ -8,6 +8,6 @@ public class DoorToHome : Interactable
     public override void Interact(Pickupable heldItem)
     {
         // TODO: Use heldItem to add item to the house!
-        SceneManager.LoadScene("HomeScene");
+        EventBus.PublishEvent(new ReturnHomeEvent(heldItem));
     }
 }

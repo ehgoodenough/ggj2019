@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 
-public class UnitIdleState : State
+public class ExampleState : State
 {
     protected override void DoAwake()
     {
