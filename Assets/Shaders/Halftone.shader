@@ -17,7 +17,8 @@
 		_ScanDistance("Scan Distance", float) = 0
 		_EffectPos("Effect Position", Vector) = (1,1,1,1)
 		_ScanSmoothAmount("Scan Smooth Amount", float) = 0
-			
+		_EdgeNoiseTex("Edge Noise Texture", 2D) = "white" {}
+		_EdgeScale("Edge Scale", float) = 0
     }
     SubShader
     {
@@ -70,6 +71,8 @@
 			float4 _EffectOrigin;
 			float _ScanDistance;
 			float _ScanSmoothAmount;
+			sampler2D _EdgeNoiseTex;
+			float _EdgeScale;
 
             fixed4 frag (v2f i) : SV_Target
             {
@@ -108,8 +111,8 @@
 				// ignore items on the color layer
 				fixed4 modifiedColor = colorBufferSample > .5 && depthDifference < -.001 ? lerp(dotCol, texCol, .95) : halftoneColor;
 
-				float noiseLookup = atan2(wsPos.y - _EffectOrigin.y, wsPos.x - _EffectOrigin.x);
-				//dist += ();
+				float noiseLookup = atan2(wsPos.z - _EffectOrigin.z, wsPos.x - _EffectOrigin.x);
+				dist += (tex2D(_EdgeNoiseTex, fixed2(noiseLookup * .5, .5 + _Time.x)) * 2 - 1) * _EdgeScale;
 
 				// TODO: replace texCol with a dynamic value based on current saturation level.
 				return lerp(lerp(dotCol, texCol, .95), modifiedColor, smoothstep(_ScanDistance, _ScanDistance + _ScanSmoothAmount, dist));

@@ -47,6 +47,10 @@ Material:
         m_Texture: {fileID: 2800000, guid: 7a4570a4a61214640930d7bef742f484, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    - _EdgeNoiseTex:
+        m_Texture: {fileID: 2800000, guid: 5997f2313e7437a44b6c0e038f717917, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - _EmissionMap:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
@@ -74,6 +78,7 @@ Material:
     - _DotSizeBase: 0.15
     - _DotSizeMult: 1
     - _DstBlend: 0
+    - _EdgeScale: 4
     - _GlossMapScale: 1
     - _Glossiness: 0.5
     - _GlossyReflections: 1
@@ -87,8 +92,8 @@ Material:
     - _OcclusionStrength: 1
     - _Parallax: 0.02
     - _ScaleIncrement: 0.7
-    - _ScanDistance: 2.82
-    - _ScanSmoothAmount: 3
+    - _ScanDistance: -0.38
+    - _ScanSmoothAmount: 0.75
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
     - _SrcBlend: 1
