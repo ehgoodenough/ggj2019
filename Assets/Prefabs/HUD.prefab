@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 625840491}
   - component: {fileID: 625840490}
   - component: {fileID: 625840492}
+  - component: {fileID: 468397598}
   m_Layer: 5
   m_Name: PowerDownText
   m_TagString: Untagged
@@ -90,7 +91,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 625840486}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 49db08eaf84e6e543a02d7da52119b7b, type: 3}
   m_Name: 
@@ -120,10 +121,29 @@ CanvasGroup:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 625840486}
   m_Enabled: 1
-  m_Alpha: 1
+  m_Alpha: 0
   m_Interactable: 1
-  m_BlocksRaycasts: 1
+  m_BlocksRaycasts: 0
   m_IgnoreParentGroups: 0
+--- !u!95 &468397598
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 625840486}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 0}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &742297239
 GameObject:
   m_ObjectHideFlags: 0
@@ -223,6 +243,7 @@ GameObject:
   - component: {fileID: 770363287}
   - component: {fileID: 770363286}
   - component: {fileID: 770363285}
+  - component: {fileID: 988348090}
   m_Layer: 5
   m_Name: Fade
   m_TagString: Untagged
@@ -298,6 +319,25 @@ CanvasGroup:
   m_Interactable: 1
   m_BlocksRaycasts: 1
   m_IgnoreParentGroups: 0
+--- !u!95 &988348090
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 770363283}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 0}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &1001258394
 GameObject:
   m_ObjectHideFlags: 0
@@ -310,8 +350,9 @@ GameObject:
   - component: {fileID: 1001258398}
   - component: {fileID: 1001258397}
   - component: {fileID: 1001258396}
+  - component: {fileID: 704271422}
   m_Layer: 5
-  m_Name: Text
+  m_Name: BootUpText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -393,6 +434,25 @@ MonoBehaviour:
   textFile: {fileID: 4900000, guid: d39bdd3163af8df4682292d75c600df9, type: 3}
   totalTime: 5
   maxLines: 10
+--- !u!95 &704271422
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1001258394}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 0}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &2602560496373081341
 GameObject:
   m_ObjectHideFlags: 0
@@ -494,6 +554,7 @@ GameObject:
   - component: {fileID: 2602560496404840859}
   - component: {fileID: 2602560496404840856}
   - component: {fileID: 2602560496404840857}
+  - component: {fileID: 1091864122}
   m_Layer: 5
   m_Name: HUD
   m_TagString: Untagged
@@ -608,6 +669,29 @@ MonoBehaviour:
   m_ChildForceExpandHeight: 1
   m_ChildControlWidth: 0
   m_ChildControlHeight: 0
+--- !u!320 &1091864122
+PlayableDirector:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2602560496404840934}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_PlayableAsset: {fileID: 11400000, guid: 05f9dc6cafdb95d4db39b617ae91429d, type: 2}
+  m_InitialState: 1
+  m_WrapMode: 2
+  m_DirectorUpdateMode: 1
+  m_InitialTime: 0
+  m_SceneBindings:
+  - key: {fileID: 114954081190703226, guid: 05f9dc6cafdb95d4db39b617ae91429d, type: 2}
+    value: {fileID: 988348090}
+  - key: {fileID: 114200521466555016, guid: 05f9dc6cafdb95d4db39b617ae91429d, type: 2}
+    value: {fileID: 704271422}
+  - key: {fileID: 114643087443432770, guid: 05f9dc6cafdb95d4db39b617ae91429d, type: 2}
+    value: {fileID: 0}
+  m_ExposedReferences:
+    m_References: []
 --- !u!1 &2602560496457598428
 GameObject:
   m_ObjectHideFlags: 0
