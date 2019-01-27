@@ -5,6 +5,9 @@ using UnityEngine.SceneManagement;
 public class GameStateTitleScreen : State
 {
     public GameObject playerPrefab;
+    public float titleFadeDuration;
+    public CanvasGroup titleCanvas;
+
     private GameObject playerObj;
 
     private GameStateHome homeState;
@@ -26,6 +29,8 @@ public class GameStateTitleScreen : State
         }
 
         // EventBus.PublishEvent(new TitleScreenStartEvent(playerObj));
+        titleCanvas.alpha = 0;
+        StartCoroutine(RevealTitle());
     }
 
     protected override void DoEnter()
@@ -48,5 +53,14 @@ public class GameStateTitleScreen : State
     protected override void DoExit()
     {
         // Do stuff here when exiting the title screen but before entering another game state
+    }
+
+    IEnumerator RevealTitle()
+    {
+        while (titleCanvas.alpha < 1)
+        {
+            titleCanvas.alpha += Time.deltaTime / titleFadeDuration;
+            yield return null;
+        }
     }
 }
