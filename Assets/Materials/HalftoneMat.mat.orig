@@ -92,8 +92,12 @@ Material:
     - _OcclusionStrength: 1
     - _Parallax: 0.02
     - _ScaleIncrement: 0.7
+<<<<<<< HEAD
+    - _ScanDistance: 0
+=======
     - _ScanDistance: -0.38
     - _ScanSmoothAmount: 0.75
+>>>>>>> a993fc3c3a670edb8158876f1aa4a9d68dd8668f
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
     - _SrcBlend: 1
