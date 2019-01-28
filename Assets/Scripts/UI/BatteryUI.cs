@@ -15,7 +15,10 @@ public class BatteryUI : MonoBehaviour
     {
         if (playerEnergy)
         {
-            batteryFill.fillAmount = playerEnergy.GetCurrentEnergy() / playerEnergy.GetCurrentMaxEnergy();
+            if (batteryFill)
+            {
+                batteryFill.fillAmount = playerEnergy.GetCurrentEnergy() / playerEnergy.GetCurrentMaxEnergy();
+            }
         }
     }
 }
