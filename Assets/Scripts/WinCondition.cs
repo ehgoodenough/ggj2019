@@ -7,8 +7,6 @@ public class WinCondition : MonoBehaviour
 
     private void Awake()
     {
-        Invoke("PlayFinalCinematic", 4);
-
         if (GameProgress.hasJustCompletedObjective == true) {
             GameProgress.hasJustCompletedObjective = false;
             // TODO: Show the photo first, then take it down, then run the cool effect.
@@ -19,6 +17,8 @@ public class WinCondition : MonoBehaviour
         && GameProgress.isObjectiveComplete(ObjectivePickupable.Type.Flowers)
         && GameProgress.isObjectiveComplete(ObjectivePickupable.Type.Art)) {
             Debug.Log("WINNER IS YOU");
+
+            Invoke("PlayFinalCinematic", 4);
         }
     }
 
