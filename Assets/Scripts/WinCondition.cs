@@ -12,6 +12,10 @@ public class WinCondition : MonoBehaviour
             // TODO: Show the photo first, then take it down, then run the cool effect.
             SaturationWaveSequencer w = wave.GetComponent(typeof(SaturationWaveSequencer)) as SaturationWaveSequencer;
             w.IncreaseSaturationLevel();
+
+            var intro = FMODUnity.RuntimeManager.CreateInstance("event:/VO/Object_Deposited");
+            intro.start();
+            intro.release();
         }
         if(GameProgress.isObjectiveComplete(ObjectivePickupable.Type.Chair)
         && GameProgress.isObjectiveComplete(ObjectivePickupable.Type.Flowers)
