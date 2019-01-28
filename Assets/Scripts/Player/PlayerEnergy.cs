@@ -11,6 +11,7 @@ public class PlayerEnergy : MonoBehaviour
     }
 
     public float startingEnergy = 25f;
+    [SerializeField]
     private float currentEnergy;
 
     public float initialMaxEnergy = 50f;
@@ -103,7 +104,7 @@ public class PlayerEnergy : MonoBehaviour
         currentEnergy = Mathf.Clamp(currentEnergy - CalculateDepletionAmount(Time.deltaTime), 0f, currentMaxEnergy);
         if (currentEnergy == 0)
         {
-            FindObjectOfType<PowerDown>().Init();
+            EventBus.PublishEvent(new PowerDownEvent());
         }
     }
 
