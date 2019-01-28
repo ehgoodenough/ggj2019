@@ -389,13 +389,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f0d76ef4bd2a16745b542c23040de154, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  startingEnergy: 25
+  startingEnergy: 15
   currentEnergy: 0
   initialMaxEnergy: 50
   incrementMaxAmount: 10
-  rechargingRate: 1
+  rechargingRate: 1.25
   baselineDepletionRate: 0.1
-  maxDepletionRate: 0.5
+  maxDepletionRate: 0.25
 --- !u!114 &1464807852026845858
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -691,6 +691,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3873266012346060486, guid: de7cd572520f8584ba8cc81f1ca1aa24,
+        type: 3}
+      propertyPath: m_Layer
+      value: 12
+      objectReference: {fileID: 0}
     - target: {fileID: 3873266013234605588, guid: de7cd572520f8584ba8cc81f1ca1aa24,
         type: 3}
       propertyPath: SubModule.subEmitters.Array.data[0].emitter
@@ -711,11 +716,6 @@ PrefabInstance:
       propertyPath: SubModule.subEmitters.Array.data[0].emitter
       value: 
       objectReference: {fileID: 4105976142975996989}
-    - target: {fileID: 3873266012346060486, guid: de7cd572520f8584ba8cc81f1ca1aa24,
-        type: 3}
-      propertyPath: m_Layer
-      value: 12
-      objectReference: {fileID: 0}
     - target: {fileID: 6678944181542069611, guid: de7cd572520f8584ba8cc81f1ca1aa24,
         type: 3}
       propertyPath: m_Layer
@@ -771,6 +771,18 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2602560496404840934, guid: b587635b2678440438de4cf5fae550a3,
         type: 3}
+      propertyPath: m_Layer
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 625840486, guid: b587635b2678440438de4cf5fae550a3, type: 3}
+      propertyPath: m_Layer
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 1001258394, guid: b587635b2678440438de4cf5fae550a3, type: 3}
+      propertyPath: m_Layer
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 770363283, guid: b587635b2678440438de4cf5fae550a3, type: 3}
       propertyPath: m_Layer
       value: 12
       objectReference: {fileID: 0}
@@ -879,20 +891,16 @@ PrefabInstance:
       propertyPath: m_Pivot.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 1091864122, guid: b587635b2678440438de4cf5fae550a3, type: 3}
-      propertyPath: m_SceneBindings.Array.data[0].value
+    - target: {fileID: 625840491, guid: b587635b2678440438de4cf5fae550a3, type: 3}
+      propertyPath: fadeCanvasGrewp
       value: 
-      objectReference: {fileID: 3047077379281113495}
-    - target: {fileID: 1091864122, guid: b587635b2678440438de4cf5fae550a3, type: 3}
-      propertyPath: m_SceneBindings.Array.data[1].value
-      value: 
-      objectReference: {fileID: 3047077378963503891}
-    - target: {fileID: 1091864122, guid: b587635b2678440438de4cf5fae550a3, type: 3}
-      propertyPath: m_SceneBindings.Array.data[2].value
-      value: 
-      objectReference: {fileID: 9081872692348742867}
-    - target: {fileID: 1091864122, guid: b587635b2678440438de4cf5fae550a3, type: 3}
-      propertyPath: m_InitialState
+      objectReference: {fileID: 3047077379059720628}
+    - target: {fileID: 625840491, guid: b587635b2678440438de4cf5fae550a3, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 770363285, guid: b587635b2678440438de4cf5fae550a3, type: 3}
+      propertyPath: m_Alpha
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 770363284, guid: b587635b2678440438de4cf5fae550a3, type: 3}
@@ -907,10 +915,6 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 2
       objectReference: {fileID: 0}
-    - target: {fileID: 625840486, guid: b587635b2678440438de4cf5fae550a3, type: 3}
-      propertyPath: m_Layer
-      value: 12
-      objectReference: {fileID: 0}
     - target: {fileID: 742297240, guid: b587635b2678440438de4cf5fae550a3, type: 3}
       propertyPath: m_LocalScale.x
       value: 2
@@ -923,11 +927,7 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 2
       objectReference: {fileID: 0}
-    - target: {fileID: 770363283, guid: b587635b2678440438de4cf5fae550a3, type: 3}
-      propertyPath: m_Layer
-      value: 12
-      objectReference: {fileID: 0}
-    - target: {fileID: 1001258394, guid: b587635b2678440438de4cf5fae550a3, type: 3}
+    - target: {fileID: 742297239, guid: b587635b2678440438de4cf5fae550a3, type: 3}
       propertyPath: m_Layer
       value: 12
       objectReference: {fileID: 0}
@@ -940,22 +940,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Layer
       value: 12
-      objectReference: {fileID: 0}
-    - target: {fileID: 625840491, guid: b587635b2678440438de4cf5fae550a3, type: 3}
-      propertyPath: fadeCanvasGrewp
-      value: 
-      objectReference: {fileID: 3047077379059720628}
-    - target: {fileID: 625840491, guid: b587635b2678440438de4cf5fae550a3, type: 3}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 742297239, guid: b587635b2678440438de4cf5fae550a3, type: 3}
-      propertyPath: m_Layer
-      value: 12
-      objectReference: {fileID: 0}
-    - target: {fileID: 770363285, guid: b587635b2678440438de4cf5fae550a3, type: 3}
-      propertyPath: m_Alpha
-      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2602560496373081329, guid: b587635b2678440438de4cf5fae550a3,
         type: 3}
@@ -996,6 +980,22 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Layer
       value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 1091864122, guid: b587635b2678440438de4cf5fae550a3, type: 3}
+      propertyPath: m_SceneBindings.Array.data[0].value
+      value: 
+      objectReference: {fileID: 3047077379281113495}
+    - target: {fileID: 1091864122, guid: b587635b2678440438de4cf5fae550a3, type: 3}
+      propertyPath: m_SceneBindings.Array.data[1].value
+      value: 
+      objectReference: {fileID: 3047077378963503891}
+    - target: {fileID: 1091864122, guid: b587635b2678440438de4cf5fae550a3, type: 3}
+      propertyPath: m_SceneBindings.Array.data[2].value
+      value: 
+      objectReference: {fileID: 9081872692348742867}
+    - target: {fileID: 1091864122, guid: b587635b2678440438de4cf5fae550a3, type: 3}
+      propertyPath: m_InitialState
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b587635b2678440438de4cf5fae550a3, type: 3}
@@ -1048,16 +1048,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 8936142915627543902}
     m_Modifications:
-    - target: {fileID: 5173505497214926241, guid: d9a5b2dee9415ef40b8074de83b6690a,
-        type: 3}
-      propertyPath: m_Name
-      value: Photo
-      objectReference: {fileID: 0}
-    - target: {fileID: 5173505497214926241, guid: d9a5b2dee9415ef40b8074de83b6690a,
-        type: 3}
-      propertyPath: m_Layer
-      value: 12
-      objectReference: {fileID: 0}
     - target: {fileID: 5173505497214926270, guid: d9a5b2dee9415ef40b8074de83b6690a,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1112,6 +1102,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5173505497214926241, guid: d9a5b2dee9415ef40b8074de83b6690a,
+        type: 3}
+      propertyPath: m_Name
+      value: Photo
+      objectReference: {fileID: 0}
+    - target: {fileID: 5173505497214926241, guid: d9a5b2dee9415ef40b8074de83b6690a,
+        type: 3}
+      propertyPath: m_Layer
+      value: 12
       objectReference: {fileID: 0}
     - target: {fileID: 5173505497274948298, guid: d9a5b2dee9415ef40b8074de83b6690a,
         type: 3}
