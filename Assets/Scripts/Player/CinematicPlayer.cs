@@ -35,9 +35,20 @@ public class CinematicPlayer : MonoBehaviour
         }
     }
 
+    private void Update()
+    {
+        //test
+        if (Input.GetKeyDown(KeyCode.Keypad7))
+        {
+            PlayFinalCinematic();
+        }
+    }
+
     public void PlayFinalCinematic()
     {
-        director.playableAsset = closingCinematicPlayable;
-        director.Play();
+        //director.playableAsset = closingCinematicPlayable;
+        //director.Play();
+        GameObject.Find("friend_pieces").SetActive(false);
+        GameObject.Find("friend_whole").GetComponent<MeshRenderer>().enabled = true;
     }
 }
