@@ -49,7 +49,7 @@ public class OutlineManager : MonoBehaviour
                 //}
 
                 cachedLayersForObject[rend] = rend.gameObject.layer;
-                rend.gameObject.layer = LayerMask.NameToLayer("Outline");
+                rend.gameObject.layer = LayerMask.NameToLayer("ColorAndOutline");
             }
         }
     }
