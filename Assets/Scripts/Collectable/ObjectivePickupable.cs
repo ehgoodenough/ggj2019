@@ -1,4 +1,6 @@
-﻿public class ObjectivePickupable : Pickupable
+﻿using UnityEngine;
+
+public class ObjectivePickupable : Pickupable
 {
     public enum Type
     {
@@ -12,5 +14,11 @@
     public override bool CanInteractWith(Pickupable heldItem)
     {
         return !GameProgress.isObjectiveComplete(type);
+    }
+
+    public override void Pickup(Vector3 holdPoint, Transform parent)
+    {
+        base.Pickup(holdPoint, parent);
+        FMODUnity.RuntimeManager.PlayOneShot("event:/VO/Object_Found", transform.position);
     }
 }

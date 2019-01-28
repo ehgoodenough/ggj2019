@@ -169,6 +169,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3bc326056e220944d8b99eee791e4e37, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  sceneTransitionFade: {fileID: 0}
+  fadeDuration: 1
   playerStart: {fileID: 5355786701562833813}
   dogStart: {fileID: 6766815113777111829}
 --- !u!114 &4234319171573080014
@@ -183,6 +185,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f27fe1d81476dd5479ec17fc1e268e21, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  sceneTransitionFade: {fileID: 0}
+  fadeDuration: 1
   playerStart: {fileID: 6182436049881090099}
   dogStart: {fileID: 954092713128142080}
 --- !u!114 &4234319171573080015
@@ -221,7 +225,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4693510644262928461}
   m_LocalRotation: {x: 0, y: 0.7071068, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: -10, y: 0, z: 0}
+  m_LocalPosition: {x: -8.959, y: 1.537, z: -0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4234319171573080011}
