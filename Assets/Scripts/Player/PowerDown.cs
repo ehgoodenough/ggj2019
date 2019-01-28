@@ -51,6 +51,7 @@ public class PowerDown : MonoBehaviour
     {
         Destroy(GameObject.Find("BootupText"));
         Debug.Log("IT'S Gone");
+        textCanvasGrewp.alpha = 0;
 
         while (textCanvasGrewp.alpha < 1)
         {
