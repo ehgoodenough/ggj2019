@@ -11,14 +11,9 @@ public class DoorToHome : Interactable
     // public Transform Item2;
     // public Transform Item3;
 
-    [FMODUnity.EventRef]
-    public string doorOpenEvent;
-    [FMODUnity.EventRef]
-    public string doorCloseEvent;
-
     void Start()
     {
-        FMODUnity.RuntimeManager.PlayOneShot(doorCloseEvent, transform.position);
+        FMODUnity.RuntimeManager.PlayOneShot("event:/SFX/Interactables/Door_Close", transform.position);
     }
 
     public override bool CanInteractWith(Pickupable heldItem)
@@ -36,7 +31,7 @@ public class DoorToHome : Interactable
 
         StartCoroutine(EnterHome(heldItem));
         //EventBus.PublishEvent(new ReturnHomeEvent(heldItem));
-        FMODUnity.RuntimeManager.PlayOneShotAttached(doorOpenEvent, FindObjectOfType<PlayerMovement>().gameObject);
+        FMODUnity.RuntimeManager.PlayOneShotAttached("event:/SFX/Interactables/Door_Open", FindObjectOfType<PlayerMovement>().gameObject);
     }
 
     IEnumerator EnterHome(Pickupable heldItem)

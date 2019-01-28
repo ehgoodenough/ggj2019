@@ -8,10 +8,6 @@ public class DoorToCity : Interactable
 {
     public CanvasGroup sceneTransitionFade;
     public float fadeDuration = 1f;
-    [FMODUnity.EventRef]
-    public string doorOpenEvent;
-    [FMODUnity.EventRef]
-    public string doorCloseEvent;
 
     private static bool enteredFromTitleScreen = true;
 
@@ -19,9 +15,12 @@ public class DoorToCity : Interactable
     {
         if (!enteredFromTitleScreen)
         {
-            FMODUnity.RuntimeManager.PlayOneShot(doorCloseEvent, transform.position);
-        } else
+            Debug.Log("did not enter from title");
+            FMODUnity.RuntimeManager.PlayOneShot("event:/SFX/Interactables/Door_Close", transform.position);
+        }
+        else
         {
+            Debug.Log("entered from title");
             enteredFromTitleScreen = false; // all other transitions will be between city and home
         }
     }
@@ -37,7 +36,7 @@ public class DoorToCity : Interactable
     {
         //EventBus.PublishEvent(new LeaveHomeEvent(heldItem));
         StartCoroutine(EnterCity(heldItem));
-        FMODUnity.RuntimeManager.PlayOneShotAttached(doorOpenEvent, FindObjectOfType<PlayerMovement>().gameObject);
+        FMODUnity.RuntimeManager.PlayOneShotAttached("event:/SFX/Interactables/Door_Open", FindObjectOfType<PlayerMovement>().gameObject);
     }
 
     IEnumerator EnterCity(Pickupable heldItem)
