@@ -30,7 +30,7 @@ public class Photo : MonoBehaviour
     void Update()
     {
         time += Time.deltaTime;
-        const float HOW_LONG_TO_KEEP_IT_UP_AT_START = 10f;
+        const float HOW_LONG_TO_KEEP_IT_UP_AT_START = 5f;
         if (time < HOW_LONG_TO_KEEP_IT_UP_AT_START || showPhoto) { // Input.GetKey("space")) {
             if (transform.localRotation.x > 0) {
                 transform.Rotate(new Vector3(-1,0,0) * Time.deltaTime * rotationSpeed);
@@ -44,6 +44,12 @@ public class Photo : MonoBehaviour
 
     private void OnExitTitleScreenEvent(ExitTitleScreenEvent e)
     {
+        StartCoroutine(DelayShowingPhotoAtStart());
+    }
+
+    IEnumerator DelayShowingPhotoAtStart()
+    {
+        yield return new WaitForSeconds(8f);
         time = 0f;
     }
 }
