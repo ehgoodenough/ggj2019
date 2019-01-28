@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using UnityEngine;
+using UnityEngine.Playables;
 
 public class PowerDown : MonoBehaviour
 {
@@ -48,6 +49,10 @@ public class PowerDown : MonoBehaviour
 
     IEnumerator FadeOut()
     {
+        Destroy(GameObject.Find("BootupText"));
+        Debug.Log("IT'S Gone");
+        textCanvasGrewp.alpha = 0;
+
         while (textCanvasGrewp.alpha < 1)
         {
             textCanvasGrewp.alpha += Time.deltaTime / textFadeDuration;
@@ -61,6 +66,8 @@ public class PowerDown : MonoBehaviour
             fadeCanvasGrewp.alpha += Time.deltaTime / textFadeDuration;
             yield return null;
         }
+
+        FindObjectOfType<PlayableDirector>().enabled = false;
         EventBus.PublishEvent(new ReturnHomeEvent());
     }
 }

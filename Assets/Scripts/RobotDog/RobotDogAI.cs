@@ -21,6 +21,8 @@ public class RobotDogAI : MonoBehaviour
     private Vector3 previousPosition; // This will be the position before the most recent position of the player
     private float startFollowingDistance;
 
+    private PoochAnimator animator;
+
     [SerializeField]
     private Vector3 lastFootstepLocation;
     private bool muteFootsteps = false;
@@ -28,6 +30,8 @@ public class RobotDogAI : MonoBehaviour
 
     void Awake()
     {
+        animator = GetComponentInChildren<PoochAnimator>();
+
         // Debug.Log("RobotDogAI.Awake()");
         // Debug.Log("Robot Dog Position: " + this.transform.position);
         agent = GetComponent<NavMeshAgent>();
@@ -56,7 +60,24 @@ public class RobotDogAI : MonoBehaviour
 
     void Update()
     {
-        if (!muteFootsteps && Vector3.Magnitude(agent.velocity) > 0 && Vector3.Distance(lastFootstepLocation, transform.position) > strideLength)
+        // Change Animation state according to current speed
+        float currentSpeed = agent.velocity.magnitude;
+        float currentSpeedNormalized = currentSpeed / agent.speed;
+        // Debug.Log("Current Speed Normalized: " + currentSpeedNormalized);
+        if (currentSpeedNormalized > 0.4f )
+        {
+            animator.Run();
+        }
+        else if (currentSpeedNormalized > 0.2f)
+        {
+            animator.Trot();
+        }
+        else
+        {
+            animator.Idle();
+        }
+
+        if (!muteFootsteps && currentSpeed > 0 && Vector3.Distance(lastFootstepLocation, transform.position) > strideLength)
         {
             PlayFootstep();
         }

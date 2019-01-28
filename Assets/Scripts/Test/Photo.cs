@@ -25,7 +25,7 @@ public class Photo : MonoBehaviour
     void Update()
     {
         time += Time.deltaTime;
-        const float HOW_LONG_TO_KEEP_IT_UP_AT_START = 2.5f;
+        const float HOW_LONG_TO_KEEP_IT_UP_AT_START = 10f;
         if (time < HOW_LONG_TO_KEEP_IT_UP_AT_START || showPhoto) { // Input.GetKey("space")) {
             if (transform.localRotation.x > 0) {
                 transform.Rotate(new Vector3(-1,0,0) * Time.deltaTime * rotationSpeed);
