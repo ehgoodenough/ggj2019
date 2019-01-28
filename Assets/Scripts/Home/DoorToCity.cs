@@ -15,12 +15,10 @@ public class DoorToCity : Interactable
     {
         if (!enteredFromTitleScreen)
         {
-            Debug.Log("did not enter from title");
             FMODUnity.RuntimeManager.PlayOneShot("event:/SFX/Interactables/Door_Close", transform.position);
         }
         else
         {
-            Debug.Log("entered from title");
             enteredFromTitleScreen = false; // all other transitions will be between city and home
         }
     }
