@@ -5,6 +5,7 @@ using UnityEngine.AI;
 public class PlayerMovement : MonoBehaviour
 {
     public float speed;
+    public float modifiedSpeed;
 
     [FMODUnity.EventRef]
     public string footstepEvent;
@@ -42,10 +43,15 @@ public class PlayerMovement : MonoBehaviour
         rb.freezeRotation = true;
     }
 
+    private void Update()
+    {
+        modifiedSpeed = speed * ((Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.RightShift)) ? 1.6f : 1);
+    }
+
     void FixedUpdate()
     {
-        currentSpeed = movementVector.magnitude * speed;
-        Vector3 moveDirection = transform.forward * movementVector.z * speed + transform.right * movementVector.x * speed;
+        currentSpeed = movementVector.magnitude * modifiedSpeed;
+        Vector3 moveDirection = transform.forward * movementVector.z * modifiedSpeed + transform.right * movementVector.x * modifiedSpeed;
 
         /* Yup, this doesn't work
         if (moveDirection.magnitude > 0f)
