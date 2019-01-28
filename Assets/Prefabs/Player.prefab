@@ -633,17 +633,17 @@ PrefabInstance:
     - target: {fileID: 3873266013234605587, guid: de7cd572520f8584ba8cc81f1ca1aa24,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -1326.4
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3873266013234605587, guid: de7cd572520f8584ba8cc81f1ca1aa24,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1851.1
+      value: 37.3
       objectReference: {fileID: 0}
     - target: {fileID: 3873266013234605587, guid: de7cd572520f8584ba8cc81f1ca1aa24,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 1369.7
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3873266013234605587, guid: de7cd572520f8584ba8cc81f1ca1aa24,
         type: 3}
@@ -832,6 +832,18 @@ PrefabInstance:
       propertyPath: m_Pivot.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 625840491, guid: b587635b2678440438de4cf5fae550a3, type: 3}
+      propertyPath: textCanvasGrewp
+      value: 
+      objectReference: {fileID: 3047077378901196353}
+    - target: {fileID: 625840491, guid: b587635b2678440438de4cf5fae550a3, type: 3}
+      propertyPath: fadeCanvasGrewp
+      value: 
+      objectReference: {fileID: 3047077379059720628}
+    - target: {fileID: 625840491, guid: b587635b2678440438de4cf5fae550a3, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1091864122, guid: b587635b2678440438de4cf5fae550a3, type: 3}
       propertyPath: m_SceneBindings.Array.data[0].value
       value: 
@@ -847,18 +859,6 @@ PrefabInstance:
     - target: {fileID: 1091864122, guid: b587635b2678440438de4cf5fae550a3, type: 3}
       propertyPath: m_InitialState
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 625840491, guid: b587635b2678440438de4cf5fae550a3, type: 3}
-      propertyPath: textCanvasGrewp
-      value: 
-      objectReference: {fileID: 3047077378901196353}
-    - target: {fileID: 625840491, guid: b587635b2678440438de4cf5fae550a3, type: 3}
-      propertyPath: fadeCanvasGrewp
-      value: 
-      objectReference: {fileID: 3047077379059720628}
-    - target: {fileID: 625840491, guid: b587635b2678440438de4cf5fae550a3, type: 3}
-      propertyPath: m_Enabled
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 770363285, guid: b587635b2678440438de4cf5fae550a3, type: 3}
       propertyPath: m_Alpha
@@ -909,11 +909,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 8936142915627543902}
     m_Modifications:
-    - target: {fileID: 5173505497214926241, guid: d9a5b2dee9415ef40b8074de83b6690a,
-        type: 3}
-      propertyPath: m_Name
-      value: Photo
-      objectReference: {fileID: 0}
     - target: {fileID: 5173505497214926270, guid: d9a5b2dee9415ef40b8074de83b6690a,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -968,6 +963,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5173505497214926241, guid: d9a5b2dee9415ef40b8074de83b6690a,
+        type: 3}
+      propertyPath: m_Name
+      value: Photo
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 5173505497274948296, guid: d9a5b2dee9415ef40b8074de83b6690a, type: 3}
