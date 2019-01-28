@@ -4,12 +4,11 @@ using UnityEngine.UI;
 public class BatteryUI : MonoBehaviour
 {
     PlayerEnergy playerEnergy;
-    Image batteryFill;
+    public Image batteryFill;
 
     void Start()
     {
         playerEnergy = FindObjectOfType<PlayerEnergy>();
-        batteryFill = GetComponent<Image>();
     }
 
     void Update()
