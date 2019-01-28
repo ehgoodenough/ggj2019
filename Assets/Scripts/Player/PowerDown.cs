@@ -12,11 +12,11 @@ public class PowerDown : MonoBehaviour
 
     private GlitchEffect glitchEffect;
 
-    //private void Awake()
-    //{
-    //    glitchEffect = FindObjectOfType<GlitchEffect>();
-    //    Init();
-    //}
+    private void Awake()
+    {
+        Init();
+        EventBus.Subscribe<PowerDownEvent>(HandlePowerDown);
+    }
 
     //private void OnLevelWasLoaded(int level)
     //{
@@ -25,12 +25,12 @@ public class PowerDown : MonoBehaviour
 
     public void Init()
     {
+        glitchEffect = FindObjectOfType<GlitchEffect>();
         glitchEffect.enabled = false;
         textCanvasGrewp.alpha = 0;
         fadeCanvasGrewp.alpha = 0;
     }
 
-    [SubscribeGlobal]
     public void HandlePowerDown (PowerDownEvent e)
     {
         glitchEffect = FindObjectOfType<GlitchEffect>();

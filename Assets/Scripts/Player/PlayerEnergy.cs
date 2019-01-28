@@ -11,6 +11,7 @@ public class PlayerEnergy : MonoBehaviour
     }
 
     public float startingEnergy = 25f;
+    [SerializeField]
     private float currentEnergy;
 
     public float initialMaxEnergy = 50f;
@@ -28,6 +29,8 @@ public class PlayerEnergy : MonoBehaviour
 
     private float logFrequency = 1f;
 
+    private StateMachine gameStateMachine;
+
     private void Awake()
     {
         currentEnergy = startingEnergy;
@@ -40,6 +43,8 @@ public class PlayerEnergy : MonoBehaviour
 
         movement = GetComponent<PlayerMovement>();
         rb = GetComponent<Rigidbody>();
+
+        gameStateMachine = FindObjectOfType<GameStateTitleScreen>().GetComponent<StateMachine>();
     }
 
     private void Start()
@@ -49,6 +54,19 @@ public class PlayerEnergy : MonoBehaviour
 
     private void Update()
     {
+        if (gameStateMachine.currentState.GetType() != typeof(GameStateTitleScreen))
+        {
+            if (gameStateMachine.currentState.GetType() == typeof(GameStateHome))
+            {
+                HandleRecharging();
+            }
+            else if (gameStateMachine.currentState.GetType() == typeof(GameStateHome))
+            {
+                HandleDepleting();
+            }
+        }
+
+        /*
         switch (currentEnergyState)
         {
             case EnergyState.Recharging:
@@ -60,6 +78,7 @@ public class PlayerEnergy : MonoBehaviour
             default:
                 break;
         }
+        */
     }
 
     IEnumerator LogCurrentEnergy()
@@ -103,7 +122,7 @@ public class PlayerEnergy : MonoBehaviour
         currentEnergy = Mathf.Clamp(currentEnergy - CalculateDepletionAmount(Time.deltaTime), 0f, currentMaxEnergy);
         if (currentEnergy == 0)
         {
-            FindObjectOfType<PowerDown>().Init();
+            EventBus.PublishEvent(new PowerDownEvent());
         }
     }
 

@@ -50,6 +50,9 @@ public class Photo : MonoBehaviour
     IEnumerator DelayShowingPhotoAtStart()
     {
         yield return new WaitForSeconds(8f);
+        var intro = FMODUnity.RuntimeManager.CreateInstance("event:/VO/What_Is_Home_Intro");
+        intro.start();
+        intro.release();
         time = 0f;
     }
 }
