@@ -22,7 +22,7 @@ public class Pickupable : Interactable
         return !heldItem;
     }
 
-    public void Pickup(Vector3 holdPoint, Transform parent)
+    public virtual void Pickup(Vector3 holdPoint, Transform parent)
     {
         Debug.Log("Pickupable.Pickup()");
         isHeld = true;
