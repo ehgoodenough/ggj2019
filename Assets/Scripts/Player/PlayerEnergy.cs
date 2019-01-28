@@ -31,6 +31,8 @@ public class PlayerEnergy : MonoBehaviour
 
     private StateMachine gameStateMachine;
 
+    bool isPoweringDown = false;
+
     private void Awake()
     {
         currentEnergy = startingEnergy;
@@ -85,7 +87,7 @@ public class PlayerEnergy : MonoBehaviour
     {
         while (true)
         {
-            // Debug.Log("Current Energy: " + currentEnergy);
+            Debug.Log("Current Energy: " + currentEnergy);
             if (currentEnergyState == EnergyState.Depleting)
             {
                 // Debug.Log("Current Speed: " + movement.GetCurrentSpeed());
@@ -114,15 +116,20 @@ public class PlayerEnergy : MonoBehaviour
 
     private void HandleRecharging()
     {
+        isPoweringDown = false;
         currentEnergy = Mathf.Clamp(currentEnergy + rechargingRate * Time.deltaTime, 0f, currentMaxEnergy);
     }
 
     private void HandleDepleting()
     {
-        currentEnergy = Mathf.Clamp(currentEnergy - CalculateDepletionAmount(Time.deltaTime), 0f, currentMaxEnergy);
-        if (currentEnergy == 0)
+        if (!isPoweringDown)
         {
-            EventBus.PublishEvent(new PowerDownEvent());
+            currentEnergy = Mathf.Clamp(currentEnergy - CalculateDepletionAmount(Time.deltaTime), 0f, currentMaxEnergy);
+            if (currentEnergy == 0)
+            {
+                isPoweringDown = true;
+                EventBus.PublishEvent(new PowerDownEvent());
+            }
         }
     }
 
