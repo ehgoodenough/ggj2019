@@ -6,24 +6,50 @@ public class PoochAnimator : MonoBehaviour
 {
     Animator anim;
 
+    private enum CurrentState
+    {
+        Idle,
+        Trot,
+        Bark,
+        Run
+    }
+
+    private CurrentState currentState = CurrentState.Idle;
+
     public void Idle()
     {
-        anim.SetTrigger("Idle");
+        if (currentState != CurrentState.Idle)
+        {
+            anim.SetTrigger("Idle");
+            currentState = CurrentState.Idle;
+        }
     }
 
     public void Trot()
     {
-        anim.SetTrigger("Trot");
+        if (currentState != CurrentState.Trot)
+        {
+            anim.SetTrigger("Trot");
+            currentState = CurrentState.Trot;
+        }
     }
 
     public void Bark()
     {
-        anim.SetTrigger("Approach-Bark");
+        if (currentState != CurrentState.Bark)
+        {
+            anim.SetTrigger("Approach-Bark");
+            currentState = CurrentState.Bark;
+        }
     }
 
     public void Run()
     {
-        anim.SetTrigger("Run");
+        if (currentState != CurrentState.Run)
+        {
+            anim.SetTrigger("Run");
+            currentState = CurrentState.Run;
+        }
     }
 
     void Awake()
