@@ -60,7 +60,7 @@ public class PlayerEnergy : MonoBehaviour
             {
                 HandleRecharging();
             }
-            else if (gameStateMachine.currentState.GetType() == typeof(GameStateHome))
+            else if (gameStateMachine.currentState.GetType() == typeof(GameStateCity))
             {
                 HandleDepleting();
             }
