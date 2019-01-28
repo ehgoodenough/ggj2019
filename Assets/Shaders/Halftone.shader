@@ -154,7 +154,7 @@
 				fixed4 dotsColor = lerp(fixed4(1, 1, 1, 1) * dotCol * steppedLuminance, round(Luminance(pow((texCol.rgb), _LuminancePower)) / inc) * inc, _LuminanceLerp);
 
 				// ignore items on the color layer
-				fixed4 halftoneEffectColor = colorBufferSample > .5 && depthDifference < -.001 ? lerp(dotCol, texCol, .95) : dotsColor;
+				fixed4 halftoneEffectColor = colorBufferSample > .5 && depthDifference < .001 ? lerp(dotCol, texCol, .95) : dotsColor;
 
 				fixed4 fullColor = lerp(dotCol, texCol, .95);
 
