@@ -51,6 +51,7 @@ public class GameStateTitleScreen : State
     protected override void DoExit()
     {
         // Do stuff here when exiting the title screen but before entering another game state
+        EventBus.PublishEvent(new ExitTitleScreenEvent());
     }
 
     IEnumerator RevealTitle()

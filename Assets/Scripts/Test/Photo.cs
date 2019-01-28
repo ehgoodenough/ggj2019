@@ -22,6 +22,11 @@ public class Photo : MonoBehaviour
         showPhoto = false;
     }
 
+    private void Awake()
+    {
+        EventBus.Subscribe<ExitTitleScreenEvent>(OnExitTitleScreenEvent);
+    }
+
     void Update()
     {
         time += Time.deltaTime;
@@ -35,5 +40,10 @@ public class Photo : MonoBehaviour
                 transform.Rotate(new Vector3(1,0,0) * Time.deltaTime * rotationSpeed * 2.0f);
             }
         }
+    }
+
+    private void OnExitTitleScreenEvent(ExitTitleScreenEvent e)
+    {
+        time = 0f;
     }
 }
