@@ -68,6 +68,13 @@ public class PlayerEnergy : MonoBehaviour
             }
         }
 
+        /* Uncomment if you want to cheat
+        if (Input.GetKeyDown(KeyCode.E))
+        {
+            currentEnergy = currentMaxEnergy;
+        }
+        */
+
         /*
         switch (currentEnergyState)
         {
