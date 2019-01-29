@@ -464,6 +464,49 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 286840944}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &363889514
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 363889516}
+  - component: {fileID: 363889515}
+  m_Layer: 0
+  m_Name: CityPlayerStart (1)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &363889515
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 363889514}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 170e6c85eef97b84192600564508558d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!4 &363889516
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 363889514}
+  m_LocalRotation: {x: -0, y: -0.7567938, z: -0, w: 0.65365374}
+  m_LocalPosition: {x: 84.89, y: 18.64, z: -21.42}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 14
+  m_LocalEulerAnglesHint: {x: 0, y: -98.365005, z: 0}
 --- !u!1 &402934002
 GameObject:
   m_ObjectHideFlags: 0
@@ -907,8 +950,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sceneTransitionFade: {fileID: 0}
   fadeDuration: 1
-  doorOpenEvent: event:/SFX/Interactables/Door_Open
-  doorCloseEvent: event:/SFX/Interactables/Door_Close
 --- !u!1 &1122147340 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 7308355689968482880, guid: c3293c3084f78e046890899ce1fd9e03,

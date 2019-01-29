@@ -7,17 +7,11 @@ public class GameStateHome : State
     public CanvasGroup sceneTransitionFade;
     public float fadeDuration = 1f;
 
-    public Transform playerStart;
-    public Transform dogStart;
-
     private GameStateTitleScreen titleState;
     private GameStateCity cityState; // string cityState = "Athens";
 
     protected override void DoAwake()
     {
-        // Debug.Log("Home Player Start: " + playerStart.position);
-        Debug.Log("Home Robot Dog Start: " + dogStart.position);
-
         titleState = stateMachine.GetState<GameStateTitleScreen>();
         cityState = stateMachine.GetState<GameStateCity>();
         EventBus.Subscribe<LeaveHomeEvent>(OnLeaveHomeEvent);

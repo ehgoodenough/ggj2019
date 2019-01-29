@@ -30,6 +30,7 @@ public class PlayerMovement : MonoBehaviour
         EventBus.Subscribe<EnterCityEvent>(OnEnterCityEvent);
         EventBus.Subscribe<ExitHomeEvent>(OnExitHomeEvent);
         EventBus.Subscribe<ExitCityEvent>(OnExitCityEvent);
+        EventBus.Subscribe<PlayerStartPositionEvent>(OnPlayerStartPositionEvent);
 
         // agent = GetComponent<NavMeshAgent>();
         // agent.speed = speed;
@@ -91,14 +92,21 @@ public class PlayerMovement : MonoBehaviour
         return currentSpeed;
     }
 
+    private void OnPlayerStartPositionEvent(PlayerStartPositionEvent e)
+    {
+        if (e.startTransform)
+        {
+            this.transform.position = e.startTransform.position;
+            this.transform.rotation = e.startTransform.rotation;
+        }
+    }
+
     private void OnEnterHomeEvent(EnterHomeEvent e)
     {
         // Debug.Log("PlayerMovement.OnEnterHomeEvent()");
         // Debug.Log("Player Position: " + this.transform.position);
         // Debug.Log("e: " + e);
         // Debug.Log("e.homeState: " + e.homeState);
-        this.transform.position = e.homeState.playerStart.position;
-        this.transform.rotation = e.homeState.playerStart.rotation;
         muteFootsteps = false;
         outside = false;
         // Debug.Log("position: " + this.transform.position);
@@ -115,8 +123,6 @@ public class PlayerMovement : MonoBehaviour
         // Debug.Log("Player Position: " + this.transform.position);
         // Debug.Log("e: " + e);
         // Debug.Log("e.cityState: " + e.cityState);
-        this.transform.position = e.cityState.playerStart.position;
-        this.transform.rotation = e.cityState.playerStart.rotation;
         muteFootsteps = false;
         outside = true;
         // Debug.Log("position: " + this.transform.position);

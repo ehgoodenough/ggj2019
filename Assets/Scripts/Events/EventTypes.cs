@@ -51,3 +51,9 @@ public struct ReturnHomeEvent
 public struct PowerDownEvent { }
 
 public struct StartGameEvent { }
+
+public struct PlayerStartPositionEvent
+{
+    public Transform startTransform;
+    public PlayerStartPositionEvent(Transform startTransform) { this.startTransform = startTransform; }
+}
