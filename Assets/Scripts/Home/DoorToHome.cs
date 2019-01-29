@@ -23,7 +23,9 @@ public class DoorToHome : Interactable
 
     public override void Interact(Pickupable heldItem)
     {
-        if(heldItem is ObjectivePickupable) {
+        // Debug.Log("Interact with DoorToHome whild holding: " + heldItem);
+        if (heldItem && heldItem is ObjectivePickupable) {
+            // Debug.Log("Held Item is ObjectivePickupable");
             ObjectivePickupable objectiveItem = (ObjectivePickupable)heldItem;
             GameProgress.CompleteObjective(objectiveItem.type);
             Object.Destroy(heldItem.gameObject);
