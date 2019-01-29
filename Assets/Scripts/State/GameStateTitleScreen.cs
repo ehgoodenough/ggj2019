@@ -7,6 +7,7 @@ public class GameStateTitleScreen : State
     public GameObject playerPrefab;
     public float titleFadeDuration;
     public CanvasGroup titleCanvas;
+    public CanvasGroup startPromptCanvas;
 
     private GameObject playerObj;
 
@@ -35,7 +36,10 @@ public class GameStateTitleScreen : State
 
         // EventBus.PublishEvent(new TitleScreenStartEvent(playerObj));
         titleCanvas.alpha = 0;
-        StartCoroutine(RevealTitle());
+        StartCoroutine(RevealCanvas(titleCanvas));
+
+        startPromptCanvas.alpha = 0;
+        StartCoroutine(RevealCanvas(startPromptCanvas, 4f));
     }
 
     protected override void DoEnter()
@@ -54,15 +58,17 @@ public class GameStateTitleScreen : State
         EventBus.PublishEvent(new ExitTitleScreenEvent());
     }
 
-    IEnumerator RevealTitle()
+    IEnumerator RevealCanvas(CanvasGroup canvas, float delay = 0f)
     {
-        if (!titleCanvas) yield return null;
+        if (!canvas) yield return null;
 
-        while (titleCanvas.alpha < 1)
+        yield return new WaitForSeconds(delay);
+
+        while (canvas.alpha < 1)
         {
-            titleCanvas.alpha += Time.deltaTime / titleFadeDuration;
+            canvas.alpha += Time.deltaTime / titleFadeDuration;
             yield return null;
-            while (titleCanvas == null)
+            while (canvas == null)
             {
                 yield return null;
             }
