@@ -20,7 +20,7 @@ public class PlayerMovement : MonoBehaviour
     private bool muteFootsteps = true;
     private bool outside = false;
 
-    // private NavMeshAgent agent;
+    private Transform startTransformForCurrentScene;
 
     private void Awake()
     {
@@ -31,9 +31,6 @@ public class PlayerMovement : MonoBehaviour
         EventBus.Subscribe<ExitHomeEvent>(OnExitHomeEvent);
         EventBus.Subscribe<ExitCityEvent>(OnExitCityEvent);
         EventBus.Subscribe<PlayerStartPositionEvent>(OnPlayerStartPositionEvent);
-
-        // agent = GetComponent<NavMeshAgent>();
-        // agent.speed = speed;
     }
 
     void Start()
@@ -47,27 +44,19 @@ public class PlayerMovement : MonoBehaviour
     private void Update()
     {
         modifiedSpeed = speed * ((Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.RightShift)) ? 1.6f : 1);
+
+        // In case the player falls off the map, let's just put them back at the start
+        if (this.transform.position.y < -10f)
+        {
+            PlacePlayerAtTransform(startTransformForCurrentScene);
+        }
     }
 
     void FixedUpdate()
     {
         currentSpeed = movementVector.magnitude * modifiedSpeed;
         Vector3 moveDirection = transform.forward * movementVector.z * modifiedSpeed + transform.right * movementVector.x * modifiedSpeed;
-
-        /* Yup, this doesn't work
-        if (moveDirection.magnitude > 0f)
-        {
-            Debug.Log("Move");
-            NavMeshHit hit;
-            if (NavMesh.SamplePosition(transform.position + moveDirection * Time.deltaTime, out hit, 2f, 0))
-            {
-                Debug.Log("Found Sample Position");
-                agent.Warp(hit.position);
-                // agent.SetDestination(hit.position);
-            }
-        }
-        */
-
+        
         rb.MovePosition(transform.position + moveDirection * Time.deltaTime);
         rb.AddForce(Physics.gravity, ForceMode.Acceleration);
 
@@ -94,10 +83,18 @@ public class PlayerMovement : MonoBehaviour
 
     private void OnPlayerStartPositionEvent(PlayerStartPositionEvent e)
     {
-        if (e.startTransform)
+        Debug.Log("OnPlayerStartPositionEvent");
+        startTransformForCurrentScene = e.startTransform;
+        PlacePlayerAtTransform(e.startTransform);
+    }
+
+    private void PlacePlayerAtTransform(Transform startTransform)
+    {
+        Debug.Log("PlacePlayerAtTransform");
+        if (startTransform)
         {
-            this.transform.position = e.startTransform.position;
-            this.transform.rotation = e.startTransform.rotation;
+            this.transform.position = startTransform.position;
+            this.transform.rotation = startTransform.rotation;
         }
     }
 
