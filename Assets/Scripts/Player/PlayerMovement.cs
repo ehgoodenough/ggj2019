@@ -46,7 +46,7 @@ public class PlayerMovement : MonoBehaviour
         modifiedSpeed = speed * ((Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.RightShift)) ? 1.6f : 1);
 
         // In case the player falls off the map, let's just put them back at the start
-        if (this.transform.position.y < -10f)
+        if (startTransformForCurrentScene != null && this.transform.position.y < -10f)
         {
             PlacePlayerAtTransform(startTransformForCurrentScene);
         }
@@ -83,14 +83,14 @@ public class PlayerMovement : MonoBehaviour
 
     private void OnPlayerStartPositionEvent(PlayerStartPositionEvent e)
     {
-        Debug.Log("OnPlayerStartPositionEvent");
+        // Debug.Log("OnPlayerStartPositionEvent");
         startTransformForCurrentScene = e.startTransform;
         PlacePlayerAtTransform(e.startTransform);
     }
 
     private void PlacePlayerAtTransform(Transform startTransform)
     {
-        Debug.Log("PlacePlayerAtTransform");
+        // Debug.Log("PlacePlayerAtTransform");
         if (startTransform)
         {
             this.transform.position = startTransform.position;

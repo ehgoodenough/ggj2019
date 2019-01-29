@@ -94,7 +94,7 @@ public class PlayerEnergy : MonoBehaviour
     {
         while (true)
         {
-            Debug.Log("Current Energy: " + currentEnergy);
+            // Debug.Log("Current Energy: " + currentEnergy);
             if (currentEnergyState == EnergyState.Depleting)
             {
                 // Debug.Log("Current Speed: " + movement.GetCurrentSpeed());
