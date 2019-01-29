@@ -39,7 +39,7 @@ public class GameStateTitleScreen : State
         StartCoroutine(RevealCanvas(titleCanvas));
 
         startPromptCanvas.alpha = 0;
-        StartCoroutine(RevealCanvas(startPromptCanvas, 4f));
+        StartCoroutine(RevealCanvas(startPromptCanvas, 3.5f));
     }
 
     protected override void DoEnter()

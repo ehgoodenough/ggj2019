@@ -47,7 +47,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fb6d971d39b9a134da886f41be48b942, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentState: {fileID: 4234319171573080013}
+  currentState: {fileID: 9024649223042191078}
 --- !u!114 &9024649223042191078
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -60,9 +60,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dbaeb15f34c864249842fad10718986b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerPrefab: {fileID: 0}
-  titleFadeDuration: 0
+  playerPrefab: {fileID: 8936142915063238545, guid: cb1811ec7b8376146bd1a4e064b08c03,
+    type: 3}
+  titleFadeDuration: 2.5
   titleCanvas: {fileID: 0}
+  startPromptCanvas: {fileID: 0}
 --- !u!114 &4234319171573080013
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -70,14 +72,13 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4234319171573080016}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 3bc326056e220944d8b99eee791e4e37, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   sceneTransitionFade: {fileID: 0}
   fadeDuration: 1
-  playerStart: {fileID: 0}
 --- !u!114 &4234319171573080014
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -85,14 +86,13 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4234319171573080016}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f27fe1d81476dd5479ec17fc1e268e21, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   sceneTransitionFade: {fileID: 0}
   fadeDuration: 1
-  playerStart: {fileID: 0}
 --- !u!114 &4234319171573080015
 MonoBehaviour:
   m_ObjectHideFlags: 0
