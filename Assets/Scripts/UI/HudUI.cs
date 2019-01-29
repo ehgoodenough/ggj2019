@@ -5,17 +5,20 @@ public class HudUI : MonoBehaviour
 {
     public float startFadeDelay = 0.5f;
     public float canvasGroupFadeDuration = 0.5f;
-    public CanvasGroup defaultCanvasGroup;
+    public CanvasGroup partsCanvasGroup;
+    public CanvasGroup batteryCanvasGroup;
 
     private void Awake()
     {
-        if (defaultCanvasGroup) defaultCanvasGroup.alpha = 0f;
+        if (partsCanvasGroup) partsCanvasGroup.alpha = 0f;
+        if (batteryCanvasGroup) partsCanvasGroup.alpha = 0f;
         EventBus.Subscribe<ExitTitleScreenEvent>(OnExitTitleScreenEvent);
     }
 
     private void OnExitTitleScreenEvent(ExitTitleScreenEvent e)
     {
-        StartCoroutine(RevealCanvasGroup(defaultCanvasGroup));
+        StartCoroutine(RevealCanvasGroup(partsCanvasGroup));
+        StartCoroutine(RevealCanvasGroup(batteryCanvasGroup));
     }
 
     IEnumerator RevealCanvasGroup(CanvasGroup canvasGroup, float delay = 0f)
