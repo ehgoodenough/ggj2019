@@ -57,3 +57,5 @@ public struct PlayerStartPositionEvent
     public Transform startTransform;
     public PlayerStartPositionEvent(Transform startTransform) { this.startTransform = startTransform; }
 }
+
+public struct PhotoLoweredAtStartEvent { }

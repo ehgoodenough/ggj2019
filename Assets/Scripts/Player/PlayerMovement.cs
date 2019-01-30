@@ -19,7 +19,8 @@ public class PlayerMovement : MonoBehaviour
     private Vector3 lastFootstepLocation;
     private bool muteFootsteps = true;
     private bool outside = false;
-
+    private bool isMovementRestricted = true;
+    private bool isGravityRestricted = true;
     private Transform startTransformForCurrentScene;
 
     private void Awake()
@@ -31,6 +32,7 @@ public class PlayerMovement : MonoBehaviour
         EventBus.Subscribe<ExitHomeEvent>(OnExitHomeEvent);
         EventBus.Subscribe<ExitCityEvent>(OnExitCityEvent);
         EventBus.Subscribe<PlayerStartPositionEvent>(OnPlayerStartPositionEvent);
+        EventBus.Subscribe<PhotoLoweredAtStartEvent>(OnPhotoLoweredAtStartEvent);
     }
 
     void Start()
@@ -54,11 +56,18 @@ public class PlayerMovement : MonoBehaviour
 
     void FixedUpdate()
     {
-        currentSpeed = movementVector.magnitude * modifiedSpeed;
-        Vector3 moveDirection = transform.forward * movementVector.z * modifiedSpeed + transform.right * movementVector.x * modifiedSpeed;
-        
-        rb.MovePosition(transform.position + moveDirection * Time.deltaTime);
-        rb.AddForce(Physics.gravity, ForceMode.Acceleration);
+        if (!isMovementRestricted)
+        {
+            currentSpeed = movementVector.magnitude * modifiedSpeed;
+            Vector3 moveDirection = transform.forward * movementVector.z * modifiedSpeed + transform.right * movementVector.x * modifiedSpeed;
+
+            rb.MovePosition(transform.position + moveDirection * Time.deltaTime);
+        }
+
+        if (!isGravityRestricted)
+        {
+            rb.AddForce(Physics.gravity, ForceMode.Acceleration);
+        }
 
         if (!muteFootsteps && currentSpeed > 0 && Vector3.Distance(lastFootstepLocation, transform.position) > strideLength)
         {
@@ -79,6 +88,22 @@ public class PlayerMovement : MonoBehaviour
     public float GetCurrentSpeed()
     {
         return currentSpeed;
+    }
+
+    public void RestrictMovement(bool restrictMovement)
+    {
+        isMovementRestricted = restrictMovement;
+    }
+
+    public void RestrictGravity(bool restrictGravity)
+    {
+        isGravityRestricted = restrictGravity;
+    }
+
+    private void OnPhotoLoweredAtStartEvent(PhotoLoweredAtStartEvent e)
+    {
+        RestrictMovement(false);
+        RestrictGravity(false);
     }
 
     private void OnPlayerStartPositionEvent(PlayerStartPositionEvent e)

@@ -4,26 +4,41 @@ public class PlayerView : MonoBehaviour
 {
     public Camera playerCamera;
     public float lookSpeed = 1f;
+
     private float cameraRotation = 0;
+    private bool isViewRestricted = true;
 
     void Start()
     {
         Debug.Assert(playerCamera != null, "PlayerView requires a reference to the player Camera");
 
         cameraRotation = playerCamera.transform.rotation.eulerAngles.x;
+
+        EventBus.Subscribe<PhotoLoweredAtStartEvent>(OnPhotoLoweredAtStartEvent);
     }
 
     public void Look(Vector2 lookVector)
     {
-        // Note that looking up / down only affects the camera rotation and should not affect entire player object
-        cameraRotation = Mathf.Clamp(cameraRotation - lookVector.y * lookSpeed, -89, 89);
-        playerCamera.transform.localRotation = Quaternion.AngleAxis(cameraRotation, Vector3.right);
+        if (!isViewRestricted)
+        {
+            // Note that looking up / down only affects the camera rotation and should not affect entire player object
+            cameraRotation = Mathf.Clamp(cameraRotation - lookVector.y * lookSpeed, -89, 89);
+            playerCamera.transform.localRotation = Quaternion.AngleAxis(cameraRotation, Vector3.right);
+        }
     }
 
     public void AddToYaw(float yaw)
     {
-        // Note that looking left / right rotates the whole player object and therefore potentially affects movement direction
-        transform.rotation *= Quaternion.AngleAxis(yaw * lookSpeed, Vector3.up);
+        if (!isViewRestricted)
+        {
+            // Note that looking left / right rotates the whole player object and therefore potentially affects movement direction
+            transform.rotation *= Quaternion.AngleAxis(yaw * lookSpeed, Vector3.up);
+        }
+    }
+
+    public void RestrictView(bool restrictView)
+    {
+        isViewRestricted = restrictView;
     }
 
     public void EnablePlayerCamera()
@@ -39,5 +54,10 @@ public class PlayerView : MonoBehaviour
     public bool IsPlayerCameraEnabled()
     {
         return playerCamera.enabled;
+    }
+
+    private void OnPhotoLoweredAtStartEvent(PhotoLoweredAtStartEvent e)
+    {
+        RestrictView(false);
     }
 }

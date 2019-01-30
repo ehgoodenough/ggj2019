@@ -6,6 +6,8 @@ using Rewired;
 
 public class Photo : MonoBehaviour
 {
+    private const float HOW_LONG_TO_KEEP_IT_UP_AT_START = 4.2f;
+
     private float rotationSpeed = 180.0f;
 
     private float time = 0;
@@ -30,7 +32,7 @@ public class Photo : MonoBehaviour
     void Update()
     {
         time += Time.deltaTime;
-        const float HOW_LONG_TO_KEEP_IT_UP_AT_START = 5f;
+        // const float HOW_LONG_TO_KEEP_IT_UP_AT_START = 5f;
         if (time < HOW_LONG_TO_KEEP_IT_UP_AT_START || showPhoto) { // Input.GetKey("space")) {
             if (transform.localRotation.x > 0) {
                 transform.Rotate(new Vector3(-1,0,0) * Time.deltaTime * rotationSpeed);
@@ -44,15 +46,35 @@ public class Photo : MonoBehaviour
 
     private void OnExitTitleScreenEvent(ExitTitleScreenEvent e)
     {
-        StartCoroutine(DelayShowingPhotoAtStart());
+        StartCoroutine(HoldUpPhotoAtStart());
     }
 
-    IEnumerator DelayShowingPhotoAtStart()
+    IEnumerator HoldUpPhotoAtStart()
     {
-        yield return new WaitForSeconds(8f);
+        // Boot up sequence fades out
+        // Glitch sequence ends
+        // What is home?
+        // Is this HOME?
+        // Is THIS home?
+        // WHAT is home?
+
+        // Wait for boot up sequence to end
+        yield return new WaitForSeconds(5.8f);
         var intro = FMODUnity.RuntimeManager.CreateInstance("event:/VO/What_Is_Home_Intro");
         intro.start();
         intro.release();
-        time = 0f;
+        // While glitching, ask "What is home?"
+
+        // Wait until "Is this HOME?" to pull up photo
+        yield return new WaitForSeconds(2.7f);
+        time = 0f; // while time is less than duration to keep at start, photo is raised
+
+        // Lower Photo on "Is THIS home?"
+        yield return new WaitForSeconds(HOW_LONG_TO_KEEP_IT_UP_AT_START);
+
+        // When photo is fully lowered, release movement on "WHAT is home?"
+        yield return new WaitForSeconds(3.4f);
+        Debug.Log("Photo Lowered At Start");
+        EventBus.PublishEvent(new PhotoLoweredAtStartEvent());
     }
 }
