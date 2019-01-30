@@ -23,6 +23,7 @@ public class PlayerEnergy : MonoBehaviour
     public float maxDepletionRate = 1f;
 
     private EnergyState currentEnergyState = EnergyState.Idle;
+    private EnergyState previousEnergyState = EnergyState.Idle;
 
     private PlayerMovement movement;
     private Rigidbody rb;
@@ -43,6 +44,9 @@ public class PlayerEnergy : MonoBehaviour
         EventBus.Subscribe<ExitHomeEvent>(OnExitHomeEvent);
         EventBus.Subscribe<ExitCityEvent>(OnExitCityEvent);
 
+        EventBus.Subscribe<PauseMenuEngagedEvent>(OnPauseMenuEngagedEvent);
+        EventBus.Subscribe<PauseMenuDisengagedEvent>(OnPauseMenuDisengagedEvent);
+
         movement = GetComponent<PlayerMovement>();
         rb = GetComponent<Rigidbody>();
 
@@ -58,11 +62,13 @@ public class PlayerEnergy : MonoBehaviour
     {
         if (gameStateMachine.currentState.GetType() != typeof(GameStateTitleScreen))
         {
-            if (gameStateMachine.currentState.GetType() == typeof(GameStateHome))
+            // if (gameStateMachine.currentState.GetType() == typeof(GameStateHome))
+            if (currentEnergyState == EnergyState.Recharging)
             {
                 HandleRecharging();
             }
-            else if (gameStateMachine.currentState.GetType() == typeof(GameStateCity))
+            // else if (gameStateMachine.currentState.GetType() == typeof(GameStateCity))
+            else if (currentEnergyState == EnergyState.Depleting)
             {
                 HandleDepleting();
             }
@@ -129,6 +135,7 @@ public class PlayerEnergy : MonoBehaviour
 
     private void HandleDepleting()
     {
+        // TODO: Handle depleting energy while running (deplete at a commensurate rate)
         if (!isPoweringDown)
         {
             currentEnergy = Mathf.Clamp(currentEnergy - CalculateDepletionAmount(Time.deltaTime), 0f, currentMaxEnergy);
@@ -145,6 +152,17 @@ public class PlayerEnergy : MonoBehaviour
         float normalizedSpeed = movement.GetCurrentSpeed() / movement.speed;
         float depletionAmount = (baselineDepletionRate + normalizedSpeed * (maxDepletionRate - baselineDepletionRate)) * depletionTime;
         return depletionAmount;
+    }
+
+    private void OnPauseMenuEngagedEvent(PauseMenuEngagedEvent e)
+    {
+        previousEnergyState = currentEnergyState;
+        currentEnergyState = EnergyState.Idle;
+    }
+
+    private void OnPauseMenuDisengagedEvent(PauseMenuDisengagedEvent e)
+    {
+        currentEnergyState = previousEnergyState;
     }
 
     private void OnEnterHomeEvent(EnterHomeEvent e)

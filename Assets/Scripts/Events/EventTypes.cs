@@ -59,3 +59,13 @@ public struct PlayerStartPositionEvent
 }
 
 public struct PhotoLoweredAtStartEvent { }
+
+public struct PauseMenuEngagedEvent { }
+
+public struct PauseMenuDisengagedEvent { }
+
+public struct SwitchFocusToRestartOptionEvent { }
+
+public struct SwitchFocusToResumeOptionEvent { }
+
+public struct SwitchFocusToQuitOptionEvent { }
