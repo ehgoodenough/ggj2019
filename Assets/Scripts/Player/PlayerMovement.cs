@@ -103,7 +103,6 @@ public class PlayerMovement : MonoBehaviour
     private void OnPhotoLoweredAtStartEvent(PhotoLoweredAtStartEvent e)
     {
         RestrictMovement(false);
-        RestrictGravity(false);
     }
 
     private void OnPlayerStartPositionEvent(PlayerStartPositionEvent e)
@@ -111,6 +110,7 @@ public class PlayerMovement : MonoBehaviour
         // Debug.Log("OnPlayerStartPositionEvent");
         startTransformForCurrentScene = e.startTransform;
         PlacePlayerAtTransform(e.startTransform);
+        RestrictGravity(false);
     }
 
     private void PlacePlayerAtTransform(Transform startTransform)
