@@ -64,11 +64,11 @@ public class RobotDogAI : MonoBehaviour
         float currentSpeed = agent.velocity.magnitude;
         float currentSpeedNormalized = currentSpeed / agent.speed;
         // Debug.Log("Current Speed Normalized: " + currentSpeedNormalized);
-        if (currentSpeedNormalized > 0.7f )
+        if (currentSpeedNormalized > 0.75f )
         {
             animator.Run();
         }
-        else if (currentSpeedNormalized > 0.2f)
+        else if (currentSpeedNormalized > 0.1f)
         {
             animator.Trot();
         }
