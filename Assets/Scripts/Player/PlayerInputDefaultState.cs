@@ -130,6 +130,7 @@ public class PlayerInputDefaultState : State
                 if (canPause && Input.GetKeyUp(KeyCode.Escape))
                 {
                     Pause();
+                    return;
                 }
 
                 if (Input.GetKey("space") || player.GetAxis("ShowPhoto") > 0)
@@ -154,7 +155,8 @@ public class PlayerInputDefaultState : State
 
                     Vector3 moveVector = Vector3.forward * forward + Vector3.right * strafe;
                     moveVector = moveVector.sqrMagnitude > 1f ? moveVector.normalized : moveVector;
-                    movement.Move(moveVector);
+                    bool isRunning = (Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.RightShift));
+                    movement.Move(moveVector, isRunning);
                 }
 
                 if (focusedInteractable == null || !focusedInteractable.IsInteractionRestrictingView())

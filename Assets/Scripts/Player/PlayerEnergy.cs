@@ -10,7 +10,7 @@ public class PlayerEnergy : MonoBehaviour
         Idle
     }
 
-    public float startingEnergy = 25f;
+    public float startingEnergy = 10f;
     [SerializeField]
     private float currentEnergy;
 
@@ -18,9 +18,11 @@ public class PlayerEnergy : MonoBehaviour
     public float incrementMaxAmount = 10f;
     private float currentMaxEnergy;
 
-    public float rechargingRate = 1f;
+    public float rechargingRate = 1.25f;
     public float baselineDepletionRate = 0.1f;
-    public float maxDepletionRate = 1f;
+    public float walkingDepletionRate = 0.15f;
+    public float runningDepletionRate = 0.3f;
+    // public float maxDepletionRate = 0.25f;
 
     private EnergyState currentEnergyState = EnergyState.Idle;
     private EnergyState previousEnergyState = EnergyState.Idle;
@@ -80,20 +82,6 @@ public class PlayerEnergy : MonoBehaviour
             currentEnergy = currentMaxEnergy;
         }
         */
-
-        /*
-        switch (currentEnergyState)
-        {
-            case EnergyState.Recharging:
-                HandleRecharging();
-                break;
-            case EnergyState.Depleting:
-                HandleDepleting();
-                break;
-            default:
-                break;
-        }
-        */
     }
 
     IEnumerator LogCurrentEnergy()
@@ -149,9 +137,17 @@ public class PlayerEnergy : MonoBehaviour
 
     private float CalculateDepletionAmount(float depletionTime)
     {
-        float normalizedSpeed = movement.GetCurrentSpeed() / movement.speed;
+        float currentSpeed = movement.GetCurrentSpeed();
+        float walkingNormalized = Mathf.Clamp01(currentSpeed / movement.walkingMaxSpeed);
+        float runningNormalized = Mathf.Clamp01((currentSpeed - movement.walkingMaxSpeed) / (movement.runningMaxSpeed - movement.walkingMaxSpeed));
+        float currentDepletionRate = baselineDepletionRate + (walkingDepletionRate * walkingNormalized) + (runningNormalized * runningNormalized);
+        return currentDepletionRate * depletionTime;
+
+        /*
+        float normalizedSpeed = movement.GetCurrentSpeed() / movement.runningMaxSpeed;
         float depletionAmount = (baselineDepletionRate + normalizedSpeed * (maxDepletionRate - baselineDepletionRate)) * depletionTime;
         return depletionAmount;
+        */
     }
 
     private void OnPauseMenuEngagedEvent(PauseMenuEngagedEvent e)

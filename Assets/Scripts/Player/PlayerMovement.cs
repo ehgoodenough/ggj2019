@@ -4,8 +4,8 @@ using UnityEngine.AI;
 [RequireComponent(typeof(Rigidbody))]
 public class PlayerMovement : MonoBehaviour
 {
-    public float speed;
-    public float modifiedSpeed;
+    public float walkingMaxSpeed;
+    public float runningMaxSpeed;
 
     [FMODUnity.EventRef]
     public string footstepEvent;
@@ -13,6 +13,8 @@ public class PlayerMovement : MonoBehaviour
     public string indoorFootstepEvent;
     public float strideLength = 5.0f;
 
+    private bool isRunning = false;
+    private float currentMaxSpeed;
     private float currentSpeed = 0f;
     private Vector3 movementVector;
     private Rigidbody rb;
@@ -45,7 +47,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void Update()
     {
-        modifiedSpeed = speed * ((Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.RightShift)) ? 1.6f : 1);
+        currentMaxSpeed = isRunning ? runningMaxSpeed : walkingMaxSpeed;
 
         // In case the player falls off the map, let's just put them back at the start
         if (startTransformForCurrentScene != null && this.transform.position.y < -10f)
@@ -58,8 +60,8 @@ public class PlayerMovement : MonoBehaviour
     {
         if (!isMovementRestricted)
         {
-            currentSpeed = movementVector.magnitude * modifiedSpeed;
-            Vector3 moveDirection = transform.forward * movementVector.z * modifiedSpeed + transform.right * movementVector.x * modifiedSpeed;
+            currentSpeed = movementVector.magnitude * currentMaxSpeed;
+            Vector3 moveDirection = transform.forward * movementVector.z * currentSpeed + transform.right * movementVector.x * currentSpeed;
 
             rb.MovePosition(transform.position + moveDirection * Time.deltaTime);
         }
@@ -75,8 +77,9 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
-    public void Move(Vector3 movementVector)
+    public void Move(Vector3 movementVector, bool isRunning = false)
     {
+        this.isRunning = isRunning;
         this.movementVector = movementVector;
     }
 
@@ -88,6 +91,11 @@ public class PlayerMovement : MonoBehaviour
     public float GetCurrentSpeed()
     {
         return currentSpeed;
+    }
+
+    public float GetCurrentMaxSpeed()
+    {
+        return currentMaxSpeed;
     }
 
     public void RestrictMovement(bool restrictMovement)
