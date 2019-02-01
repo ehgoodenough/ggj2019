@@ -35,6 +35,7 @@ public class PlayerMovement : MonoBehaviour
         EventBus.Subscribe<ExitCityEvent>(OnExitCityEvent);
         EventBus.Subscribe<PlayerStartPositionEvent>(OnPlayerStartPositionEvent);
         EventBus.Subscribe<PhotoLoweredAtStartEvent>(OnPhotoLoweredAtStartEvent);
+        EventBus.Subscribe<PlayerHasWonEvent>(OnPlayerHasWonEvent);
     }
 
     void Start()
@@ -106,6 +107,11 @@ public class PlayerMovement : MonoBehaviour
     public void RestrictGravity(bool restrictGravity)
     {
         isGravityRestricted = restrictGravity;
+    }
+
+    private void OnPlayerHasWonEvent(PlayerHasWonEvent e)
+    {
+        RestrictMovement(true);
     }
 
     private void OnPhotoLoweredAtStartEvent(PhotoLoweredAtStartEvent e)

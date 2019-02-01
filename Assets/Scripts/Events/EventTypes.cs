@@ -69,3 +69,7 @@ public struct SwitchFocusToRestartOptionEvent { }
 public struct SwitchFocusToResumeOptionEvent { }
 
 public struct SwitchFocusToQuitOptionEvent { }
+
+public struct PlayerHasWonEvent { }
+
+public struct FriendFullyAssembledEvent { }

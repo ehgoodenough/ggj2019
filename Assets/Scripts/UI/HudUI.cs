@@ -17,7 +17,7 @@ public class HudUI : MonoBehaviour
 
     private void OnExitTitleScreenEvent(ExitTitleScreenEvent e)
     {
-        StartCoroutine(RevealCanvasGroup(partsCanvasGroup));
+        // StartCoroutine(RevealCanvasGroup(partsCanvasGroup));
         StartCoroutine(RevealCanvasGroup(batteryCanvasGroup));
     }
 

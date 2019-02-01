@@ -21,7 +21,7 @@ public class WinCondition : MonoBehaviour
         && GameProgress.isObjectiveComplete(ObjectivePickupable.Type.Flowers)
         && GameProgress.isObjectiveComplete(ObjectivePickupable.Type.Art)) {
             Debug.Log("WINNER IS YOU");
-
+            EventBus.PublishEvent(new PlayerHasWonEvent());
             Invoke("PlayFinalCinematic", 4);
         }
     }

@@ -15,6 +15,7 @@ public class PlayerView : MonoBehaviour
         cameraRotation = playerCamera.transform.rotation.eulerAngles.x;
 
         EventBus.Subscribe<PhotoLoweredAtStartEvent>(OnPhotoLoweredAtStartEvent);
+        EventBus.Subscribe<PlayerHasWonEvent>(OnPlayerHasWonEvent);
     }
 
     public void Look(Vector2 lookVector)
@@ -54,6 +55,12 @@ public class PlayerView : MonoBehaviour
     public bool IsPlayerCameraEnabled()
     {
         return playerCamera.enabled;
+    }
+
+    // TODO: Turn player in fluid motion toward robot friend
+    private void OnPlayerHasWonEvent(PlayerHasWonEvent e)
+    {
+        RestrictView(true);
     }
 
     private void OnPhotoLoweredAtStartEvent(PhotoLoweredAtStartEvent e)

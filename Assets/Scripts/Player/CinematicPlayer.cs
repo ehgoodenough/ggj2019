@@ -46,9 +46,11 @@ public class CinematicPlayer : MonoBehaviour
 
     public void PlayFinalCinematic()
     {
+        Debug.Log("CinematicPlayer.PlayFinalCinematic()");
         //director.playableAsset = closingCinematicPlayable;
         //director.Play();
         GameObject.Find("friend_pieces").SetActive(false);
         GameObject.Find("friend_whole").GetComponent<MeshRenderer>().enabled = true;
+        EventBus.PublishEvent(new FriendFullyAssembledEvent());
     }
 }
