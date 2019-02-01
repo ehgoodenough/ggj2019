@@ -68,7 +68,7 @@ public class RobotDogAI : MonoBehaviour
         {
             animator.Run();
         }
-        else if (currentSpeedNormalized > 0.1f)
+        else if (currentSpeedNormalized > 0.05f)
         {
             animator.Trot();
         }

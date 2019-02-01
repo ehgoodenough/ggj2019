@@ -36,7 +36,7 @@ public class GameStateTitleScreen : State
 
         // EventBus.PublishEvent(new TitleScreenStartEvent(playerObj));
         titleCanvas.alpha = 0;
-        StartCoroutine(RevealCanvas(titleCanvas));
+        StartCoroutine(RevealCanvas(titleCanvas, 0.1f));
 
         startPromptCanvas.alpha = 0;
         StartCoroutine(RevealCanvas(startPromptCanvas, 3.5f));
@@ -60,8 +60,6 @@ public class GameStateTitleScreen : State
 
     IEnumerator RevealCanvas(CanvasGroup canvas, float delay = 0f)
     {
-        if (!canvas) yield return null;
-
         yield return new WaitForSeconds(delay);
 
         while (canvas.alpha < 1)
