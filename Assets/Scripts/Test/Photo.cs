@@ -14,14 +14,24 @@ public class Photo : MonoBehaviour
 
     private bool showPhoto = false;
 
+    private bool playerCanRaisePhoto = false;
+
+    // Only use this method for player input
     public void ShowPhoto()
     {
-        showPhoto = true;
+        if (playerCanRaisePhoto)
+        {
+            showPhoto = true;
+        }
     }
 
+    // Only use this method for player input
     public void HidePhoto()
     {
-        showPhoto = false;
+        if (playerCanRaisePhoto)
+        {
+            showPhoto = false;
+        }
     }
 
     private void Awake()
@@ -77,5 +87,6 @@ public class Photo : MonoBehaviour
         yield return new WaitForSeconds(3.4f);
         Debug.Log("Photo Lowered At Start");
         EventBus.PublishEvent(new PhotoLoweredAtStartEvent());
+        playerCanRaisePhoto = true;
     }
 }
