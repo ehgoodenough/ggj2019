@@ -15,7 +15,7 @@ public class OutlineEffect : MonoBehaviour
         cam = GetComponent<Camera>();
         cam.depthTextureMode = DepthTextureMode.Depth;
 
-        outlineBufferCam = PostProcessUtils.GenerateBufferCamera(1 << LayerMask.NameToLayer("Outline") | 1 << LayerMask.NameToLayer("ColorAndOutline"), "Color", cam);
+        outlineBufferCam = PostProcessUtils.GenerateBufferCamera(1 << LayerMask.NameToLayer("Outline") | 1 << LayerMask.NameToLayer("ColorAndOutline"), "Outline", cam);
     }
 
     void Update()

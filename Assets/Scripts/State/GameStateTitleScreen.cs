@@ -62,7 +62,7 @@ public class GameStateTitleScreen : State
     {
         yield return new WaitForSeconds(delay);
 
-        while (canvas.alpha < 1)
+        while (canvas && canvas.alpha < 1)
         {
             canvas.alpha += Time.deltaTime / titleFadeDuration;
             yield return null;
