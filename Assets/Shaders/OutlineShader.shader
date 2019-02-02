@@ -123,7 +123,7 @@
 					float colorAmount = 0;
 					float2 grabUv = i.uv;
 
-					#if !UNITY_UV_STARTS_AT_TOP
+					#if UNITY_UV_STARTS_AT_TOP
 					grabUv.y = 1 - grabUv.y;
 					#endif
 
