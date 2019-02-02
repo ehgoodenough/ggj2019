@@ -4,6 +4,7 @@ using UnityEngine.Playables;
 
 public class PowerDown : MonoBehaviour
 {
+    public float powerDownGlitchIntensitay;
     public float textFadeDuration;
     public float textShowDuration;
     public float screenFadeDuration;
@@ -35,6 +36,8 @@ public class PowerDown : MonoBehaviour
     {
         glitchEffect = FindObjectOfType<GlitchEffect>();
         glitchEffect.enabled = true;
+        glitchEffect.overallIntensity = powerDownGlitchIntensitay;
+
         StartCoroutine(FadeOut());
     }
 
