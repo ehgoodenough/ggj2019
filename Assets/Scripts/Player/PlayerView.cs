@@ -4,6 +4,8 @@ public class PlayerView : MonoBehaviour
 {
     public Camera playerCamera;
     public float lookSpeed = 1f;
+    public float verticalRotationMaxLimit = 89f;
+    public float verticalRotationMinLimit = -89f;
 
     private float cameraRotation = 0;
     private bool isViewRestricted = true;
@@ -23,7 +25,7 @@ public class PlayerView : MonoBehaviour
         if (!isViewRestricted)
         {
             // Note that looking up / down only affects the camera rotation and should not affect entire player object
-            cameraRotation = Mathf.Clamp(cameraRotation - lookVector.y * lookSpeed, -89, 89);
+            cameraRotation = Mathf.Clamp(cameraRotation - lookVector.y * lookSpeed, verticalRotationMinLimit, verticalRotationMaxLimit);
             playerCamera.transform.localRotation = Quaternion.AngleAxis(cameraRotation, Vector3.right);
         }
     }
