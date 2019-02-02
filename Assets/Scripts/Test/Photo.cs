@@ -10,7 +10,7 @@ public class Photo : MonoBehaviour
 
     private float rotationSpeed = 180.0f;
 
-    private float time = 0;
+    private float time;
 
     private bool showPhoto = false;
 
@@ -26,6 +26,7 @@ public class Photo : MonoBehaviour
 
     private void Awake()
     {
+        time = HOW_LONG_TO_KEEP_IT_UP_AT_START; // Ensure that photo is down to start
         EventBus.Subscribe<ExitTitleScreenEvent>(OnExitTitleScreenEvent);
     }
 
