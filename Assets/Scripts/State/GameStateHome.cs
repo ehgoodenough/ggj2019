@@ -20,22 +20,6 @@ public class GameStateHome : State
     protected override void DoStart()
     {
         // Debug.Log("GameStateHome.DoStart()");
-
-        /*
-        if (playerObj == null)
-        {
-            playerObj = Instantiate(playerPrefab); // , playerStart.position, Quaternion.Euler(playerStart.position));
-            Debug.Log("playerObj: " + playerObj);
-            Debug.Log("Player Position: " + playerObj.transform.position);
-        }
-        */
-
-        /*
-        if (dogObj == null)
-        {
-            dogObj = Instantiate(dogPrefab);
-        }
-        */
     }
 
     protected override void DoEnter()
