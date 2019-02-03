@@ -18,6 +18,13 @@ public class DoorToHome : Interactable
 
     public override bool CanInteractWith(Pickupable heldItem)
     {
+        // Let powering down handle returning player to home
+        PlayerEnergy playerEnergy = FindObjectOfType<PlayerEnergy>();
+        if (playerEnergy && playerEnergy.GetCurrentEnergy() == 0)
+        {
+            return false;
+        }
+
         return true;
     }
 
