@@ -12,15 +12,16 @@ public class Collectable : MonoBehaviour
     void Awake()
     {
         uniqueIdComponent = gameObject.GetComponent<UniqueId>();
+        if (GameProgress.IsIdCollected(id))
+        {
+            gameObject.SetActive(false);
+        }
     }
 
     void OnCollisionEnter(Collision collision)
     {
-        InteractionDetector interactor = collision.gameObject.GetComponent<InteractionDetector>();
-        if (interactor)
-        {
-            GameProgress.Collect(id);
-            gameObject.SetActive(false);
-        }
+        GameProgress.Collect(id);
+        gameObject.SetActive(false);
+        Debug.Log(GameProgress.NumCollected);
     }
 }
