@@ -40,6 +40,11 @@ public class RobotDogInteractable : Interactable
     //    positionHandle.Free();
     //}
 
+    public override bool CanInteractWith(Pickupable heldItem)
+    {
+        return Time.time >= 26; // dirty hack since opening cutscene/voiceline takes about 26 seconds
+    }
+
     public override void Interact(Pickupable heldItem)
     {
         Debug.Log("Start banter");
