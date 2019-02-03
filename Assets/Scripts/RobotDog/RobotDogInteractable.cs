@@ -7,7 +7,6 @@ public class RobotDogInteractable : Interactable
     //Vector3 position;
 
     private EventInstance banterInstance;
-    private bool isBantering;
     private bool isResponding;
 
     void Start()
@@ -32,7 +31,7 @@ public class RobotDogInteractable : Interactable
         else if (state == PLAYBACK_STATE.STOPPED)
         {
             isResponding = false;
-            isBantering = false;
+            isInteracting = false;
         }
     }
 
@@ -41,15 +40,10 @@ public class RobotDogInteractable : Interactable
     //    positionHandle.Free();
     //}
 
-    public override bool CanInteractWith(Pickupable heldItem)
-    {
-        return !isBantering;
-    }
-
     public override void Interact(Pickupable heldItem)
     {
         Debug.Log("Start banter");
-        isBantering = true;
+        isInteracting = true;
         banterInstance = FMODUnity.RuntimeManager.CreateInstance("event:/VO/Dorg_Banter");
 
         //banterInstance.setCallback(BanterCallback, EVENT_CALLBACK_TYPE.SOUND_STOPPED);

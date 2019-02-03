@@ -2,7 +2,7 @@
 
 public class Interactable : MonoBehaviour
 {
-    private bool isInteracting = false; // Used for interactions that have a duration
+    protected bool isInteracting = false; // Used for interactions that have a duration
     private bool restrictsMovement = false; // Restricts movement while isInteracting when set to true
     private bool restrictsView = false; // Restricts looking around while isInteracting when set to true
     private Renderer rend;
