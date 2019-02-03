@@ -76,6 +76,17 @@ public class PowerDown : MonoBehaviour
         CanvasGroup sceneTransitionFade = GameObject.Find("SceneTransitionFade").GetComponent<CanvasGroup>();
         sceneTransitionFade.alpha = 1f;
 
+        // Before sending player back home, destroy held item
+        PickupHolder pickupHolder = FindObjectOfType<PickupHolder>();
+        if (pickupHolder)
+        {
+            Pickupable heldItem = pickupHolder.GetHeldItem();
+            if (heldItem)
+            {
+                Object.Destroy(heldItem.gameObject);
+            }
+        }
+
         FindObjectOfType<PlayableDirector>().enabled = false;
         EventBus.PublishEvent(new ReturnHomeEvent());
     }
