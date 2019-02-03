@@ -7,7 +7,7 @@ public class RobotDogInteractable : Interactable
     //Vector3 position;
 
     private EventInstance banterInstance;
-    private bool canInteract = false;
+    private static bool canInteract = false;
     private bool isResponding;
 
     void Start()

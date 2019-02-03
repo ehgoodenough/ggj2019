@@ -89,7 +89,7 @@ public class Photo : MonoBehaviour
         EventBus.PublishEvent(new PhotoLoweredAtStartEvent());
         playerCanRaisePhoto = true;
 
-        yield return new WaitForSeconds(12.0f);
+        yield return new WaitForSeconds(10.0f);
         EventBus.PublishEvent(new OpeningVoiceLineDoneEvent());
     }
 }
