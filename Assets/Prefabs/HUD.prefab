@@ -96,6 +96,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 49db08eaf84e6e543a02d7da52119b7b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  powerDownGlitchIntensitay: 0
   textFadeDuration: 1
   textShowDuration: 1.5
   screenFadeDuration: 1
@@ -121,7 +122,7 @@ CanvasGroup:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 625840486}
   m_Enabled: 1
-  m_Alpha: 0
+  m_Alpha: 1
   m_Interactable: 1
   m_BlocksRaycasts: 0
   m_IgnoreParentGroups: 0

@@ -123,7 +123,6 @@ public class PlayerEnergy : MonoBehaviour
 
     private void HandleDepleting()
     {
-        // TODO: Handle depleting energy while running (deplete at a commensurate rate)
         if (!isPoweringDown)
         {
             currentEnergy = Mathf.Clamp(currentEnergy - CalculateDepletionAmount(Time.deltaTime), 0f, currentMaxEnergy);
@@ -131,6 +130,7 @@ public class PlayerEnergy : MonoBehaviour
             {
                 isPoweringDown = true;
                 EventBus.PublishEvent(new PowerDownEvent());
+                // Debug.Log("Power Down Event");
             }
         }
     }
