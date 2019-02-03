@@ -28,11 +28,13 @@ public class InteractionDetector : MonoBehaviour
 
     private void UpdateInteractableInFocus()
     {
+        /* For the moment, we will allow other interactables to come into focus while other interactions are ongoing
         // Do not change the interactableInFocus if it is currently being interacted with
         if (interactableInFocus != null && interactableInFocus.IsInteracting())
         {
             return; // Exit update and do not reset interactableInFocus
         }
+        */
 
         // Check whether a new interactable should now be in focus
         /// Note: A variety of events will affect what is currently the nearest valid interactable
