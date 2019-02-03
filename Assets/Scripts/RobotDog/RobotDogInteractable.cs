@@ -49,7 +49,7 @@ public class RobotDogInteractable : Interactable
 
     public override bool CanInteractWith(Pickupable heldItem)
     {
-        return base.CanInteractWith(heldItem) && canInteract;
+        return canInteract;
     }
 
     public override void Interact(Pickupable heldItem)
