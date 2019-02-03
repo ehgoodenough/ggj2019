@@ -19,6 +19,7 @@ public class ObjectivePickupable : Pickupable
     public override void Pickup(Vector3 holdPoint, Transform parent)
     {
         base.Pickup(holdPoint, parent);
+        FMODUnity.RuntimeManager.PlayOneShot("event:/SFX/Interactables/Grab_Item", transform.position);
         FMODUnity.RuntimeManager.PlayOneShot("event:/VO/Object_Found", transform.position);
     }
 }

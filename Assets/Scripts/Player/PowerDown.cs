@@ -38,6 +38,8 @@ public class PowerDown : MonoBehaviour
         glitchEffect.enabled = true;
         glitchEffect.overallIntensity = powerDownGlitchIntensitay;
 
+        FMODUnity.RuntimeManager.PlayOneShot("event:/SFX/Xtra_SFX/Fail_State");
+
         StartCoroutine(FadeOut());
     }
 
