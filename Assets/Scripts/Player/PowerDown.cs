@@ -46,7 +46,7 @@ public class PowerDown : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Keypad8))
         {
             // uncomment to test
-            HandlePowerDown(new PowerDownEvent());
+            // HandlePowerDown(new PowerDownEvent());
         }
     }
 

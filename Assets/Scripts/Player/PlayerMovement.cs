@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using UnityEngine.AI;
+using System.Collections;
 
 [RequireComponent(typeof(Rigidbody))]
 public class PlayerMovement : MonoBehaviour
@@ -16,6 +17,7 @@ public class PlayerMovement : MonoBehaviour
     private bool isRunning = false;
     private float currentMaxSpeed;
     private float currentSpeed = 0f;
+    private float powerDownModifier = 1f;
     private Vector3 movementVector;
     private Rigidbody rb;
     private Vector3 lastFootstepLocation;
@@ -36,19 +38,23 @@ public class PlayerMovement : MonoBehaviour
         EventBus.Subscribe<PlayerStartPositionEvent>(OnPlayerStartPositionEvent);
         EventBus.Subscribe<PhotoLoweredAtStartEvent>(OnPhotoLoweredAtStartEvent);
         EventBus.Subscribe<PlayerHasWonEvent>(OnPlayerHasWonEvent);
+        EventBus.Subscribe<PowerDownEvent>(OnPowerDownEvent);
     }
 
     void Start()
     {
-        // Debug.Log("PlayerMovement.Start()");
+        Debug.Log("PlayerMovement.Start()");
         movementVector = Vector3.zero;
         rb = GetComponent<Rigidbody>();
         rb.freezeRotation = true;
+
+        // For Debug purposes only
+        StartCoroutine(LogCurrentMaxSpeed());
     }
 
     private void Update()
     {
-        currentMaxSpeed = isRunning ? runningMaxSpeed : walkingMaxSpeed;
+        currentMaxSpeed = (isRunning ? runningMaxSpeed : walkingMaxSpeed) * powerDownModifier;
 
         // In case the player falls off the map, let's just put them back at the start
         if (startTransformForCurrentScene != null && this.transform.position.y < -10f)
@@ -75,6 +81,15 @@ public class PlayerMovement : MonoBehaviour
         if (!muteFootsteps && currentSpeed > 0 && Vector3.Distance(lastFootstepLocation, transform.position) > strideLength)
         {
             PlayFootstep();
+        }
+    }
+
+    IEnumerator LogCurrentMaxSpeed()
+    {
+        while (true)
+        {
+            Debug.Log("Current Max Speed: " + currentMaxSpeed);
+            yield return new WaitForSeconds(0.33f);
         }
     }
 
@@ -107,6 +122,20 @@ public class PlayerMovement : MonoBehaviour
     public void RestrictGravity(bool restrictGravity)
     {
         isGravityRestricted = restrictGravity;
+    }
+
+    private void OnPowerDownEvent(PowerDownEvent e)
+    {
+        StartCoroutine(LerpPowerDownModifier(powerDownModifier, 0f, 1.5f));
+    }
+
+    private IEnumerator LerpPowerDownModifier(float startModifierValue, float endModifierValue, float lerpDuration)
+    {
+        while (Mathf.Min(startModifierValue, endModifierValue) < powerDownModifier)
+        {
+            powerDownModifier += Mathf.Sign(endModifierValue - startModifierValue) * Time.deltaTime / lerpDuration;
+            yield return null;
+        }
     }
 
     private void OnPlayerHasWonEvent(PlayerHasWonEvent e)
@@ -145,6 +174,7 @@ public class PlayerMovement : MonoBehaviour
         // Debug.Log("e.homeState: " + e.homeState);
         muteFootsteps = false;
         outside = false;
+        powerDownModifier = 1f;
         // Debug.Log("position: " + this.transform.position);
     }
 
