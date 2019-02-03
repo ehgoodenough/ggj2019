@@ -88,5 +88,8 @@ public class Photo : MonoBehaviour
         Debug.Log("Photo Lowered At Start");
         EventBus.PublishEvent(new PhotoLoweredAtStartEvent());
         playerCanRaisePhoto = true;
+
+        yield return new WaitForSeconds(12.0f);
+        EventBus.PublishEvent(new OpeningVoiceLineDoneEvent());
     }
 }

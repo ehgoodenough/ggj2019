@@ -7,11 +7,13 @@ public class RobotDogInteractable : Interactable
     //Vector3 position;
 
     private EventInstance banterInstance;
+    private bool canInteract = false;
     private bool isResponding;
 
     void Start()
     {
         //positionHandle = GCHandle.Alloc(position, GCHandleType.Pinned);
+        EventBus.Subscribe<OpeningVoiceLineDoneEvent>(OnOpeningComplete);
     }
 
     void Update() {
@@ -40,9 +42,14 @@ public class RobotDogInteractable : Interactable
     //    positionHandle.Free();
     //}
 
+    private void OnOpeningComplete(OpeningVoiceLineDoneEvent e)
+    {
+        canInteract = true;
+    }
+
     public override bool CanInteractWith(Pickupable heldItem)
     {
-        return Time.time >= 26; // dirty hack since opening cutscene/voiceline takes about 26 seconds
+        return base.CanInteractWith(heldItem) && canInteract;
     }
 
     public override void Interact(Pickupable heldItem)

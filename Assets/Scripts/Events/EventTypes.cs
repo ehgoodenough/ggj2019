@@ -73,3 +73,5 @@ public struct SwitchFocusToQuitOptionEvent { }
 public struct PlayerHasWonEvent { }
 
 public struct FriendFullyAssembledEvent { }
+
+public struct OpeningVoiceLineDoneEvent { }
