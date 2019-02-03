@@ -76,15 +76,20 @@ public class GameStateHome : State
         CanvasGroup otherCanvasGroup = GameObject.Find("FadePanel").GetComponent<CanvasGroup>();
         CanvasGroup powerDownTextCanvasGroup = GameObject.Find("PowerDownText").GetComponent<CanvasGroup>();
 
+        // reset power down canvas
         powerDownTextCanvasGroup.alpha = 0;
+        otherCanvasGroup.alpha = 0;
+
         while (sceneTransitionFade.alpha > 0)
         {
             sceneTransitionFade.alpha -= Time.deltaTime / fadeDuration;
+            /*
             if (otherCanvasGroup)
             {
                 otherCanvasGroup.alpha -= Time.deltaTime / fadeDuration;
                 //Debug.Log("otherCanvasGroup alpha " + otherCanvasGroup.alpha);
             }
+            */
             yield return null;
         }
         // TODO: Publish Event here for end of fade in...

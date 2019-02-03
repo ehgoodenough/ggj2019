@@ -72,6 +72,10 @@ public class PowerDown : MonoBehaviour
             yield return null;
         }
 
+        // Set scene transition fade up before moving the player in preparation for the handoff to GameStateHome fading it out
+        CanvasGroup sceneTransitionFade = GameObject.Find("SceneTransitionFade").GetComponent<CanvasGroup>();
+        sceneTransitionFade.alpha = 1f;
+
         FindObjectOfType<PlayableDirector>().enabled = false;
         EventBus.PublishEvent(new ReturnHomeEvent());
     }

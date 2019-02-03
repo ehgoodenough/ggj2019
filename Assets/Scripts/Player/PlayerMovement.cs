@@ -88,7 +88,7 @@ public class PlayerMovement : MonoBehaviour
     {
         while (true)
         {
-            Debug.Log("Current Max Speed: " + currentMaxSpeed);
+            // Debug.Log("Current Max Speed: " + currentMaxSpeed);
             yield return new WaitForSeconds(0.33f);
         }
     }
