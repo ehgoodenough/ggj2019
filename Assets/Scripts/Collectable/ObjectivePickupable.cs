@@ -21,5 +21,6 @@ public class ObjectivePickupable : Pickupable
         base.Pickup(holdPoint, parent);
         FMODUnity.RuntimeManager.PlayOneShot("event:/SFX/Interactables/Grab_Item", transform.position);
         FMODUnity.RuntimeManager.PlayOneShot("event:/VO/Object_Found", transform.position);
+        EventBus.PublishEvent(new ObjectiveItemPickedUpEvent(this));
     }
 }

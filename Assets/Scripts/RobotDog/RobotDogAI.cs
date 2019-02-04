@@ -28,8 +28,16 @@ public class RobotDogAI : MonoBehaviour
     private bool muteFootsteps = false;
     private bool outside = false;
 
+    private static bool chairHasBeenPickedUp = false;
+    private static bool artworkHasBeenPickedUp = false;
+    private static bool flowerHasBeenPickedUp = false;
+
     void Awake()
     {
+        Debug.Log("Chair Has Been Picked Up: " + chairHasBeenPickedUp);
+        Debug.Log("Artwork Has Been Picked Up: " + artworkHasBeenPickedUp);
+        Debug.Log("Flower Has Been Picked Up: " + flowerHasBeenPickedUp);
+
         animator = GetComponentInChildren<PoochAnimator>();
 
         // Debug.Log("RobotDogAI.Awake()");
@@ -47,6 +55,7 @@ public class RobotDogAI : MonoBehaviour
         EventBus.Subscribe<EnterCityEvent>(OnEnterCityEvent);
         EventBus.Subscribe<ExitHomeEvent>(OnExitHomeEvent);
         EventBus.Subscribe<ExitCityEvent>(OnExitCityEvent);
+        EventBus.Subscribe<ObjectiveItemPickedUpEvent>(OnObjectiveItemHasBeenPickedUpEvent);
     }
 
     void Start()
@@ -111,6 +120,27 @@ public class RobotDogAI : MonoBehaviour
         Gizmos.DrawCube(previousPosition, Vector3.one * 0.5f);
         Gizmos.color = Color.green;
         Gizmos.DrawCube(nextPosition, Vector3.one * 0.5f);
+    }
+
+    private void OnObjectiveItemHasBeenPickedUpEvent(ObjectiveItemPickedUpEvent e)
+    {
+        switch (e.objectiveItem.type)
+        {
+            case ObjectivePickupable.Type.Art:
+                Debug.Log("Artwork Has Been Picked Up");
+                if (!artworkHasBeenPickedUp) artworkHasBeenPickedUp = true;
+                break;
+            case ObjectivePickupable.Type.Chair:
+                Debug.Log("Chair Has Been Picked Up");
+                if (!chairHasBeenPickedUp) chairHasBeenPickedUp = true;
+                break;
+            case ObjectivePickupable.Type.Flowers:
+                Debug.Log("Flower Has Been Picked Up");
+                if (!flowerHasBeenPickedUp) flowerHasBeenPickedUp = true;
+                break;
+            default:
+                break;
+        }
     }
 
     private void OnEnterHomeEvent(EnterHomeEvent e)

@@ -75,3 +75,9 @@ public struct PlayerHasWonEvent { }
 public struct FriendFullyAssembledEvent { }
 
 public struct OpeningVoiceLineDoneEvent { }
+
+public struct ObjectiveItemPickedUpEvent
+{
+    public ObjectivePickupable objectiveItem;
+    public ObjectiveItemPickedUpEvent(ObjectivePickupable objectiveItem) { this.objectiveItem = objectiveItem; }
+}
