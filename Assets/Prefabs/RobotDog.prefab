@@ -105,6 +105,7 @@ GameObject:
   - component: {fileID: 2015435973685222532}
   - component: {fileID: 2960617011342060471}
   - component: {fileID: 6249507323505452970}
+  - component: {fileID: 7843479565961217266}
   m_Layer: 0
   m_Name: RobotDog
   m_TagString: Untagged
@@ -194,6 +195,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 569023b0760b01b4f8afbab16ea69447, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &7843479565961217266
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2015435973685222535}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 06ee841d8243e5349b3bf2d5325b7170, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  footstepEvent: event:/SFX/Ambience/Dorg_Footsteps
+  indoorFootstepEvent: event:/SFX/Ambience/Dorg_Indoor_Steps
+  strideLength: 2
 --- !u!1001 &7513206047593369988
 PrefabInstance:
   m_ObjectHideFlags: 0
