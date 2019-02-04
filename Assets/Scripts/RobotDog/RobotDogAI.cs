@@ -17,30 +17,19 @@ public class RobotDogAI : MonoBehaviour
 
     private PoochAnimator animator;
 
-    private static bool chairHasBeenPickedUp = false;
-    private static bool artworkHasBeenPickedUp = false;
-    private static bool flowerHasBeenPickedUp = false;
-
     void Awake()
     {
-        Debug.Log("Chair Has Been Picked Up: " + chairHasBeenPickedUp);
-        Debug.Log("Artwork Has Been Picked Up: " + artworkHasBeenPickedUp);
-        Debug.Log("Flower Has Been Picked Up: " + flowerHasBeenPickedUp);
 
         animator = GetComponentInChildren<PoochAnimator>();
 
         // Debug.Log("RobotDogAI.Awake()");
-        // Debug.Log("Robot Dog Position: " + this.transform.position);
         agent = GetComponent<NavMeshAgent>();
         startFollowingDistance = agent.stoppingDistance + startFollowingHysteresis;
 
         PlaceOnNavMesh(this.transform.position);
 
         // Debug.Log("Player: " + player);
-        // Debug.Log("PlayerMovement: " + FindObjectOfType<PlayerMovement>());
         if (player == null) player = FindObjectOfType<PlayerMovement>().gameObject;
-        
-        EventBus.Subscribe<ObjectiveItemPickedUpEvent>(OnObjectiveItemHasBeenPickedUpEvent);
     }
 
     void Start()
@@ -104,27 +93,6 @@ public class RobotDogAI : MonoBehaviour
         NavMeshHit hit;
         bool positionFound = NavMesh.SamplePosition(position, out hit, 2.5f, 1);
         this.transform.position = positionFound ? hit.position : this.transform.position; // If cannot find position, stay put
-    }
-
-    private void OnObjectiveItemHasBeenPickedUpEvent(ObjectiveItemPickedUpEvent e)
-    {
-        switch (e.objectiveItem.type)
-        {
-            case ObjectivePickupable.Type.Art:
-                Debug.Log("Artwork Has Been Picked Up");
-                if (!artworkHasBeenPickedUp) artworkHasBeenPickedUp = true;
-                break;
-            case ObjectivePickupable.Type.Chair:
-                Debug.Log("Chair Has Been Picked Up");
-                if (!chairHasBeenPickedUp) chairHasBeenPickedUp = true;
-                break;
-            case ObjectivePickupable.Type.Flowers:
-                Debug.Log("Flower Has Been Picked Up");
-                if (!flowerHasBeenPickedUp) flowerHasBeenPickedUp = true;
-                break;
-            default:
-                break;
-        }
     }
 
     private void OnDrawGizmosSelected()
