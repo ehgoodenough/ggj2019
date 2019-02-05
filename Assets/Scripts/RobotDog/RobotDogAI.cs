@@ -18,25 +18,23 @@ public class RobotDogAI : MonoBehaviour
 
     private PoochAnimator animator;
 
-    private RobotDogAiState currentState;
-    private enum RobotDogAiState
+    private DorgTask currentTask;
+    public enum DorgTask
     {
-        FollowBehindPlayer
+        FollowBehindPlayer,
+        InvestigateObjectiveItem
     }
 
     /*
     tree "Root"
-	    fallback
-		    tree "InvestigateObjectiveItem"
-		    FollowBehindPlayer
+	fallback
+		while IsValidObjectiveInRange
+			tree "InvestigateObjectiveItem"
+		while not IsValidObjectiveInRange
+			FollowBehindPlayer
 
     tree "InvestigateObjectiveItem"
-	    sequence
-		    IsValidObjectiveInRange
-		    DeterminePointNearObjective
-		    GotToPointNearObjective
-		    InvestigateObjective
-		    CallAttentionToObjective
+	    GoToPointNearObjective
     */
 
     void Awake()
@@ -46,8 +44,10 @@ public class RobotDogAI : MonoBehaviour
         // Debug.Log("RobotDogAI.Awake()");
         agent = GetComponent<NavMeshAgent>();
         startFollowingDistance = agent.stoppingDistance + startFollowingHysteresis;
-
+        
         PlaceOnNavMesh(this.transform.position);
+        nextPosition = this.transform.position;
+        previousPosition = this.transform.position;
 
         // Debug.Log("Player: " + player);
         if (player == null) player = FindObjectOfType<PlayerMovement>().gameObject;
@@ -62,17 +62,55 @@ public class RobotDogAI : MonoBehaviour
         // StartCoroutine(FollowPlayer());
     }
 
+    public float GetCurrentSpeed()
+    {
+        return agent.velocity.magnitude;
+    }
+
+    private void PlaceOnNavMesh(Vector3 position)
+    {
+        this.transform.position = GetPositionOnNavMesh(position);
+    }
+
+    public Vector3 GetPositionOnNavMesh(Vector3 samplePosition)
+    {
+        NavMeshHit hit;
+        bool positionFound = NavMesh.SamplePosition(samplePosition, out hit, 2.5f, 1);
+        return positionFound ? hit.position : this.transform.position; // If cannot find position, return current position
+    }
+
+    public DorgTask GetCurrentDorgTask()
+    {
+        return currentTask;
+    }
+
+    /// <summary>
+    /// This should only be called on Task.current.isStarting of the first task of any Dorg AI tree
+    /// </summary>
+    public void SetCurrentDorgTask(DorgTask newTask)
+    {
+        currentTask = newTask;
+    }
+
+    /// Handle Follow Behind Player Task
+
     [Task]
     public void FollowBehindPlayer()
     {
         // Debug.Log("FollowBehindPlayer() [Task]");
         if (Task.current.isStarting)
         {
-            currentState = RobotDogAiState.FollowBehindPlayer;
-            nextPosition = GetNextPositionOnNavMesh(player.transform.position);
+            Debug.Log("Starting FollowBehindPlayer [Task]");
+            currentTask = DorgTask.FollowBehindPlayer;
+            nextPosition = GetPositionOnNavMesh(player.transform.position);
             StartCoroutine(FollowPlayer());
         }
 
+        HandleFollowBehindPlayerAnimation();
+    }
+
+    private void HandleFollowBehindPlayerAnimation()
+    {
         // Change Animation state according to current speed
         float currentSpeed = GetCurrentSpeed();
         float currentSpeedNormalized = currentSpeed / agent.speed;
@@ -94,14 +132,14 @@ public class RobotDogAI : MonoBehaviour
     IEnumerator FollowPlayer()
     {
         Debug.Log("Start FollowPlayer() Coroutine");
-        while (currentState == RobotDogAiState.FollowBehindPlayer)
+        while (currentTask == DorgTask.FollowBehindPlayer)
         {
             previousPosition = nextPosition;
-            nextPosition = GetNextPositionOnNavMesh(player.transform.position);
+            nextPosition = GetPositionOnNavMesh(player.transform.position);
             yield return new WaitForSeconds(updateDestinationFrequency * 0.5f);
 
             // Check that current state continues to be Follow Behind Player
-            if (currentState == RobotDogAiState.FollowBehindPlayer)
+            if (currentTask == DorgTask.FollowBehindPlayer)
             {
                 if (Vector3.Distance(this.transform.position, nextPosition) > startFollowingDistance)
                 {
@@ -112,30 +150,16 @@ public class RobotDogAI : MonoBehaviour
         }
     }
 
-    public float GetCurrentSpeed()
-    {
-        return agent.velocity.magnitude;
-    }
-
-    private Vector3 GetNextPositionOnNavMesh(Vector3 samplePosition)
-    {
-        NavMeshHit hit;
-        bool positionFound = NavMesh.SamplePosition(samplePosition, out hit, 2.5f, 1);
-        return positionFound ? hit.position : this.transform.position; // If cannot find position, stay put
-    }
-
-    private void PlaceOnNavMesh(Vector3 position)
-    {
-        NavMeshHit hit;
-        bool positionFound = NavMesh.SamplePosition(position, out hit, 2.5f, 1);
-        this.transform.position = positionFound ? hit.position : this.transform.position; // If cannot find position, stay put
-    }
+    /// Handle Editor Gizmo Displays
 
     private void OnDrawGizmosSelected()
     {
-        Gizmos.color = Color.yellow;
-        Gizmos.DrawCube(previousPosition, Vector3.one * 0.5f);
-        Gizmos.color = Color.green;
-        Gizmos.DrawCube(nextPosition, Vector3.one * 0.5f);
+        if (currentTask == DorgTask.FollowBehindPlayer)
+        {
+            Gizmos.color = Color.yellow;
+            Gizmos.DrawCube(previousPosition, Vector3.one * 0.5f);
+            Gizmos.color = Color.green;
+            Gizmos.DrawCube(nextPosition, Vector3.one * 0.5f);
+        }
     }
 }

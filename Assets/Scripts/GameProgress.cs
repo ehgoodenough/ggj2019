@@ -53,6 +53,14 @@ public static class GameProgress
     // Track objective items picked up (at least once)
     private static HashSet<ObjectivePickupable.Type> pickedUpObjectives = new HashSet<ObjectivePickupable.Type>();
 
+    public static int NumPickedUp
+    {
+        get
+        {
+            return pickedUpObjectives.Count;
+        }
+    }
+
     public static bool HasObjectiveItemBeenPickedUp(ObjectivePickupable.Type type)
     {
         return pickedUpObjectives.Contains(type);

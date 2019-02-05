@@ -108,6 +108,7 @@ GameObject:
   - component: {fileID: 6249507323505452970}
   - component: {fileID: 7843479565961217266}
   - component: {fileID: 6760811121654546156}
+  - component: {fileID: 3346513239997670880}
   m_Layer: 0
   m_Name: RobotDog
   m_TagString: Untagged
@@ -243,9 +244,26 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 874d8c0b473a1bf4981a7cceb627c569, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  checkForObjectives: 1
   checkFrequency: 1
   sensorRadius: 10
+  isCityDorg: 0
+  detectionLayers:
+    serializedVersion: 2
+    m_Bits: 3072
+--- !u!114 &3346513239997670880
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2015435973685222535}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 179fbeb519dad18488c4452d5a627344, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sensorRangeHysteresis: 2
+  timeInRangeToBeValid: 2
 --- !u!1001 &7513206047593369988
 PrefabInstance:
   m_ObjectHideFlags: 0

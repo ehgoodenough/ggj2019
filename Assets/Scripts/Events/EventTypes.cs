@@ -81,3 +81,9 @@ public struct ObjectiveItemPickedUpEvent
     public ObjectivePickupable objectiveItem;
     public ObjectiveItemPickedUpEvent(ObjectivePickupable objectiveItem) { this.objectiveItem = objectiveItem; }
 }
+
+public struct UntouchedObjectiveItemDetectedEvent
+{
+    public ObjectivePickupable objectiveItem;
+    public UntouchedObjectiveItemDetectedEvent(ObjectivePickupable objectiveItem) { this.objectiveItem = objectiveItem; }
+}
