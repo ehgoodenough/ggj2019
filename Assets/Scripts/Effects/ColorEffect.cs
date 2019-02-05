@@ -20,10 +20,21 @@ public class ColorEffect : MonoBehaviour
         colorBufferCam = PostProcessUtils.GenerateBufferCamera(1 << LayerMask.NameToLayer("Color") | 1 << LayerMask.NameToLayer("ColorAndOutline"), "Color", cam);
     }
 
+    void OnLevelWasLoaded(int level)
+    {
+        // settin dat wave origin YO.
+        SetWaveOrigin(GameObject.Find("WaveOrigin").transform);
+    }
+
     void Update()
     {
         PostProcessUtils.GenerateBufferIfNecessary(ref colorBuffer, 0, RenderTextureFormat.R8, "Buffer");
         PostProcessUtils.GenerateBufferIfNecessary(ref depthBuffer, 0, RenderTextureFormat.Depth, "Depth buffer");
+    }
+
+    public void SetWaveOrigin(Transform waveOrigin)
+    {
+        saturationWaveOrigin = waveOrigin;
     }
 
     void OnRenderImage(RenderTexture source, RenderTexture destination)

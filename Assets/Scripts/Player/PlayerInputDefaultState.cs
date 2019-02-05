@@ -22,6 +22,7 @@ public class PlayerInputDefaultState : State
 
     private bool canPause = false;
     private bool isPaused = false;
+
     enum PauseOption
     {
         // Restart = 0,

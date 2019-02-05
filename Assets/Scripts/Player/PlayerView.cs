@@ -59,6 +59,12 @@ public class PlayerView : MonoBehaviour
         return playerCamera.enabled;
     }
 
+    public void ResetCamera()
+    {
+        cameraRotation = 0;
+        playerCamera.transform.localRotation = Quaternion.Euler(new Vector3(0, 0, 0));
+    }
+
     // TODO: Turn player in fluid motion toward robot friend
     private void OnPlayerHasWonEvent(PlayerHasWonEvent e)
     {

@@ -6,7 +6,7 @@ using Rewired;
 
 public class Photo : MonoBehaviour
 {
-    private const float HOW_LONG_TO_KEEP_IT_UP_AT_START = 4.2f;
+    public const float HOW_LONG_TO_KEEP_IT_UP_FOR_CINEMATICS = 4.2f;
 
     private float rotationSpeed = 180.0f;
 
@@ -36,7 +36,7 @@ public class Photo : MonoBehaviour
 
     private void Awake()
     {
-        time = HOW_LONG_TO_KEEP_IT_UP_AT_START; // Ensure that photo is down to start
+        time = HOW_LONG_TO_KEEP_IT_UP_FOR_CINEMATICS; // Ensure that photo is down to start
         EventBus.Subscribe<ExitTitleScreenEvent>(OnExitTitleScreenEvent);
     }
 
@@ -44,7 +44,7 @@ public class Photo : MonoBehaviour
     {
         time += Time.deltaTime;
         // const float HOW_LONG_TO_KEEP_IT_UP_AT_START = 5f;
-        if (time < HOW_LONG_TO_KEEP_IT_UP_AT_START || showPhoto) { // Input.GetKey("space")) {
+        if (time < HOW_LONG_TO_KEEP_IT_UP_FOR_CINEMATICS || showPhoto) { // Input.GetKey("space")) {
             if (transform.localRotation.x > 0) {
                 transform.Rotate(new Vector3(-1,0,0) * Time.deltaTime * rotationSpeed);
             }
@@ -81,7 +81,7 @@ public class Photo : MonoBehaviour
         time = 0f; // while time is less than duration to keep at start, photo is raised
 
         // Lower Photo on "Is THIS home?"
-        yield return new WaitForSeconds(HOW_LONG_TO_KEEP_IT_UP_AT_START);
+        yield return new WaitForSeconds(HOW_LONG_TO_KEEP_IT_UP_FOR_CINEMATICS);
 
         // When photo is fully lowered, release movement on "WHAT is home?"
         yield return new WaitForSeconds(3.4f);
@@ -91,5 +91,10 @@ public class Photo : MonoBehaviour
 
         yield return new WaitForSeconds(10.0f);
         EventBus.PublishEvent(new OpeningVoiceLineDoneEvent());
+    }
+
+    public void HoldUpPhotoForCinematic()
+    {
+        time = 0;
     }
 }
