@@ -7,7 +7,7 @@ using Panda;
 [RequireComponent(typeof(NavMeshAgent))]
 public class RobotDogAI : MonoBehaviour
 {
-    public GameObject player;
+    public PlayerMovement player;
     public float updateDestinationFrequency = 1f;
     public float startFollowingHysteresis = 2f;
 
@@ -21,7 +21,8 @@ public class RobotDogAI : MonoBehaviour
     private DorgTask currentTask;
     public enum DorgTask
     {
-        FollowBehindPlayer,
+        FollowPlayerAhead,
+        FollowPlayerBehind,
         InvestigateObjectiveItem
     }
 
@@ -31,7 +32,11 @@ public class RobotDogAI : MonoBehaviour
 		while IsValidObjectiveInRange
 			tree "InvestigateObjectiveItem"
 		while not IsValidObjectiveInRange
-			FollowBehindPlayer
+            fallback
+                while ShouldFollowPlayerAhead
+                    FollowPlayerAhead
+                while not ShouldFollowPlayerAhead
+			        FollowPlayerBehind
 
     tree "InvestigateObjectiveItem"
 	    GoToPointNearObjective
@@ -50,7 +55,7 @@ public class RobotDogAI : MonoBehaviour
         previousPosition = this.transform.position;
 
         // Debug.Log("Player: " + player);
-        if (player == null) player = FindObjectOfType<PlayerMovement>().gameObject;
+        if (player == null) player = FindObjectOfType<PlayerMovement>();
     }
 
     void Start()
@@ -92,24 +97,57 @@ public class RobotDogAI : MonoBehaviour
         currentTask = newTask;
     }
 
-    /// Handle Follow Behind Player Task
+    /// Determine wheather to follower player from ahead or behind
 
     [Task]
-    public void FollowBehindPlayer()
+    public bool ShouldFollowPlayerAhead()
     {
-        // Debug.Log("FollowBehindPlayer() [Task]");
-        if (Task.current.isStarting)
-        {
-            Debug.Log("Starting FollowBehindPlayer [Task]");
-            currentTask = DorgTask.FollowBehindPlayer;
-            nextPosition = GetPositionOnNavMesh(player.transform.position);
-            StartCoroutine(FollowPlayer());
-        }
-
-        HandleFollowBehindPlayerAnimation();
+        // For now, let's alternate evenly
+        // TODO: modify this to be random (coherent noise function?)
+        float stateDuration = 8f; // number of seconds to be following ahead, then number of seconds to be following behind
+        bool shouldFollowAhead = Mathf.Sin(Time.time * Mathf.PI / stateDuration) > 0f;
+        return shouldFollowAhead;
     }
 
-    private void HandleFollowBehindPlayerAnimation()
+    /// Handle Follow Player Behind Task
+
+    [Task]
+    public void FollowPlayerBehind()
+    {
+        // Debug.Log("FollowPlayerBehind() [Task]");
+        if (Task.current.isStarting)
+        {
+            Debug.Log("Starting FollowPlayerBehind [Task]");
+            currentTask = DorgTask.FollowPlayerBehind;
+            nextPosition = GetPositionOnNavMesh(player.transform.position);
+            StartCoroutine(FollowBehindPlayer());
+        }
+
+        HandleFollowPlayerBehindAnimation();
+    }
+
+    IEnumerator FollowBehindPlayer()
+    {
+        Debug.Log("Start FollowPlayer() Coroutine");
+        while (currentTask == DorgTask.FollowPlayerBehind)
+        {
+            previousPosition = nextPosition;
+            nextPosition = GetPositionOnNavMesh(player.transform.position);
+            yield return new WaitForSeconds(updateDestinationFrequency * 0.5f);
+
+            // Check that current state continues to be Follow Player Ahead
+            if (currentTask == DorgTask.FollowPlayerBehind)
+            {
+                if (Vector3.Distance(this.transform.position, nextPosition) > startFollowingDistance)
+                {
+                    agent.SetDestination(nextPosition);
+                }
+                yield return new WaitForSeconds(updateDestinationFrequency * 0.5f);
+            }
+        }
+    }
+
+    private void HandleFollowPlayerBehindAnimation()
     {
         // Change Animation state according to current speed
         float currentSpeed = GetCurrentSpeed();
@@ -129,17 +167,37 @@ public class RobotDogAI : MonoBehaviour
         }
     }
 
-    IEnumerator FollowPlayer()
+    /// Handle Follow Player Ahead Task
+
+    [Task]
+    public void FollowPlayerAhead()
+    {
+        // Debug.Log("FollowPlayerBehind() [Task]");
+        if (Task.current.isStarting)
+        {
+            Debug.Log("Starting FollowPlayerAhead [Task]");
+            currentTask = DorgTask.FollowPlayerAhead;
+            nextPosition = GetPositionOnNavMesh(player.transform.position);
+            StartCoroutine(FollowAheadOfPlayer());
+        }
+
+        HandleFollowPlayerAheadAnimation();
+    }
+
+    IEnumerator FollowAheadOfPlayer()
     {
         Debug.Log("Start FollowPlayer() Coroutine");
-        while (currentTask == DorgTask.FollowBehindPlayer)
+        while (currentTask == DorgTask.FollowPlayerAhead)
         {
             previousPosition = nextPosition;
-            nextPosition = GetPositionOnNavMesh(player.transform.position);
+            float currentPlayerSpeedNormalized = player.GetCurrentSpeed() / player.GetCurrentMaxSpeed();
+            Vector3 direction = player.GetCurrentMovementVector().sqrMagnitude > 0 ? player.GetCurrentMovementVector() : player.transform.forward;
+            Vector3 targetPosition = player.transform.position + direction * (1f + currentPlayerSpeedNormalized * 2f);
+            nextPosition = GetPositionOnNavMesh(targetPosition);
             yield return new WaitForSeconds(updateDestinationFrequency * 0.5f);
 
-            // Check that current state continues to be Follow Behind Player
-            if (currentTask == DorgTask.FollowBehindPlayer)
+            // Check that current state continues to be Follow Player Ahead
+            if (currentTask == DorgTask.FollowPlayerAhead)
             {
                 if (Vector3.Distance(this.transform.position, nextPosition) > startFollowingDistance)
                 {
@@ -150,11 +208,31 @@ public class RobotDogAI : MonoBehaviour
         }
     }
 
+    private void HandleFollowPlayerAheadAnimation()
+    {
+        // Change Animation state according to current speed
+        float currentSpeed = GetCurrentSpeed();
+        float currentSpeedNormalized = currentSpeed / agent.speed;
+        // Debug.Log("Current Speed Normalized: " + currentSpeedNormalized);
+        if (currentSpeedNormalized > 0.75f)
+        {
+            animator.Run();
+        }
+        else if (currentSpeedNormalized > 0.05f)
+        {
+            animator.Trot();
+        }
+        else
+        {
+            animator.Idle();
+        }
+    }
+
     /// Handle Editor Gizmo Displays
 
     private void OnDrawGizmosSelected()
     {
-        if (currentTask == DorgTask.FollowBehindPlayer)
+        if (currentTask == DorgTask.FollowPlayerBehind || currentTask == DorgTask.FollowPlayerAhead)
         {
             Gizmos.color = Color.yellow;
             Gizmos.DrawCube(previousPosition, Vector3.one * 0.5f);

@@ -114,6 +114,11 @@ public class PlayerMovement : MonoBehaviour
         return currentMaxSpeed;
     }
 
+    public Vector3 GetCurrentMovementVector()
+    {
+        return movementVector.normalized;
+    }
+
     public void RestrictMovement(bool restrictMovement)
     {
         isMovementRestricted = restrictMovement;
