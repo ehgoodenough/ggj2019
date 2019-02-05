@@ -101,9 +101,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2015435973685222533}
+  - component: {fileID: 2960617011342060471}
+  - component: {fileID: 66844109140440597}
   - component: {fileID: 2015435973685222534}
   - component: {fileID: 2015435973685222532}
-  - component: {fileID: 2960617011342060471}
   - component: {fileID: 6249507323505452970}
   - component: {fileID: 7843479565961217266}
   - component: {fileID: 6760811121654546156}
@@ -130,6 +131,41 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &2960617011342060471
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2015435973685222535}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.90449524, y: 0.79883766, z: 2.145111}
+  m_Center: {x: 0.0043411255, y: 1.0134935, z: -0.06905365}
+--- !u!114 &66844109140440597
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2015435973685222535}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 17e43e7170fb45b4b81dcd16d0ff55d9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  scripts:
+  - {fileID: 4900000, guid: acd3919cb9b66cf4d86e9432aaa7ec46, type: 3}
+  autoReset: 1
+  tickOn: 0
+  sourceInfos:
+  - isFoldout: 1
+    breakPoints: 
+    breakPointStatuses: 
+    collapsedLines: 
+    btScript: 
 --- !u!195 &2015435973685222534
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -167,19 +203,6 @@ MonoBehaviour:
   player: {fileID: 0}
   updateDestinationFrequency: 1
   startFollowingHysteresis: 2
---- !u!65 &2960617011342060471
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2015435973685222535}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 0.90449524, y: 0.79883766, z: 2.145111}
-  m_Center: {x: 0.0043411255, y: 1.0134935, z: -0.06905365}
 --- !u!114 &6249507323505452970
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -220,6 +243,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 874d8c0b473a1bf4981a7cceb627c569, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  checkForObjectives: 1
+  checkFrequency: 1
+  sensorRadius: 10
 --- !u!1001 &7513206047593369988
 PrefabInstance:
   m_ObjectHideFlags: 0
