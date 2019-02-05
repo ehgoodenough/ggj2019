@@ -96,14 +96,14 @@ Material:
     - _NumLevels: 5
     - _OcclusionStrength: 1
     - _Parallax: 0.02
-    - _SaturationLevel: 1
+    - _SaturationLevel: 0
     - _ScaleIncrement: 0.7
     - _ScanDistance: 0
     - _ScanSmoothAmount: 0.75
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
     - _SrcBlend: 1
-    - _TargetSaturationLevel: 1
+    - _TargetSaturationLevel: 0.33333334
     - _UVSec: 0
     - _ZWrite: 1
     m_Colors:
