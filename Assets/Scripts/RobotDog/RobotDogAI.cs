@@ -19,7 +19,6 @@ public class RobotDogAI : MonoBehaviour
 
     void Awake()
     {
-
         animator = GetComponentInChildren<PoochAnimator>();
 
         // Debug.Log("RobotDogAI.Awake()");
@@ -43,6 +42,8 @@ public class RobotDogAI : MonoBehaviour
 
     void Update()
     {
+
+
         // Change Animation state according to current speed
         float currentSpeed = GetCurrentSpeed();
         float currentSpeedNormalized = currentSpeed / agent.speed;
