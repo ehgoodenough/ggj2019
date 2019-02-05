@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using Panda;
 
 [RequireComponent(typeof(NavMeshAgent))]
 public class RobotDogAI : MonoBehaviour
@@ -16,6 +17,27 @@ public class RobotDogAI : MonoBehaviour
     private float startFollowingDistance;
 
     private PoochAnimator animator;
+
+    private RobotDogAiState currentState;
+    private enum RobotDogAiState
+    {
+        FollowBehindPlayer
+    }
+
+    /*
+    tree "Root"
+	    fallback
+		    tree "InvestigateObjectiveItem"
+		    FollowBehindPlayer
+
+    tree "InvestigateObjectiveItem"
+	    sequence
+		    IsValidObjectiveInRange
+		    DeterminePointNearObjective
+		    GotToPointNearObjective
+		    InvestigateObjective
+		    CallAttentionToObjective
+    */
 
     void Awake()
     {
@@ -36,19 +58,26 @@ public class RobotDogAI : MonoBehaviour
         // Debug.Log("RobotDogAI.Start()");
         Debug.Assert(player != null, "Robot Dog AI needs to have a reference to the player transform");
 
-        nextPosition = GetNextPositionOnNavMesh(player.transform.position);
-        StartCoroutine(FollowPlayer());
+        // nextPosition = GetNextPositionOnNavMesh(player.transform.position);
+        // StartCoroutine(FollowPlayer());
     }
 
-    void Update()
+    [Task]
+    public void FollowBehindPlayer()
     {
-
+        // Debug.Log("FollowBehindPlayer() [Task]");
+        if (Task.current.isStarting)
+        {
+            currentState = RobotDogAiState.FollowBehindPlayer;
+            nextPosition = GetNextPositionOnNavMesh(player.transform.position);
+            StartCoroutine(FollowPlayer());
+        }
 
         // Change Animation state according to current speed
         float currentSpeed = GetCurrentSpeed();
         float currentSpeedNormalized = currentSpeed / agent.speed;
         // Debug.Log("Current Speed Normalized: " + currentSpeedNormalized);
-        if (currentSpeedNormalized > 0.75f )
+        if (currentSpeedNormalized > 0.75f)
         {
             animator.Run();
         }
@@ -61,25 +90,31 @@ public class RobotDogAI : MonoBehaviour
             animator.Idle();
         }
     }
-    
-    public float GetCurrentSpeed()
-    {
-        return agent.velocity.magnitude;
-    }
 
     IEnumerator FollowPlayer()
     {
-        while (true)
+        Debug.Log("Start FollowPlayer() Coroutine");
+        while (currentState == RobotDogAiState.FollowBehindPlayer)
         {
             previousPosition = nextPosition;
             nextPosition = GetNextPositionOnNavMesh(player.transform.position);
             yield return new WaitForSeconds(updateDestinationFrequency * 0.5f);
-            if (Vector3.Distance(this.transform.position, nextPosition) > startFollowingDistance)
+
+            // Check that current state continues to be Follow Behind Player
+            if (currentState == RobotDogAiState.FollowBehindPlayer)
             {
-                agent.SetDestination(nextPosition);
+                if (Vector3.Distance(this.transform.position, nextPosition) > startFollowingDistance)
+                {
+                    agent.SetDestination(nextPosition);
+                }
+                yield return new WaitForSeconds(updateDestinationFrequency * 0.5f);
             }
-            yield return new WaitForSeconds(updateDestinationFrequency * 0.5f);
         }
+    }
+
+    public float GetCurrentSpeed()
+    {
+        return agent.velocity.magnitude;
     }
 
     private Vector3 GetNextPositionOnNavMesh(Vector3 samplePosition)
