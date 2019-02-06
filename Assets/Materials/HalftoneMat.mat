@@ -81,9 +81,9 @@ Material:
     - _EdgeGlowExp: 3
     - _EdgeGlowSpeed: 1.5
     - _EdgeGlowStrength: 1
-    - _EdgeScale: 6
+    - _EdgeScale: 3
     - _EdgeScaleX: 8
-    - _EdgeSpeed: 1.5
+    - _EdgeSpeed: 2
     - _GlossMapScale: 1
     - _Glossiness: 0.5
     - _GlossyReflections: 1
