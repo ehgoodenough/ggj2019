@@ -10,6 +10,13 @@ public class RobotDogAI : MonoBehaviour
     public PlayerMovement player;
     public float updateDestinationFrequency = 1f;
     public float startFollowingHysteresis = 2f;
+    public float aheadBehindDuration = 6f;
+
+    [Header("Follow Ahead Parameters")]
+    public float minimumDistanceToFollowAhead = 5f;
+    public float speedDependentDistanceToFollowAhead = 5f;
+    public float lookingDirectionWeight = 0.33f;
+    public float movingDirectionWeight = 1.67f;
 
     private NavMeshAgent agent;
     private Vector3 nextPosition; // This will be the most recent position of the player
@@ -104,7 +111,7 @@ public class RobotDogAI : MonoBehaviour
     {
         // For now, let's alternate evenly
         // TODO: modify this to be random (coherent noise function?)
-        float stateDuration = 8f; // number of seconds to be following ahead, then number of seconds to be following behind
+        float stateDuration = aheadBehindDuration; // number of seconds to be following ahead, then number of seconds to be following behind
         bool shouldFollowAhead = Mathf.Sin(Time.time * Mathf.PI / stateDuration) > 0f;
         return shouldFollowAhead;
     }
@@ -128,7 +135,7 @@ public class RobotDogAI : MonoBehaviour
 
     IEnumerator FollowBehindPlayer()
     {
-        Debug.Log("Start FollowPlayer() Coroutine");
+        Debug.Log("Start FollowBehindPlayer() Coroutine");
         while (currentTask == DorgTask.FollowPlayerBehind)
         {
             previousPosition = nextPosition;
@@ -186,14 +193,11 @@ public class RobotDogAI : MonoBehaviour
 
     IEnumerator FollowAheadOfPlayer()
     {
-        Debug.Log("Start FollowPlayer() Coroutine");
+        Debug.Log("Start FollowAheadOfPlayer() Coroutine");
         while (currentTask == DorgTask.FollowPlayerAhead)
         {
             previousPosition = nextPosition;
-            float currentPlayerSpeedNormalized = player.GetCurrentSpeed() / player.GetCurrentMaxSpeed();
-            Vector3 direction = player.GetCurrentMovementVector().sqrMagnitude > 0 ? player.GetCurrentMovementVector() : player.transform.forward;
-            Vector3 targetPosition = player.transform.position + direction * (1f + currentPlayerSpeedNormalized * 2f);
-            nextPosition = GetPositionOnNavMesh(targetPosition);
+            nextPosition = GetPositionOnNavMesh(GetPointAheadOfPlayer(minimumDistanceToFollowAhead, speedDependentDistanceToFollowAhead));
             yield return new WaitForSeconds(updateDestinationFrequency * 0.5f);
 
             // Check that current state continues to be Follow Player Ahead
@@ -206,6 +210,15 @@ public class RobotDogAI : MonoBehaviour
                 yield return new WaitForSeconds(updateDestinationFrequency * 0.5f);
             }
         }
+    }
+
+    private Vector3 GetPointAheadOfPlayer(float minimumDistanceAhead, float speedDependentDistanceAhead)
+    {
+        float currentPlayerSpeedNormalized = player.GetCurrentSpeed() / player.GetCurrentMaxSpeed();
+        float distanceAhead = (minimumDistanceAhead + currentPlayerSpeedNormalized * speedDependentDistanceAhead);
+        Vector3 directionPlayerIsLooking = player.transform.forward * distanceAhead;
+        Vector3 directionPlayerIsGoing = player.GetCurrentMovementVectorInWorldSpace() * distanceAhead;
+        return player.transform.position + (directionPlayerIsLooking * lookingDirectionWeight + directionPlayerIsGoing * movingDirectionWeight);
     }
 
     private void HandleFollowPlayerAheadAnimation()
@@ -239,5 +252,27 @@ public class RobotDogAI : MonoBehaviour
             Gizmos.color = Color.green;
             Gizmos.DrawCube(nextPosition, Vector3.one * 0.5f);
         }
+        
+        if (currentTask == DorgTask.FollowPlayerAhead)
+        {
+            Gizmos.color = Color.cyan;
+            Vector3 targetPosition = GetPointAheadOfPlayer(minimumDistanceToFollowAhead, speedDependentDistanceToFollowAhead);
+            Gizmos.DrawLine(player.transform.position + Vector3.up, targetPosition + Vector3.up);
+
+            Gizmos.color = Color.blue;
+            Vector3 lineStart = player.transform.position + Vector3.up;
+            Vector3 lineEnd = player.transform.position + player.GetCurrentMovementVectorInWorldSpace() * 5f + Vector3.up;
+            Gizmos.DrawLine(lineStart, lineEnd);
+        }
     }
+
+    /*
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.blue;
+        Vector3 lineStart = player.transform.position + Vector3.up;
+        Vector3 lineEnd = player.transform.position + player.GetCurrentMovementVectorInWorldSpace() * 5f + Vector3.up;
+        Gizmos.DrawLine(lineStart, lineEnd);
+    }
+    */
 }

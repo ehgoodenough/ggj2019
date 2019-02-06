@@ -113,10 +113,10 @@ public class PlayerMovement : MonoBehaviour
     {
         return currentMaxSpeed;
     }
-
-    public Vector3 GetCurrentMovementVector()
+    
+    public Vector3 GetCurrentMovementVectorInWorldSpace()
     {
-        return movementVector.normalized;
+        return this.transform.TransformDirection(movementVector.normalized);
     }
 
     public void RestrictMovement(bool restrictMovement)

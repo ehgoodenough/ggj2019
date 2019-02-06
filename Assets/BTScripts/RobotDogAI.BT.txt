@@ -1,3 +1,6 @@
 tree "Root"
-	repeat
-		FollowPlayerAhead
+	fallback
+		while ShouldFollowPlayerAhead
+			FollowPlayerAhead
+		while not ShouldFollowPlayerAhead
+			FollowPlayerBehind
