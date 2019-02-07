@@ -46,6 +46,11 @@ public class SaturationWaveSequencer : MonoBehaviour
         }
     }
 
+    void OnDestroy()
+    {
+        colorEffectMat.SetFloat("_ScanDistance", 0);
+    }
+
     IEnumerator DoEffect()
     {
         effectIsActive = true;
