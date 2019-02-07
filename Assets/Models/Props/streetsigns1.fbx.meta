@@ -1,19 +1,18 @@
 fileFormatVersion: 2
-guid: 56144454cd4e52e40ac4cd433c6b3d86
+guid: 3cc5fdd979cbc4e4b84fcb4b1b54b18a
 ModelImporter:
   serializedVersion: 23
   fileIDToRecycleName:
-    100000: //RootNode
-    100002: light_street1
-    400000: //RootNode
-    400002: light_street1
+    100000: streetsigns1
+    100002: //RootNode
+    400000: streetsigns1
+    400002: //RootNode
     2100000: lambert1
-    2300000: //RootNode
-    2300002: light_street1
-    3300000: //RootNode
-    3300002: light_street1
-    4300000: light_street
-    4300002: light_street1
+    2300000: streetsigns1
+    2300002: //RootNode
+    3300000: streetsigns1
+    3300002: //RootNode
+    4300000: streetsigns1
   externalObjects: {}
   materials:
     importMaterials: 1

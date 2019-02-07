@@ -1,19 +1,18 @@
 fileFormatVersion: 2
-guid: 56144454cd4e52e40ac4cd433c6b3d86
+guid: ac3b4a805cc238d4caf2158123effc54
 ModelImporter:
   serializedVersion: 23
   fileIDToRecycleName:
-    100000: //RootNode
-    100002: light_street1
-    400000: //RootNode
-    400002: light_street1
+    100000: woodplanks_5
+    100002: //RootNode
+    400000: woodplanks_5
+    400002: //RootNode
     2100000: lambert1
-    2300000: //RootNode
-    2300002: light_street1
-    3300000: //RootNode
-    3300002: light_street1
-    4300000: light_street
-    4300002: light_street1
+    2300000: woodplanks_5
+    2300002: //RootNode
+    3300000: woodplanks_5
+    3300002: //RootNode
+    4300000: woodplanks_5
   externalObjects: {}
   materials:
     importMaterials: 1

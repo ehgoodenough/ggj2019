@@ -4,10 +4,14 @@ ModelImporter:
   serializedVersion: 23
   fileIDToRecycleName:
     100000: //RootNode
+    100002: debris_pile
     400000: //RootNode
+    400002: debris_pile
     2100000: lambert1
     2300000: //RootNode
+    2300002: debris_pile
     3300000: //RootNode
+    3300002: debris_pile
     4300000: debris_pile
   externalObjects: {}
   materials:

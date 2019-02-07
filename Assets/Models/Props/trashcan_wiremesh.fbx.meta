@@ -1,19 +1,20 @@
 fileFormatVersion: 2
-guid: 56144454cd4e52e40ac4cd433c6b3d86
+guid: eacc1b9c108af654abcf95c9ba9cd938
 ModelImporter:
   serializedVersion: 23
   fileIDToRecycleName:
-    100000: //RootNode
-    100002: light_street1
-    400000: //RootNode
-    400002: light_street1
+    100000: trashcan_wiremesh
+    100002: //RootNode
+    400000: trashcan_wiremesh
+    400002: //RootNode
     2100000: lambert1
-    2300000: //RootNode
-    2300002: light_street1
-    3300000: //RootNode
-    3300002: light_street1
-    4300000: light_street
-    4300002: light_street1
+    2100002: chain_m
+    2100004: chain2_m
+    2300000: trashcan_wiremesh
+    2300002: //RootNode
+    3300000: trashcan_wiremesh
+    3300002: //RootNode
+    4300000: trashcan_wiremesh
   externalObjects: {}
   materials:
     importMaterials: 1
