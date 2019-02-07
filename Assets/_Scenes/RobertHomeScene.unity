@@ -1660,7 +1660,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 100000, guid: 826532a52ba02f34a89ee7f3c0cf300b, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 826532a52ba02f34a89ee7f3c0cf300b, type: 3}
       propertyPath: m_LocalPosition.x
@@ -2013,7 +2013,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &976228313
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2116,7 +2116,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1121927764}
-  m_LocalRotation: {x: 0.005135285, y: 0.9918458, z: -0.10756036, w: 0.06816403}
+  m_LocalRotation: {x: 0.00514148, y: 0.9930401, z: -0.10769023, w: 0.04741126}
   m_LocalPosition: {x: -7.457, y: 2.381, z: 2.112}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
@@ -2143,16 +2143,22 @@ MonoBehaviour:
   m_DefaultBlend:
     m_Style: 1
     m_Time: 2
+    m_CustomCurve:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
   m_CustomBlends: {fileID: 0}
   m_CameraCutEvent:
     m_PersistentCalls:
       m_Calls: []
-    m_TypeName: Cinemachine.CinemachineBrain+BrainEvent, Assembly-CSharp, Version=0.0.0.0,
+    m_TypeName: Cinemachine.CinemachineBrain+BrainEvent, Cinemachine, Version=0.0.0.0,
       Culture=neutral, PublicKeyToken=null
   m_CameraActivatedEvent:
     m_PersistentCalls:
       m_Calls: []
-    m_TypeName: Cinemachine.CinemachineBrain+VcamEvent, Assembly-CSharp, Version=0.0.0.0,
+    m_TypeName: Cinemachine.CinemachineBrain+VcamActivatedEvent, Cinemachine, Version=0.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!1001 &1245559429
 PrefabInstance:
@@ -3104,7 +3110,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 400008, guid: 63248aee098982046bbf1f6364afde57, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -3.56
+      value: -3.453
       objectReference: {fileID: 0}
     - target: {fileID: 400008, guid: 63248aee098982046bbf1f6364afde57, type: 3}
       propertyPath: m_LocalPosition.y
@@ -3112,23 +3118,23 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 400008, guid: 63248aee098982046bbf1f6364afde57, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -5.9
+      value: -5.707
       objectReference: {fileID: 0}
     - target: {fileID: 400008, guid: 63248aee098982046bbf1f6364afde57, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 400008, guid: 63248aee098982046bbf1f6364afde57, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0
+      value: -0.0588129
       objectReference: {fileID: 0}
     - target: {fileID: 400008, guid: 63248aee098982046bbf1f6364afde57, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 400008, guid: 63248aee098982046bbf1f6364afde57, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 1
+      value: 0.998269
       objectReference: {fileID: 0}
     - target: {fileID: 400008, guid: 63248aee098982046bbf1f6364afde57, type: 3}
       propertyPath: m_RootOrder
@@ -3140,7 +3146,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 400008, guid: 63248aee098982046bbf1f6364afde57, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
+      value: -6.7430005
       objectReference: {fileID: 0}
     - target: {fileID: 400008, guid: 63248aee098982046bbf1f6364afde57, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
@@ -3194,6 +3200,7 @@ MonoBehaviour:
   m_LockStageInInspector: 
   m_StreamingVersion: 20170927
   m_Priority: 10
+  m_StandbyUpdate: 2
   m_LookAt: {fileID: 1410897630}
   m_Follow: {fileID: 0}
   m_Lens:
@@ -3202,6 +3209,16 @@ MonoBehaviour:
     NearClipPlane: 0.1
     FarClipPlane: 5000
     Dutch: 0
+    LensShift: {x: 0, y: 0}
+  m_Transitions:
+    m_BlendHint: 0
+    m_InheritPosition: 0
+    m_OnCameraLive:
+      m_PersistentCalls:
+        m_Calls: []
+      m_TypeName: Cinemachine.CinemachineBrain+VcamActivatedEvent, Cinemachine, Version=0.0.0.0,
+        Culture=neutral, PublicKeyToken=null
+  m_LegacyBlendHint: 0
   m_ComponentOwner: {fileID: 2135306857}
 --- !u!4 &1843497677
 Transform:
@@ -3210,7 +3227,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1843497675}
-  m_LocalRotation: {x: 0.0049085733, y: 0.9950859, z: -0.07157165, w: 0.068246104}
+  m_LocalRotation: {x: 0.00514148, y: 0.9930401, z: -0.10769023, w: 0.04741126}
   m_LocalPosition: {x: -7.457, y: 2.381, z: 2.112}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -3234,7 +3251,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!95 &1983498974
 Animator:
   serializedVersion: 3
@@ -3556,9 +3573,11 @@ MonoBehaviour:
   m_XDamping: 1
   m_YDamping: 1
   m_ZDamping: 1
+  m_AngularDampingMode: 0
   m_PitchDamping: 0
   m_YawDamping: 0
   m_RollDamping: 0
+  m_AngularDamping: 0
 --- !u!114 &2135306859
 MonoBehaviour:
   m_ObjectHideFlags: 3
@@ -3574,6 +3593,7 @@ MonoBehaviour:
   m_TrackedObjectOffset: {x: 0, y: 0, z: 0}
   m_LookaheadTime: 0
   m_LookaheadSmoothing: 10
+  m_LookaheadIgnoreY: 0
   m_HorizontalDamping: 0.5
   m_VerticalDamping: 0.5
   m_ScreenX: 0.5
@@ -3584,6 +3604,7 @@ MonoBehaviour:
   m_SoftZoneHeight: 0.8
   m_BiasX: 0
   m_BiasY: 0
+  m_CenterOnActivate: 1
 --- !u!114 &2135306860
 MonoBehaviour:
   m_ObjectHideFlags: 3
@@ -3611,6 +3632,7 @@ MonoBehaviour:
   m_NoiseProfile: {fileID: 11400000, guid: 46965f9cbaf525742a6da4c2172a99cd, type: 2}
   m_AmplitudeGain: 0.5
   m_FrequencyGain: 0.5
+  mNoiseOffsets: {x: 0, y: 0, z: 0}
 --- !u!1001 &2137987944
 PrefabInstance:
   m_ObjectHideFlags: 0

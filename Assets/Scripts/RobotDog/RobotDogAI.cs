@@ -23,6 +23,7 @@ public class RobotDogAI : MonoBehaviour
     private Vector3 previousPosition; // This will be the position before the most recent position of the player
     private float startFollowingDistance;
 
+    private RobotDogSensor dorgSensor;
     private PoochAnimator animator;
 
     private DorgTask currentTask;
@@ -51,6 +52,7 @@ public class RobotDogAI : MonoBehaviour
 
     void Awake()
     {
+        dorgSensor = GetComponent<RobotDogSensor>();
         animator = GetComponentInChildren<PoochAnimator>();
 
         // Debug.Log("RobotDogAI.Awake()");
@@ -109,6 +111,8 @@ public class RobotDogAI : MonoBehaviour
     [Task]
     public bool ShouldFollowPlayerAhead()
     {
+        if (!dorgSensor.isCityDorg) return false;
+
         // For now, let's alternate evenly
         // TODO: modify this to be random (coherent noise function?)
         float stateDuration = aheadBehindDuration; // number of seconds to be following ahead, then number of seconds to be following behind
@@ -122,15 +126,18 @@ public class RobotDogAI : MonoBehaviour
     public void FollowPlayerBehind()
     {
         // Debug.Log("FollowPlayerBehind() [Task]");
-        if (Task.current.isStarting)
+        if (dorgSensor.isCityDorg)
         {
-            Debug.Log("Starting FollowPlayerBehind [Task]");
-            currentTask = DorgTask.FollowPlayerBehind;
-            nextPosition = GetPositionOnNavMesh(player.transform.position);
-            StartCoroutine(FollowBehindPlayer());
-        }
+            if (Task.current.isStarting)
+            {
+                Debug.Log("Starting FollowPlayerBehind [Task]");
+                currentTask = DorgTask.FollowPlayerBehind;
+                nextPosition = GetPositionOnNavMesh(player.transform.position);
+                StartCoroutine(FollowBehindPlayer());
+            }
 
-        HandleFollowPlayerBehindAnimation();
+            HandleFollowPlayerBehindAnimation();
+        }
     }
 
     IEnumerator FollowBehindPlayer()
