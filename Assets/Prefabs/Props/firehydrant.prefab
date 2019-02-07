@@ -11,14 +11,14 @@ GameObject:
   - component: {fileID: 8853889766127259848}
   - component: {fileID: 6403273296393632011}
   - component: {fileID: 1673359712198400245}
+  - component: {fileID: 5961057664575594908}
   - component: {fileID: 7247348775655468520}
-  - component: {fileID: 7500828246121195722}
   m_Layer: 0
   m_Name: firehydrant
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_NavMeshLayer: 1
+  m_StaticEditorFlags: 8
   m_IsActive: 1
 --- !u!4 &8853889766127259848
 Transform:
@@ -28,7 +28,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2074545758612322148}
   m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -66.66971, y: 16.975756, z: -95.42577}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -79,6 +79,20 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!136 &5961057664575594908
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2074545758612322148}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 0.6329775
+  m_Height: 2.60242
+  m_Direction: 1
+  m_Center: {x: 0, y: 1.30121, z: -0.007563412}
 --- !u!208 &7247348775655468520
 NavMeshObstacle:
   m_ObjectHideFlags: 0
@@ -88,23 +102,10 @@ NavMeshObstacle:
   m_GameObject: {fileID: 2074545758612322148}
   m_Enabled: 1
   serializedVersion: 3
-  m_Shape: 1
-  m_Extents: {x: 1.0550001, y: 2.1690001, z: 1.013}
+  m_Shape: 0
+  m_Extents: {x: 0.633, y: 1.3010001, z: 0.633}
   m_MoveThreshold: 0.1
   m_Carve: 1
   m_CarveOnlyStationary: 1
-  m_Center: {x: 0, y: 2.1690001, z: -0.013}
+  m_Center: {x: 0, y: 1.3010001, z: -0.008}
   m_TimeToStationary: 0.5
---- !u!65 &7500828246121195722
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2074545758612322148}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 2.109925, y: 4.337367, z: 2.0257645}
-  m_Center: {x: 0, y: 2.1686835, z: -0.012605667}

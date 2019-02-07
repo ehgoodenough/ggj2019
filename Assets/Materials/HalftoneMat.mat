@@ -96,7 +96,7 @@ Material:
     - _NumLevels: 5
     - _OcclusionStrength: 1
     - _Parallax: 0.02
-    - _SaturationLevel: 0.33333334
+    - _SaturationLevel: 0
     - _ScaleIncrement: 0.7
     - _ScanDistance: 0
     - _ScanSmoothAmount: 0.75

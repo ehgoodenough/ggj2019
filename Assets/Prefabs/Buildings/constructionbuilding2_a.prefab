@@ -11,7 +11,9 @@ GameObject:
   - component: {fileID: 8433393398454909113}
   - component: {fileID: 3657433256130207111}
   - component: {fileID: 1951362891484222301}
-  - component: {fileID: 5631970497545418171}
+  - component: {fileID: 4374067185664767567}
+  - component: {fileID: 6791654362750970950}
+  - component: {fileID: 2820320118527909640}
   m_Layer: 0
   m_Name: constructionbuilding2_a
   m_TagString: Untagged
@@ -78,8 +80,8 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!64 &5631970497545418171
-MeshCollider:
+--- !u!65 &4374067185664767567
+BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -88,7 +90,32 @@ MeshCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  serializedVersion: 3
-  m_Convex: 0
-  m_CookingOptions: 14
-  m_Mesh: {fileID: 4300000, guid: 2544ce9bd6f01d94ebee6160f9dfbf28, type: 3}
+  serializedVersion: 2
+  m_Size: {x: 35.367607, y: 68.076324, z: 93.69618}
+  m_Center: {x: -12.021282, y: 34.038162, z: -0.000015258789}
+--- !u!65 &6791654362750970950
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2929484544204794478}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 59.284126, y: 68.076324, z: 32.187244}
+  m_Center: {x: 0.000020980835, y: 34.038162, z: -30.75445}
+--- !u!65 &2820320118527909640
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2929484544204794478}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 59.284126, y: 68.076324, z: 32.187244}
+  m_Center: {x: 0.000020980835, y: 34.038162, z: 30.754454}

@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 4087169463448867029}
   - component: {fileID: 2469227628064063638}
   - component: {fileID: 307786489362347339}
-  - component: {fileID: 8621803622849582005}
+  - component: {fileID: 8193827020639509065}
   m_Layer: 0
   m_Name: marketstall_1a
   m_TagString: Untagged
@@ -78,8 +78,8 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!64 &8621803622849582005
-MeshCollider:
+--- !u!65 &8193827020639509065
+BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -88,7 +88,6 @@ MeshCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  serializedVersion: 3
-  m_Convex: 0
-  m_CookingOptions: 14
-  m_Mesh: {fileID: 4300000, guid: daf5b6e0004cf6643a4a0e61a3677382, type: 3}
+  serializedVersion: 2
+  m_Size: {x: 12.5, y: 7.426819, z: 7.1899934}
+  m_Center: {x: -0.0000020435878, y: 3.7134094, z: -0.50926703}

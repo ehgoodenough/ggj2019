@@ -11,14 +11,14 @@ GameObject:
   - component: {fileID: 1181315773}
   - component: {fileID: 1774732751}
   - component: {fileID: 1774732750}
-  - component: {fileID: 4396818721387983541}
+  - component: {fileID: 6803172823426405249}
   - component: {fileID: 1397864372243089586}
   m_Layer: 0
   m_Name: light_traffic
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_NavMeshLayer: 1
+  m_StaticEditorFlags: 8
   m_IsActive: 1
 --- !u!4 &1181315773
 Transform:
@@ -27,13 +27,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1774732749}
-  m_LocalRotation: {x: 0, y: 1, z: -0, w: 0}
-  m_LocalPosition: {x: 55.500034, y: -0.00001335144, z: 245.20004}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &1774732751
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -79,7 +79,7 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!65 &4396818721387983541
+--- !u!65 &6803172823426405249
 BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -90,8 +90,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 5.100755, y: 28.52354, z: 2.625745}
-  m_Center: {x: -0.2759077, y: 14.26177, z: 0.28597438}
+  m_Size: {x: 1.2, y: 18, z: 1.2}
+  m_Center: {x: 0, y: 9, z: 0}
 --- !u!208 &1397864372243089586
 NavMeshObstacle:
   m_ObjectHideFlags: 0
@@ -102,9 +102,9 @@ NavMeshObstacle:
   m_Enabled: 1
   serializedVersion: 3
   m_Shape: 1
-  m_Extents: {x: 2.43, y: 14.262001, z: 1.605}
+  m_Extents: {x: 0.6, y: 9, z: 0.6}
   m_MoveThreshold: 0.1
   m_Carve: 1
   m_CarveOnlyStationary: 1
-  m_Center: {x: -0.27600002, y: 14.262001, z: 0}
+  m_Center: {x: 0, y: 9, z: 0}
   m_TimeToStationary: 0.5

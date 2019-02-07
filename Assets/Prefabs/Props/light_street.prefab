@@ -17,8 +17,8 @@ GameObject:
   m_Name: light_street
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_NavMeshLayer: 1
+  m_StaticEditorFlags: 8
   m_IsActive: 1
 --- !u!4 &22128593
 Transform:
@@ -27,13 +27,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 70020730}
-  m_LocalRotation: {x: -0, y: 0.30319145, z: -0, w: 0.9529297}
-  m_LocalPosition: {x: -195.90002, y: 0, z: 118.30005}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: -54.701004, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &70020734
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -90,8 +90,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 2.371385, y: 28.52354, z: 1.9497201}
-  m_Center: {x: -0.00005638874, y: 14.26177, z: -0.051944103}
+  m_Size: {x: 1.2, y: 18, z: 1.2}
+  m_Center: {x: 0, y: 9, z: 0}
 --- !u!208 &70020732
 NavMeshObstacle:
   m_ObjectHideFlags: 0
@@ -102,9 +102,9 @@ NavMeshObstacle:
   m_Enabled: 1
   serializedVersion: 3
   m_Shape: 1
-  m_Extents: {x: 1.1860001, y: 14.005, z: 1.365}
+  m_Extents: {x: 0.6, y: 9, z: 0.6}
   m_MoveThreshold: 0.1
   m_Carve: 1
   m_CarveOnlyStationary: 1
-  m_Center: {x: 0, y: 14.262001, z: 0.11}
+  m_Center: {x: 0, y: 9, z: 0}
   m_TimeToStationary: 0.5

@@ -11,14 +11,14 @@ GameObject:
   - component: {fileID: 7509341731813676484}
   - component: {fileID: 5861909589923635870}
   - component: {fileID: 64300726325641094}
-  - component: {fileID: 7190080101324671860}
-  - component: {fileID: 5314689803243051206}
+  - component: {fileID: 2155700314976511257}
+  - component: {fileID: 2517183748842292069}
   m_Layer: 0
   m_Name: wood_pallet
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_NavMeshLayer: 1
+  m_StaticEditorFlags: 8
   m_IsActive: 1
 --- !u!4 &7509341731813676484
 Transform:
@@ -28,7 +28,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5717715769098656010}
   m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -58.234837, y: 16.984749, z: -102.48877}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -79,23 +79,7 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!208 &7190080101324671860
-NavMeshObstacle:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5717715769098656010}
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Shape: 1
-  m_Extents: {x: 4.066, y: 0.485, z: 4.0670004}
-  m_MoveThreshold: 0.1
-  m_Carve: 1
-  m_CarveOnlyStationary: 1
-  m_Center: {x: 0.003, y: 0.476, z: 0.007}
-  m_TimeToStationary: 0.5
---- !u!65 &5314689803243051206
+--- !u!65 &2155700314976511257
 BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -106,5 +90,21 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 8.1323185, y: 0.9708726, z: 8.13366}
-  m_Center: {x: 0.0026979446, y: 0.47644064, z: 0.0066952705}
+  m_Size: {x: 4.8793907, y: 0.5825235, z: 4.8801956}
+  m_Center: {x: 0.001618743, y: 0.28586438, z: 0.004017234}
+--- !u!208 &2517183748842292069
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5717715769098656010}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: 2.44, y: 0.291, z: 2.44}
+  m_MoveThreshold: 0.1
+  m_Carve: 1
+  m_CarveOnlyStationary: 1
+  m_Center: {x: 0.002, y: 0.286, z: 0.004}
+  m_TimeToStationary: 0.5
