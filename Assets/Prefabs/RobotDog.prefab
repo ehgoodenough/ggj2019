@@ -176,7 +176,7 @@ NavMeshAgent:
   m_GameObject: {fileID: 2015435973685222535}
   m_Enabled: 1
   m_AgentTypeID: 0
-  m_Radius: 0.75
+  m_Radius: 1.25
   m_Speed: 22
   m_Acceleration: 12
   avoidancePriority: 50
@@ -204,6 +204,7 @@ MonoBehaviour:
   player: {fileID: 0}
   updateDestinationFrequency: 1
   startFollowingHysteresis: 2
+  aheadBehindDuration: 6
   minimumDistanceToFollowAhead: 6
   speedDependentDistanceToFollowAhead: 10
   lookingDirectionWeight: 0.33

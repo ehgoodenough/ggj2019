@@ -197,18 +197,34 @@ public class RobotDogAI : MonoBehaviour
         while (currentTask == DorgTask.FollowPlayerAhead)
         {
             previousPosition = nextPosition;
-            nextPosition = GetPositionOnNavMesh(GetPointAheadOfPlayer(minimumDistanceToFollowAhead, speedDependentDistanceToFollowAhead));
-            yield return new WaitForSeconds(updateDestinationFrequency * 0.5f);
-
-            // Check that current state continues to be Follow Player Ahead
-            if (currentTask == DorgTask.FollowPlayerAhead)
+            // nextPosition = GetPositionOnNavMesh(GetPointAheadOfPlayer(minimumDistanceToFollowAhead, speedDependentDistanceToFollowAhead));
+            Vector3 prospectiveTarget = GetPositionOnNavMesh(GetPointAheadOfPlayer(minimumDistanceToFollowAhead, speedDependentDistanceToFollowAhead));
+            NavMeshPath prospectivePath = new NavMeshPath();
+            if (agent.CalculatePath(prospectiveTarget, prospectivePath))
             {
-                if (Vector3.Distance(this.transform.position, nextPosition) > startFollowingDistance)
+                if (!ValidatePathToDestination(prospectivePath, 2f))
                 {
-                    agent.SetDestination(nextPosition);
+                    // Pick a point halfway between Dorg and either the first raycast hit or the original prospective target
+                    RaycastHit hit;
+                    Vector3 center = player.transform.position + Vector3.up;
+                    Vector3 halfExtents = Vector3.one * 0.25f;
+                    Vector3 direction = prospectiveTarget - player.transform.position;
+                    Vector3 endPoint = Physics.BoxCast(center, halfExtents, direction, out hit) ? hit.point : prospectiveTarget;
+                    Vector3 bisectedDestination = GetPositionOnNavMesh((endPoint - this.transform.position) * 0.5f);
+
+                    // If this alternative destination is still not valid, we'll just follow the player as usual
+                    if (!agent.CalculatePath(bisectedDestination, prospectivePath) || !ValidatePathToDestination(prospectivePath, 2f))
+                    {
+                        agent.CalculatePath(GetPositionOnNavMesh(player.transform.position), prospectivePath);
+                    }
                 }
-                yield return new WaitForSeconds(updateDestinationFrequency * 0.5f);
             }
+            nextPosition = prospectivePath.corners[prospectivePath.corners.Length - 1];
+            if (Vector3.Distance(this.transform.position, nextPosition) > startFollowingDistance)
+            {
+                agent.SetPath(prospectivePath);
+            }
+            yield return new WaitForSeconds(updateDestinationFrequency);
         }
     }
 
@@ -219,6 +235,32 @@ public class RobotDogAI : MonoBehaviour
         Vector3 directionPlayerIsLooking = player.transform.forward * distanceAhead;
         Vector3 directionPlayerIsGoing = player.GetCurrentMovementVectorInWorldSpace() * distanceAhead;
         return player.transform.position + (directionPlayerIsLooking * lookingDirectionWeight + directionPlayerIsGoing * movingDirectionWeight);
+    }
+
+    private bool ValidatePathToDestination(NavMeshPath prospectivePath, float pathToDirectDistanceRatioTolerance)
+    {
+        if (prospectivePath.status != NavMeshPathStatus.PathComplete)
+        {
+            return false;
+        }
+        else
+        {
+            Vector3 startingPoint = prospectivePath.corners[0];
+            Vector3 endingPoint = prospectivePath.corners[prospectivePath.corners.Length - 1];
+            float directDistance = (endingPoint - startingPoint).magnitude;
+            float pathDistance = GetLengthOfNavMeshPath(prospectivePath);
+            return pathDistance < directDistance * pathToDirectDistanceRatioTolerance;
+        }
+    }
+
+    private float GetLengthOfNavMeshPath(NavMeshPath path)
+    {
+        float sum = 0f;
+        for (int i = 1; i < path.corners.Length; i++)
+        {
+            sum += Vector3.Distance(path.corners[i], path.corners[i - 1]);
+        }
+        return sum;
     }
 
     private void HandleFollowPlayerAheadAnimation()
@@ -253,7 +295,7 @@ public class RobotDogAI : MonoBehaviour
             Gizmos.DrawCube(nextPosition, Vector3.one * 0.5f);
         }
         
-        if (currentTask == DorgTask.FollowPlayerAhead)
+        if (currentTask == DorgTask.FollowPlayerAhead && player != null)
         {
             Gizmos.color = Color.cyan;
             Vector3 targetPosition = GetPointAheadOfPlayer(minimumDistanceToFollowAhead, speedDependentDistanceToFollowAhead);
