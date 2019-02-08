@@ -253,9 +253,10 @@ public class RobotDogAI : MonoBehaviour
         float distanceAhead = (minimumDistanceAhead + currentPlayerSpeedNormalized * speedDependentDistanceAhead);
         float gameProgressModifier = ((float)(GameProgress.NumObjectivesComplete + 1) / (float)(Enum.GetValues(typeof(ObjectivePickupable.Type)).Length + 1));
         float distanceModified = distanceAhead * (0.25f + 0.75f * gameProgressModifier);
-        Vector3 directionPlayerIsLooking = player.transform.forward * distanceModified;
-        Vector3 directionPlayerIsGoing = player.GetCurrentMovementVectorInWorldSpace() * distanceModified;
-        return player.transform.position + (directionPlayerIsLooking * lookingDirectionWeight + directionPlayerIsGoing * movingDirectionWeight);
+        Vector3 directionPlayerIsLooking = player.transform.forward * distanceModified * lookingDirectionWeight;
+        Vector3 directionPlayerIsGoing = player.GetCurrentMovementVectorInWorldSpace() * distanceModified * movingDirectionWeight;
+        Vector3 randomOffset = UnityEngine.Random.insideUnitCircle.XZ() * 2f;
+        return (player.transform.position + randomOffset) + (directionPlayerIsLooking + directionPlayerIsGoing);
     }
 
     private bool ValidatePathToDestination(NavMeshPath prospectivePath, float pathToDirectDistanceRatioTolerance)
