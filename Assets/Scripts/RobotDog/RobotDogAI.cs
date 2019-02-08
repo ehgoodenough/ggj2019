@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
@@ -116,7 +117,18 @@ public class RobotDogAI : MonoBehaviour
         // For now, let's alternate evenly
         // TODO: modify this to be random (coherent noise function?)
         float stateDuration = aheadBehindDuration; // number of seconds to be following ahead, then number of seconds to be following behind
-        bool shouldFollowAhead = Mathf.Sin(Time.time * Mathf.PI / stateDuration) > 0f;
+        float gameProgressModifier = ((float)(GameProgress.NumObjectivesComplete + 2) / (float)(Enum.GetValues(typeof(ObjectivePickupable.Type)).Length + 3));
+        // bool shouldFollowAhead = Mathf.Sin(Time.time * Mathf.PI / stateDuration) + (gameProgressModifier - 1) > 0f;
+
+        // float sinValue = Mathf.Sin(Time.time * Mathf.PI / stateDuration) + (gameProgressModifier - 1);
+        // float sinValueRandomized = sinValue + 0.5f * (Mathf.PerlinNoise(Time.time / stateDuration * 0.5f, 0f) - 0.5f);
+
+        float stateDurationRandomized = stateDuration * (1 + 0.15f * (Mathf.PerlinNoise(Time.time / stateDuration, 0f) - 0.5f));
+        float sinValueRandomized = Mathf.Sin(Time.time * Mathf.PI / stateDurationRandomized) + (gameProgressModifier - 1);
+
+        // Debug.Log("Randomized Sin Value: " + sinValueRandomized);
+
+        bool shouldFollowAhead = sinValueRandomized > 0f;
         return shouldFollowAhead;
     }
 
@@ -239,8 +251,10 @@ public class RobotDogAI : MonoBehaviour
     {
         float currentPlayerSpeedNormalized = player.GetCurrentSpeed() / player.GetCurrentMaxSpeed();
         float distanceAhead = (minimumDistanceAhead + currentPlayerSpeedNormalized * speedDependentDistanceAhead);
-        Vector3 directionPlayerIsLooking = player.transform.forward * distanceAhead;
-        Vector3 directionPlayerIsGoing = player.GetCurrentMovementVectorInWorldSpace() * distanceAhead;
+        float gameProgressModifier = ((float)(GameProgress.NumObjectivesComplete + 1) / (float)(Enum.GetValues(typeof(ObjectivePickupable.Type)).Length + 1));
+        float distanceModified = distanceAhead * (0.25f + 0.75f * gameProgressModifier);
+        Vector3 directionPlayerIsLooking = player.transform.forward * distanceModified;
+        Vector3 directionPlayerIsGoing = player.GetCurrentMovementVectorInWorldSpace() * distanceModified;
         return player.transform.position + (directionPlayerIsLooking * lookingDirectionWeight + directionPlayerIsGoing * movingDirectionWeight);
     }
 

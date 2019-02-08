@@ -204,9 +204,9 @@ MonoBehaviour:
   player: {fileID: 0}
   updateDestinationFrequency: 1
   startFollowingHysteresis: 2
-  aheadBehindDuration: 6
+  aheadBehindDuration: 8
   minimumDistanceToFollowAhead: 6
-  speedDependentDistanceToFollowAhead: 10
+  speedDependentDistanceToFollowAhead: 9
   lookingDirectionWeight: 0.33
   movingDirectionWeight: 1.67
 --- !u!114 &6249507323505452970
@@ -286,7 +286,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 747449603, guid: 3ef4706c81221e744bf65edb3864ce19, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.125
+      value: -0.17
       objectReference: {fileID: 0}
     - target: {fileID: 747449603, guid: 3ef4706c81221e744bf65edb3864ce19, type: 3}
       propertyPath: m_LocalPosition.z
