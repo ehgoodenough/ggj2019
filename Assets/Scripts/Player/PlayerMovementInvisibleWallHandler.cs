@@ -4,7 +4,7 @@ using System.Collections;
 [RequireComponent(typeof(PlayerMovement))]
 public class PlayerMovementInvisibleWallHandler : MonoBehaviour, ISlowingModifier
 {
-    public float minSlowerModifierValue = 0.35f; // Allow at least some movement so player doesn't get trapped at (nearly) zero
+    public float minSlowingModifierValue = 0.35f; // Allow at least some movement so player doesn't get trapped at (nearly) zero
     public float checkForInvisibleWallsMaxDistance = 15f;
     public LayerMask InvisibleWallLayer;
 
@@ -43,7 +43,7 @@ public class PlayerMovementInvisibleWallHandler : MonoBehaviour, ISlowingModifie
             minSlowingModifier = currentSlowingModifier < minSlowingModifier ? currentSlowingModifier : minSlowingModifier;
         }
         // Debug.Log("minSlowingModifier: " + minSlowingModifier);
-        return Mathf.Clamp01(minSlowingModifier + minSlowerModifierValue); // Allow at least some movement so player doesn't get trapped at (nearly) zero
+        return Mathf.Clamp01(minSlowingModifier + minSlowingModifierValue); // Allow at least some movement so player doesn't get trapped at (nearly) zero
     }
 
     private void OnDrawGizmos()
