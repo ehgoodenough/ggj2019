@@ -7,7 +7,9 @@ public class PlayerSpawning : MonoBehaviour
 
     private void Awake()
     {
+        // Debug.Log("PlayerMovement.Awake()");
         // Debug.Log("Player Position: " + this.transform.position);
+
         EventBus.Subscribe<PlayerStartPositionEvent>(OnPlayerStartPositionEvent);
     }
 
