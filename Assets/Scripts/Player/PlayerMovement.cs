@@ -6,23 +6,29 @@ using System.Linq;
 [RequireComponent(typeof(Rigidbody))]
 public class PlayerMovement : MonoBehaviour
 {
+    // Base movement speeds
     public float walkingMaxSpeed;
     public float runningMaxSpeed;
+
+    // Invisible Walls
     public float checkForInvisibleWallsMaxDistance = 5f;
     public LayerMask InvisibleWallLayer;
 
+    // Base movement variables
     private bool isRunning = false;
     private float currentMaxSpeed;
     private float currentSpeed = 0f;
-    private float powerDownModifier = 1f;
     private Vector3 movementVector;
-    
     private bool isMovementRestricted = true;
     private bool isGravityRestricted = true;
 
+    // Power down speed modifier
+    private float powerDownModifier = 1f;
+
+    // Private components
     private Rigidbody rb;
-    private Transform startTransformForCurrentScene;
-    private CapsuleCollider playerCapsuleCollider;
+    private Transform startTransformForCurrentScene; // Spawning
+    private CapsuleCollider playerCapsuleCollider; // Invisible Walls
 
     private void Awake()
     {
@@ -76,6 +82,7 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
+    // Invisible Walls
     private float GetInvisibleWallSlowingModifier()
     {
         if (movementVector.sqrMagnitude == 0)
@@ -151,11 +158,13 @@ public class PlayerMovement : MonoBehaviour
         isGravityRestricted = restrictGravity;
     }
 
+    // Powering Down
     private void OnPowerDownEvent(PowerDownEvent e)
     {
         StartCoroutine(LerpPowerDownModifier(powerDownModifier, 0f, 1.5f));
     }
 
+    // Powering Down
     private IEnumerator LerpPowerDownModifier(float startModifierValue, float endModifierValue, float lerpDuration)
     {
         while (Mathf.Min(startModifierValue, endModifierValue) < powerDownModifier)
@@ -175,6 +184,7 @@ public class PlayerMovement : MonoBehaviour
         RestrictMovement(false);
     }
 
+    // Spawning
     private void OnPlayerStartPositionEvent(PlayerStartPositionEvent e)
     {
         // Debug.Log("OnPlayerStartPositionEvent");
@@ -183,6 +193,7 @@ public class PlayerMovement : MonoBehaviour
         RestrictGravity(false);
     }
 
+    // Spawning
     private void PlacePlayerAtTransform(Transform startTransform)
     {
         // Debug.Log("PlacePlayerAtTransform");
@@ -193,6 +204,7 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
+    // Powering Down
     private void OnEnterHomeEvent(EnterHomeEvent e)
     {
         // Debug.Log("PlayerMovement.OnEnterHomeEvent()");
@@ -201,9 +213,11 @@ public class PlayerMovement : MonoBehaviour
 
     private void OnDrawGizmos()
     {
+        // Invisible Walls
         Gizmos.color = Color.magenta;
         Gizmos.DrawWireSphere(this.transform.position, checkForInvisibleWallsMaxDistance);
 
+        // Base movement vector
         Gizmos.color = Color.blue;
         Vector3 lineStart = this.transform.position + Vector3.up;
         Vector3 lineEnd = this.transform.position + this.GetCurrentMovementVectorInWorldSpace() * 5f + Vector3.up;
