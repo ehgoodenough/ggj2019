@@ -13,6 +13,7 @@ public class RobotDogAI : MonoBehaviour
     public float startFollowingHysteresis = 2f;
     public float aheadBehindDuration = 6f;
 
+
     [Header("Follow Ahead Parameters")]
     public float minimumDistanceToFollowAhead = 5f;
     public float speedDependentDistanceToFollowAhead = 5f;
