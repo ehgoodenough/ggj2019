@@ -2,7 +2,7 @@
 using System.Collections;
 
 [RequireComponent(typeof(PlayerMovement))]
-public class PlayerMovementInvisibleWallHandler : MonoBehaviour
+public class PlayerMovementInvisibleWallHandler : MonoBehaviour, ISlowingModifier
 {
     public float minSlowerModifierValue = 0.35f; // Allow at least some movement so player doesn't get trapped at (nearly) zero
     public float checkForInvisibleWallsMaxDistance = 15f;

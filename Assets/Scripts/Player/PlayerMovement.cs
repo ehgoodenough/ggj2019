@@ -2,6 +2,12 @@
 using UnityEngine.AI;
 using System.Collections;
 
+// Could we make this a more generic ISpeedModifier, which running could also implement?
+public interface ISlowingModifier
+{
+    float GetSlowingModifier();
+}
+
 [RequireComponent(typeof(Rigidbody))]
 public class PlayerMovement : MonoBehaviour
 {
@@ -17,26 +23,21 @@ public class PlayerMovement : MonoBehaviour
     private bool isMovementRestricted = true;
     private bool isGravityRestricted = true;
 
-    // Power down speed modifier
-    private float powerDownModifier = 1f;
-
     // Private components
     private Rigidbody rb;
     private Transform startTransformForCurrentScene; // Spawning
-    private PlayerMovementInvisibleWallHandler invisibleWallHandler;
+    private ISlowingModifier[] slowingModifiers;
 
     private void Awake()
     {
         // Debug.Log("PlayerMovement.Awake()");
         // Debug.Log("Player Position: " + this.transform.position);
         
-        invisibleWallHandler = GetComponent<PlayerMovementInvisibleWallHandler>();
+        slowingModifiers = GetComponents<ISlowingModifier>();
 
-        EventBus.Subscribe<EnterHomeEvent>(OnEnterHomeEvent);
         EventBus.Subscribe<PlayerStartPositionEvent>(OnPlayerStartPositionEvent);
         EventBus.Subscribe<PhotoLoweredAtStartEvent>(OnPhotoLoweredAtStartEvent);
         EventBus.Subscribe<PlayerHasWonEvent>(OnPlayerHasWonEvent);
-        EventBus.Subscribe<PowerDownEvent>(OnPowerDownEvent);
     }
 
     void Start()
@@ -52,8 +53,12 @@ public class PlayerMovement : MonoBehaviour
 
     private void Update()
     {
-        currentMaxSpeed = (isRunning ? runningMaxSpeed : walkingMaxSpeed) * powerDownModifier;
-        currentMaxSpeed *= invisibleWallHandler.GetSlowingModifier();
+        currentMaxSpeed = (isRunning ? runningMaxSpeed : walkingMaxSpeed);
+        // Perhaps we could turn these into a more generic ISpeedModifier, and running could also be an applied modifier?
+        foreach (ISlowingModifier modifier in slowingModifiers)
+        {
+            currentMaxSpeed *= modifier.GetSlowingModifier();
+        }
 
         // In case the player falls off the map, let's just put them back at the start
         if (startTransformForCurrentScene != null && this.transform.position.y < -10f)
@@ -75,15 +80,6 @@ public class PlayerMovement : MonoBehaviour
         if (!isGravityRestricted)
         {
             rb.AddForce(Physics.gravity, ForceMode.Acceleration);
-        }
-    }
-
-    IEnumerator LogCurrentMaxSpeed()
-    {
-        while (true)
-        {
-            Debug.Log("Current Max Speed: " + currentMaxSpeed);
-            yield return new WaitForSeconds(0.33f);
         }
     }
 
@@ -123,22 +119,6 @@ public class PlayerMovement : MonoBehaviour
         isGravityRestricted = restrictGravity;
     }
 
-    // Powering Down
-    private void OnPowerDownEvent(PowerDownEvent e)
-    {
-        StartCoroutine(LerpPowerDownModifier(powerDownModifier, 0f, 1.5f));
-    }
-
-    // Powering Down
-    private IEnumerator LerpPowerDownModifier(float startModifierValue, float endModifierValue, float lerpDuration)
-    {
-        while (Mathf.Min(startModifierValue, endModifierValue) < powerDownModifier)
-        {
-            powerDownModifier += Mathf.Sign(endModifierValue - startModifierValue) * Time.deltaTime / lerpDuration;
-            yield return null;
-        }
-    }
-
     private void OnPlayerHasWonEvent(PlayerHasWonEvent e)
     {
         RestrictMovement(true);
@@ -169,11 +149,15 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
-    // Powering Down
-    private void OnEnterHomeEvent(EnterHomeEvent e)
+    /// METHODS FOR DEBUGGING PURPOSES BELOW
+
+    IEnumerator LogCurrentMaxSpeed()
     {
-        // Debug.Log("PlayerMovement.OnEnterHomeEvent()");
-        powerDownModifier = 1f;
+        while (true)
+        {
+            Debug.Log("Current Max Speed: " + currentMaxSpeed);
+            yield return new WaitForSeconds(0.33f);
+        }
     }
 
     private void OnDrawGizmos()
