@@ -11,23 +11,16 @@ public class PlayerMovement : MonoBehaviour
     public float checkForInvisibleWallsMaxDistance = 5f;
     public LayerMask InvisibleWallLayer;
 
-    [FMODUnity.EventRef]
-    public string footstepEvent;
-    [FMODUnity.EventRef]
-    public string indoorFootstepEvent;
-    public float strideLength = 5.0f;
-
     private bool isRunning = false;
     private float currentMaxSpeed;
     private float currentSpeed = 0f;
     private float powerDownModifier = 1f;
     private Vector3 movementVector;
-    private Rigidbody rb;
-    private Vector3 lastFootstepLocation;
-    private bool muteFootsteps = true;
-    private bool outside = false;
+    
     private bool isMovementRestricted = true;
     private bool isGravityRestricted = true;
+
+    private Rigidbody rb;
     private Transform startTransformForCurrentScene;
     private CapsuleCollider playerCapsuleCollider;
 
@@ -39,9 +32,6 @@ public class PlayerMovement : MonoBehaviour
         playerCapsuleCollider = GetComponent<CapsuleCollider>();
 
         EventBus.Subscribe<EnterHomeEvent>(OnEnterHomeEvent);
-        EventBus.Subscribe<EnterCityEvent>(OnEnterCityEvent);
-        EventBus.Subscribe<ExitHomeEvent>(OnExitHomeEvent);
-        EventBus.Subscribe<ExitCityEvent>(OnExitCityEvent);
         EventBus.Subscribe<PlayerStartPositionEvent>(OnPlayerStartPositionEvent);
         EventBus.Subscribe<PhotoLoweredAtStartEvent>(OnPhotoLoweredAtStartEvent);
         EventBus.Subscribe<PlayerHasWonEvent>(OnPlayerHasWonEvent);
@@ -83,11 +73,6 @@ public class PlayerMovement : MonoBehaviour
         if (!isGravityRestricted)
         {
             rb.AddForce(Physics.gravity, ForceMode.Acceleration);
-        }
-
-        if (!muteFootsteps && currentSpeed > 0 && Vector3.Distance(lastFootstepLocation, transform.position) > strideLength)
-        {
-            PlayFootstep();
         }
     }
 
@@ -211,42 +196,7 @@ public class PlayerMovement : MonoBehaviour
     private void OnEnterHomeEvent(EnterHomeEvent e)
     {
         // Debug.Log("PlayerMovement.OnEnterHomeEvent()");
-        // Debug.Log("Player Position: " + this.transform.position);
-        muteFootsteps = false;
-        outside = false;
         powerDownModifier = 1f;
-        // Debug.Log("position: " + this.transform.position);
-    }
-
-    private void OnExitHomeEvent(ExitHomeEvent e)
-    {
-        muteFootsteps = true;
-    }
-
-    private void OnEnterCityEvent(EnterCityEvent e)
-    {
-        // Debug.Log("PlayerMovement.OnEnterCityEvent()");
-        // Debug.Log("Player Position: " + this.transform.position);
-        muteFootsteps = false;
-        outside = true;
-        // Debug.Log("position: " + this.transform.position);
-    }
-
-    private void OnExitCityEvent(ExitCityEvent e)
-    {
-        muteFootsteps = true;
-    }
-
-    private void PlayFootstep()
-    {
-        lastFootstepLocation = transform.position;
-        if (outside)
-        {
-            FMODUnity.RuntimeManager.PlayOneShot(footstepEvent, transform.position);
-        } else
-        {
-            FMODUnity.RuntimeManager.PlayOneShot(indoorFootstepEvent, transform.position);
-        }
     }
 
     private void OnDrawGizmos()
