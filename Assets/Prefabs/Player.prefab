@@ -323,6 +323,7 @@ GameObject:
   - component: {fileID: 7611996446220338069}
   - component: {fileID: 7494126520693513752}
   - component: {fileID: 433569334181228237}
+  - component: {fileID: 2910315879343969719}
   m_Layer: 12
   m_Name: Player
   m_TagString: Untagged
@@ -569,7 +570,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fd06aeb69b52fa34dbf6b9e5e65785bd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  minSlowerModifierValue: 0.35
+  minSlowingModifierValue: 0.35
   checkForInvisibleWallsMaxDistance: 15
   InvisibleWallLayer:
     serializedVersion: 2
@@ -586,7 +587,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2fb0c9fdb9a06f54cb1b694e79e08309, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  powerDownSlowingDuration: 1.5
+  slowingDuration: 1.5
+--- !u!114 &2910315879343969719
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8936142915063238545}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 76136fb9bf4ba1c4b978bd8d2d205ebb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &8936142915627543873
 GameObject:
   m_ObjectHideFlags: 0

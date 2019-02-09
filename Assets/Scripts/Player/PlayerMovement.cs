@@ -25,7 +25,6 @@ public class PlayerMovement : MonoBehaviour
 
     // Private components
     private Rigidbody rb;
-    private Transform startTransformForCurrentScene; // Spawning
     private ISlowingModifier[] slowingModifiers;
 
     private void Awake()
@@ -58,12 +57,6 @@ public class PlayerMovement : MonoBehaviour
         foreach (ISlowingModifier modifier in slowingModifiers)
         {
             currentMaxSpeed *= modifier.GetSlowingModifier();
-        }
-
-        // In case the player falls off the map, let's just put them back at the start
-        if (startTransformForCurrentScene != null && this.transform.position.y < -10f)
-        {
-            PlacePlayerAtTransform(startTransformForCurrentScene);
         }
     }
 
@@ -119,9 +112,9 @@ public class PlayerMovement : MonoBehaviour
         isGravityRestricted = restrictGravity;
     }
 
-    private void OnPlayerHasWonEvent(PlayerHasWonEvent e)
+    private void OnPlayerStartPositionEvent(PlayerStartPositionEvent e)
     {
-        RestrictMovement(true);
+        RestrictGravity(false);
     }
 
     private void OnPhotoLoweredAtStartEvent(PhotoLoweredAtStartEvent e)
@@ -129,24 +122,9 @@ public class PlayerMovement : MonoBehaviour
         RestrictMovement(false);
     }
 
-    // Spawning
-    private void OnPlayerStartPositionEvent(PlayerStartPositionEvent e)
+    private void OnPlayerHasWonEvent(PlayerHasWonEvent e)
     {
-        // Debug.Log("OnPlayerStartPositionEvent");
-        startTransformForCurrentScene = e.startTransform;
-        PlacePlayerAtTransform(e.startTransform);
-        RestrictGravity(false);
-    }
-
-    // Spawning
-    private void PlacePlayerAtTransform(Transform startTransform)
-    {
-        // Debug.Log("PlacePlayerAtTransform");
-        if (startTransform)
-        {
-            this.transform.position = startTransform.position;
-            this.transform.rotation = startTransform.rotation;
-        }
+        RestrictMovement(true);
     }
 
     /// METHODS FOR DEBUGGING PURPOSES BELOW
