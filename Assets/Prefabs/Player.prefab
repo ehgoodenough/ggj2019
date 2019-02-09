@@ -433,6 +433,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   walkingMaxSpeed: 9
   runningMaxSpeed: 14
+  checkForInvisibleWallsMaxDistance: 15
+  InvisibleWallLayer:
+    serializedVersion: 2
+    m_Bits: 32768
   footstepEvent: event:/SFX/Ambience/Robot_Footsteps
   indoorFootstepEvent: event:/SFX/Ambience/Robot_Indoor_Steps
   strideLength: 3
@@ -805,21 +809,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 3873266012346060486, guid: de7cd572520f8584ba8cc81f1ca1aa24,
-        type: 3}
-      propertyPath: m_Layer
-      value: 12
-      objectReference: {fileID: 0}
     - target: {fileID: 3873266013234605588, guid: de7cd572520f8584ba8cc81f1ca1aa24,
         type: 3}
       propertyPath: SubModule.subEmitters.Array.data[0].emitter
       value: 
       objectReference: {fileID: 2151181456287435553}
-    - target: {fileID: 6678944181542069611, guid: de7cd572520f8584ba8cc81f1ca1aa24,
-        type: 3}
-      propertyPath: m_Layer
-      value: 12
-      objectReference: {fileID: 0}
     - target: {fileID: 3873266012346060485, guid: de7cd572520f8584ba8cc81f1ca1aa24,
         type: 3}
       propertyPath: moveWithTransform
@@ -835,6 +829,16 @@ PrefabInstance:
       propertyPath: SubModule.subEmitters.Array.data[0].emitter
       value: 
       objectReference: {fileID: 4105976142975996989}
+    - target: {fileID: 3873266012346060486, guid: de7cd572520f8584ba8cc81f1ca1aa24,
+        type: 3}
+      propertyPath: m_Layer
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 6678944181542069611, guid: de7cd572520f8584ba8cc81f1ca1aa24,
+        type: 3}
+      propertyPath: m_Layer
+      value: 12
+      objectReference: {fileID: 0}
     - target: {fileID: 6678944181542069608, guid: de7cd572520f8584ba8cc81f1ca1aa24,
         type: 3}
       propertyPath: SubModule.subEmitters.Array.data[0].emitter

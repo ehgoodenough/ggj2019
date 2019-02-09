@@ -329,14 +329,4 @@ public class RobotDogAI : MonoBehaviour
             Gizmos.DrawLine(lineStart, lineEnd);
         }
     }
-
-    /*
-    private void OnDrawGizmos()
-    {
-        Gizmos.color = Color.blue;
-        Vector3 lineStart = player.transform.position + Vector3.up;
-        Vector3 lineEnd = player.transform.position + player.GetCurrentMovementVectorInWorldSpace() * 5f + Vector3.up;
-        Gizmos.DrawLine(lineStart, lineEnd);
-    }
-    */
 }
