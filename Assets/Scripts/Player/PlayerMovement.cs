@@ -1,7 +1,6 @@
 ﻿using UnityEngine;
 using UnityEngine.AI;
 using System.Collections;
-using System.Linq;
 
 [RequireComponent(typeof(Rigidbody))]
 public class PlayerMovement : MonoBehaviour
@@ -9,10 +8,6 @@ public class PlayerMovement : MonoBehaviour
     // Base movement speeds
     public float walkingMaxSpeed;
     public float runningMaxSpeed;
-
-    // Invisible Walls
-    public float checkForInvisibleWallsMaxDistance = 5f;
-    public LayerMask InvisibleWallLayer;
 
     // Base movement variables
     private bool isRunning = false;
@@ -28,14 +23,14 @@ public class PlayerMovement : MonoBehaviour
     // Private components
     private Rigidbody rb;
     private Transform startTransformForCurrentScene; // Spawning
-    private CapsuleCollider playerCapsuleCollider; // Invisible Walls
+    private PlayerMovementInvisibleWallHandler invisibleWallHandler;
 
     private void Awake()
     {
         // Debug.Log("PlayerMovement.Awake()");
         // Debug.Log("Player Position: " + this.transform.position);
-
-        playerCapsuleCollider = GetComponent<CapsuleCollider>();
+        
+        invisibleWallHandler = GetComponent<PlayerMovementInvisibleWallHandler>();
 
         EventBus.Subscribe<EnterHomeEvent>(OnEnterHomeEvent);
         EventBus.Subscribe<PlayerStartPositionEvent>(OnPlayerStartPositionEvent);
@@ -57,7 +52,8 @@ public class PlayerMovement : MonoBehaviour
 
     private void Update()
     {
-        currentMaxSpeed = (isRunning ? runningMaxSpeed : walkingMaxSpeed) * powerDownModifier * GetInvisibleWallSlowingModifier();
+        currentMaxSpeed = (isRunning ? runningMaxSpeed : walkingMaxSpeed) * powerDownModifier;
+        currentMaxSpeed *= invisibleWallHandler.GetSlowingModifier();
 
         // In case the player falls off the map, let's just put them back at the start
         if (startTransformForCurrentScene != null && this.transform.position.y < -10f)
@@ -80,37 +76,6 @@ public class PlayerMovement : MonoBehaviour
         {
             rb.AddForce(Physics.gravity, ForceMode.Acceleration);
         }
-    }
-
-    // Invisible Walls
-    private float GetInvisibleWallSlowingModifier()
-    {
-        if (movementVector.sqrMagnitude == 0)
-        {
-            // Debug.Log("movementVector.sqrMagnitude == 0");
-            return 1f; // Skip raycast if not moving
-        }
-
-        Collider[] invisibleWallColliders = Physics.OverlapSphere(this.transform.position, checkForInvisibleWallsMaxDistance, InvisibleWallLayer, QueryTriggerInteraction.Ignore);
-        if (invisibleWallColliders.Length == 0)
-        {
-            // Debug.Log("invisibleWallColliders.Length == 0");
-            return 1f;
-        }
-
-        // Each Invisible Wall can have a different distance at which they start to slow the player
-        // We need to find the Invisible Wall that has the maximum slowing power, i.e. lowest slowing modifier
-        float minSlowingModifier = 1f;
-        for (int i = 0; i < invisibleWallColliders.Length; i++)
-        {
-            InvisibleWall invisibleWall = invisibleWallColliders[i].GetComponent<InvisibleWall>();
-            if (!invisibleWall || !invisibleWall.slowsToAStop) continue;
-
-            float currentSlowingModifier = invisibleWall.GetNormalizedSlowingModifier(playerCapsuleCollider);
-            minSlowingModifier = currentSlowingModifier < minSlowingModifier ? currentSlowingModifier : minSlowingModifier;
-        }
-        // Debug.Log("minSlowingModifier: " + minSlowingModifier);
-        return Mathf.Clamp01(minSlowingModifier + 0.35f); // Allow at least some movement so player doesn't get trapped at (nearly) zero
     }
 
     IEnumerator LogCurrentMaxSpeed()
@@ -213,10 +178,6 @@ public class PlayerMovement : MonoBehaviour
 
     private void OnDrawGizmos()
     {
-        // Invisible Walls
-        Gizmos.color = Color.magenta;
-        Gizmos.DrawWireSphere(this.transform.position, checkForInvisibleWallsMaxDistance);
-
         // Base movement vector
         Gizmos.color = Color.blue;
         Vector3 lineStart = this.transform.position + Vector3.up;

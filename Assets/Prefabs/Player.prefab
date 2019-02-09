@@ -321,6 +321,7 @@ GameObject:
   - component: {fileID: 1464807852026845858}
   - component: {fileID: 2477749989663630546}
   - component: {fileID: 7611996446220338069}
+  - component: {fileID: 7494126520693513752}
   m_Layer: 12
   m_Name: Player
   m_TagString: Untagged
@@ -434,13 +435,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   walkingMaxSpeed: 9
   runningMaxSpeed: 14
-  checkForInvisibleWallsMaxDistance: 15
-  InvisibleWallLayer:
-    serializedVersion: 2
-    m_Bits: 32768
-  footstepEvent: event:/SFX/Ambience/Robot_Footsteps
-  indoorFootstepEvent: event:/SFX/Ambience/Robot_Indoor_Steps
-  strideLength: 3
 --- !u!114 &8936142915063238572
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -562,6 +556,23 @@ MonoBehaviour:
   footstepEvent: event:/SFX/Ambience/Robot_Footsteps
   indoorFootstepEvent: event:/SFX/Ambience/Robot_Indoor_Steps
   strideLength: 3
+--- !u!114 &7494126520693513752
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8936142915063238545}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fd06aeb69b52fa34dbf6b9e5e65785bd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  minSlowerModifierValue: 0.35
+  checkForInvisibleWallsMaxDistance: 15
+  InvisibleWallLayer:
+    serializedVersion: 2
+    m_Bits: 32768
 --- !u!1 &8936142915627543873
 GameObject:
   m_ObjectHideFlags: 0
