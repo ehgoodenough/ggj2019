@@ -11,13 +11,15 @@ GameObject:
   - component: {fileID: 7260581457281603026}
   - component: {fileID: 2198988358468359689}
   - component: {fileID: 1237115597783689638}
+  - component: {fileID: 5078836175848880663}
   - component: {fileID: 2373559539705048560}
+  - component: {fileID: 5183539852780514226}
   m_Layer: 0
   m_Name: marketstall_2a
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_NavMeshLayer: 1
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!4 &7260581457281603026
 Transform:
@@ -28,7 +30,7 @@ Transform:
   m_GameObject: {fileID: 8583052955516343678}
   m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.7, y: 0.7, z: 0.7}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -78,6 +80,20 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!64 &5078836175848880663
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8583052955516343678}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Convex: 0
+  m_CookingOptions: 14
+  m_Mesh: {fileID: 4300000, guid: b1f1ccef59882fa42bffaa40037bd445, type: 3}
 --- !u!65 &2373559539705048560
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -89,5 +105,21 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 8, y: 8.210702, z: 8.9}
-  m_Center: {x: 0.0000040531154, y: 4.105351, z: 0}
+  m_Size: {x: 6.5, y: 4.9075427, z: 6.75}
+  m_Center: {x: 0.000004053116, y: 2.4537714, z: 0}
+--- !u!208 &5183539852780514226
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8583052955516343678}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: 3.25, y: 2.4537716, z: 3.375}
+  m_MoveThreshold: 0.1
+  m_Carve: 1
+  m_CarveOnlyStationary: 1
+  m_Center: {x: 0, y: 2.453771, z: 0}
+  m_TimeToStationary: 0.5

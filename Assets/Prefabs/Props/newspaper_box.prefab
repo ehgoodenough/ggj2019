@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 8285008298743705007}
   - component: {fileID: 4997113375795713105}
   - component: {fileID: 7160371691811902197}
+  - component: {fileID: 6237620346280278441}
   - component: {fileID: 8313291251147139188}
   m_Layer: 0
   m_Name: newspaper_box
@@ -90,8 +91,21 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1.2400496, y: 3.3688498, z: 1.289978}
-  m_Center: {x: -0.00000086426735, y: 1.6844249, z: -0.000000923872}
+  m_Size: {x: 1.2400496, y: 2.6437664, z: 1.289978}
+  m_Center: {x: -0.000000834465, y: 1.3218832, z: -0.0000009536743}
+--- !u!65 &6237620346280278441
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6750278266338588457}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.52532196, y: 0.7274704, z: 0.5}
+  m_Center: {x: -0.2848549, y: 3.0051136, z: -0.0000009536743}
 --- !u!208 &8313291251147139188
 NavMeshObstacle:
   m_ObjectHideFlags: 0

@@ -12,7 +12,6 @@ GameObject:
   - component: {fileID: 3629645076960267679}
   - component: {fileID: 747865838874014616}
   - component: {fileID: 7583267966957816047}
-  - component: {fileID: 2037562929816594409}
   - component: {fileID: 468075423853706682}
   m_Layer: 0
   m_Name: stopsign
@@ -93,19 +92,6 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.15, y: 8.564, z: 0.15}
   m_Center: {x: 0, y: 4.282, z: 0}
---- !u!65 &2037562929816594409
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9209995345397579509}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 2.03, y: 2, z: 0.15}
-  m_Center: {x: 0, y: 7.58, z: 0}
 --- !u!208 &468075423853706682
 NavMeshObstacle:
   m_ObjectHideFlags: 0

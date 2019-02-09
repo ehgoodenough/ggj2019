@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 7800616917426582761}
   - component: {fileID: 178912160485832264}
   - component: {fileID: 2105632534202380432}
-  - component: {fileID: 7132336742764937051}
+  - component: {fileID: 8288651103968533360}
   - component: {fileID: 5383311198898193205}
   m_Layer: 0
   m_Name: sign_construction
@@ -79,8 +79,8 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!65 &7132336742764937051
-BoxCollider:
+--- !u!64 &8288651103968533360
+MeshCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -89,9 +89,10 @@ BoxCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 0.95, y: 3.2, z: 3.2}
-  m_Center: {x: -0.8, y: 1.6, z: 0}
+  serializedVersion: 3
+  m_Convex: 0
+  m_CookingOptions: 14
+  m_Mesh: {fileID: 4300000, guid: c63a6ba5042471246a1846a5f69a239a, type: 3}
 --- !u!208 &5383311198898193205
 NavMeshObstacle:
   m_ObjectHideFlags: 0

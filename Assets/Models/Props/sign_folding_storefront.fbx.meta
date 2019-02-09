@@ -13,6 +13,7 @@ ModelImporter:
     3300000: sign_folding_storefront
     3300002: //RootNode
     4300000: sign_folding_storefront
+    4300002: sign_store_folding
   externalObjects: {}
   materials:
     importMaterials: 1

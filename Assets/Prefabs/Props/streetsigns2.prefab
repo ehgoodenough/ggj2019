@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 1982092508692407210}
   - component: {fileID: 3056120238599411502}
   - component: {fileID: 6084780676981354300}
+  - component: {fileID: 4290484034278173031}
   - component: {fileID: 8716266379483720004}
   m_Layer: 0
   m_Name: streetsigns2
@@ -90,8 +91,21 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.9136196, y: 6.2864795, z: 0.87356865}
-  m_Center: {x: 0.017593682, y: 3.1432397, z: 0.019511536}
+  m_Size: {x: 0.12476349, y: 6.2864795, z: 0.7391052}
+  m_Center: {x: -0.015277863, y: 3.1432397, z: 0.023994446}
+--- !u!65 &4290484034278173031
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 44631993807987402}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.9098358, y: 1.3588295, z: 0.12949371}
+  m_Center: {x: 0.017860413, y: 4.103714, z: 0.12319565}
 --- !u!208 &8716266379483720004
 NavMeshObstacle:
   m_ObjectHideFlags: 0

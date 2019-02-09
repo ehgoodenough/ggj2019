@@ -4,11 +4,15 @@ ModelImporter:
   serializedVersion: 23
   fileIDToRecycleName:
     100000: //RootNode
+    100002: Building_8a
     400000: //RootNode
+    400002: Building_8a
     2100000: lambert1
     2100002: white_m
     2300000: //RootNode
+    2300002: Building_8a
     3300000: //RootNode
+    3300002: Building_8a
     4300000: Building_8a
   externalObjects: {}
   materials:

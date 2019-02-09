@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 8853889766127259848}
   - component: {fileID: 6403273296393632011}
   - component: {fileID: 1673359712198400245}
+  - component: {fileID: 8403396165044151182}
   - component: {fileID: 5961057664575594908}
   - component: {fileID: 7247348775655468520}
   m_Layer: 0
@@ -79,6 +80,20 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!64 &8403396165044151182
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2074545758612322148}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Convex: 0
+  m_CookingOptions: 14
+  m_Mesh: {fileID: 4300000, guid: 17c5c3c18ee873149937ab1d99a81b03, type: 3}
 --- !u!136 &5961057664575594908
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -89,10 +104,10 @@ CapsuleCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  m_Radius: 0.39
-  m_Height: 2.60242
+  m_Radius: 0.6329775
+  m_Height: 2.1757562
   m_Direction: 1
-  m_Center: {x: 0, y: 1.21, z: -0.07}
+  m_Center: {x: 0, y: 1.0878781, z: -0.007563412}
 --- !u!208 &7247348775655468520
 NavMeshObstacle:
   m_ObjectHideFlags: 0
@@ -103,9 +118,9 @@ NavMeshObstacle:
   m_Enabled: 1
   serializedVersion: 3
   m_Shape: 0
-  m_Extents: {x: 0.633, y: 1.3010001, z: 0.633}
+  m_Extents: {x: 0.633, y: 1.087878, z: 0.633}
   m_MoveThreshold: 0.1
   m_Carve: 1
   m_CarveOnlyStationary: 1
-  m_Center: {x: 0, y: 1.3010001, z: -0.008}
+  m_Center: {x: 0, y: 1.087878, z: -0.007563412}
   m_TimeToStationary: 0.5
