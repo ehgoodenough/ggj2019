@@ -13,12 +13,13 @@ GameObject:
   - component: {fileID: 2160147482478664794}
   - component: {fileID: 2160147482478664795}
   - component: {fileID: 842636779692879217}
+  - component: {fileID: 7357351638009091812}
   m_Layer: 11
   m_Name: City_Item_Flower
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 8
   m_IsActive: 1
 --- !u!4 &2160147482478664798
 Transform:
@@ -92,6 +93,22 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   location: 1
   type: 1
+--- !u!208 &7357351638009091812
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2160147482478664792}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: 0.5, y: 0.5, z: 0.5}
+  m_MoveThreshold: 0.1
+  m_Carve: 1
+  m_CarveOnlyStationary: 1
+  m_Center: {x: 0, y: 0, z: 0}
+  m_TimeToStationary: 0.5
 --- !u!1001 &7740830403433365932
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -11,7 +11,7 @@ public class Pickupable : Interactable
     public AudioClip pickingUpClip;
     protected AudioSource audioSource;
 
-    void Awake()
+    protected virtual void Awake()
     {
         rb = GetComponent<Rigidbody>();
         audioSource = GetComponent<AudioSource>();
@@ -34,7 +34,7 @@ public class Pickupable : Interactable
         rb.detectCollisions = false;
     }
 
-    public void Drop()
+    public virtual void Drop()
     {
         isHeld = false;
         rb.useGravity = true;
