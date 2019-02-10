@@ -62,6 +62,7 @@ public class WinCondition : MonoBehaviour
         FinalCinematicStarter newFinalCinematic = FindObjectOfType<FinalCinematicStarter>();
         if (newFinalCinematic && newFinalCinematic.playOnGameEnd)
         {
+            yield return new WaitForSeconds(1.5f);
             newFinalCinematic.PlayFinalCinematic();
         }
         else
