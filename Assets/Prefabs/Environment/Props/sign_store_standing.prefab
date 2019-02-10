@@ -17,8 +17,8 @@ GameObject:
   m_Name: sign_store_standing
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 4294967295
+  m_NavMeshLayer: 1
+  m_StaticEditorFlags: 8
   m_IsActive: 1
 --- !u!4 &184987485460332424
 Transform:
@@ -104,7 +104,7 @@ NavMeshObstacle:
   m_Shape: 1
   m_Extents: {x: 0.27, y: 1.6549605, z: 0.89}
   m_MoveThreshold: 0.1
-  m_Carve: 0
+  m_Carve: 1
   m_CarveOnlyStationary: 1
   m_Center: {x: -0.0000001490116, y: 1.65496, z: -0.000001698732}
   m_TimeToStationary: 0.5
