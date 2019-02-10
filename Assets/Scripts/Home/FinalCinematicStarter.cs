@@ -29,6 +29,10 @@ public class FinalCinematicStarter : MonoBehaviour
 
     public void PlayFinalCinematic()
     {
+        // Disable photo object before cinematic plays
+        Photo photo = FindObjectOfType<Photo>();
+        if (photo) photo.gameObject.SetActive(false);
+
         friendPiecesApart.SetActive(true);
         assemblyParticleEffect.SetActive(true);
         cinemachineVirtualCamera.SetActive(true);
