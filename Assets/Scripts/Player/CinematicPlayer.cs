@@ -50,7 +50,8 @@ public class CinematicPlayer : MonoBehaviour
         //director.playableAsset = closingCinematicPlayable;
         //director.Play();
         GameObject.Find("friend_pieces").SetActive(false);
-        GameObject.Find("friend_whole").GetComponent<MeshRenderer>().enabled = true;
+        // GameObject.Find("friend_whole").GetComponent<MeshRenderer>().enabled = true;
+        GameObject.FindObjectOfType<FriendWhole>().Reveal();
         EventBus.PublishEvent(new FriendFullyAssembledEvent());
     }
 }
