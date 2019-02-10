@@ -50,14 +50,24 @@ public class WinCondition : MonoBehaviour
         {
             Debug.Log("WINNER IS YOU");
             EventBus.PublishEvent(new PlayerHasWonEvent());
-            Invoke("PlayFinalCinematic", 4);
+            // Invoke("PlayFinalCinematic", 4);
+            StartCoroutine(PlayFinalCinematic());
         }
 
         yield return null;
     }
 
-    public void PlayFinalCinematic()
+    private IEnumerator PlayFinalCinematic()
     {
-        FindObjectOfType<CinematicPlayer>().PlayFinalCinematic();
+        FinalCinematicStarter newFinalCinematic = FindObjectOfType<FinalCinematicStarter>();
+        if (newFinalCinematic && newFinalCinematic.playOnGameEnd)
+        {
+            newFinalCinematic.PlayFinalCinematic();
+        }
+        else
+        {
+            yield return new WaitForSeconds(1.5f);
+            FindObjectOfType<CinematicPlayer>().PlayFinalCinematic();
+        }
     }
 }

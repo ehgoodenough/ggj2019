@@ -1,9 +1,11 @@
 ﻿using UnityEngine;
 using UnityEngine.Playables;
+using System.Collections;
 
 public class FinalCinematicStarter : MonoBehaviour
 {
-    public bool playOnAwake;
+    public bool playOnAwake = false;
+    public bool playOnGameEnd = false;
     public PlayableDirector finalCinematicDirector;
     public Camera finalCinematicCamera;
     public GameObject friendPiecesApart;
@@ -32,5 +34,12 @@ public class FinalCinematicStarter : MonoBehaviour
         cinemachineVirtualCamera.SetActive(true);
         finalCinematicCamera.gameObject.SetActive(true);
         finalCinematicDirector.Play();
+        StartCoroutine(WaitForFriendToFullyAssemble());
+    }
+
+    private IEnumerator WaitForFriendToFullyAssemble()
+    {
+        yield return new WaitForSeconds(12f);
+        EventBus.PublishEvent(new FriendFullyAssembledEvent()); // This event kicks off the end credits
     }
 }

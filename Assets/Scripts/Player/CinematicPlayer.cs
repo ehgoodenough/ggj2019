@@ -35,6 +35,7 @@ public class CinematicPlayer : MonoBehaviour
         }
     }
 
+    /*
     private void Update()
     {
         //test
@@ -43,6 +44,7 @@ public class CinematicPlayer : MonoBehaviour
             PlayFinalCinematic();
         }
     }
+    */
 
     public void PlayFinalCinematic()
     {
@@ -52,6 +54,6 @@ public class CinematicPlayer : MonoBehaviour
         GameObject.Find("friend_pieces").SetActive(false);
         // GameObject.Find("friend_whole").GetComponent<MeshRenderer>().enabled = true;
         GameObject.FindObjectOfType<FriendWhole>().Reveal();
-        EventBus.PublishEvent(new FriendFullyAssembledEvent());
+        EventBus.PublishEvent(new FriendFullyAssembledEvent()); // This event kicks off the end credits
     }
 }
