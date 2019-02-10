@@ -46,7 +46,8 @@ public class PlayerInputDefaultState : State
 
         gameStateMachine = FindObjectOfType<GameStateTitleScreen>().GetComponent<StateMachine>();
 
-        EventBus.Subscribe<PhotoLoweredAtStartEvent>(e => canPause = true); // TODO: Prevent pausing during final cinematic
+        EventBus.Subscribe<PhotoLoweredAtStartEvent>(e => canPause = true);
+        EventBus.Subscribe<PlayerHasWonEvent>(e => canPause = true);
     }
 
     protected override void DoEnter()
