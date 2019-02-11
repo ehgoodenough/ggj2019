@@ -60,7 +60,7 @@ public class PlayerInputDefaultState : State
     {
         if (gameStateMachine.currentState.GetType() == typeof(GameStateTitleScreen))
         {
-            if (Input.GetKeyDown(KeyCode.Return) || player.GetButtonDown("Interact"))
+            if (Input.GetKeyDown(KeyCode.Return) || (player.GetButtonDown("Interact") && !Input.GetMouseButton(0)))
             {
                 Debug.Log("StartGame");
                 EventBus.PublishEvent(new StartGameEvent());
@@ -72,12 +72,12 @@ public class PlayerInputDefaultState : State
             if (isPaused) // Game is currently in the pause screen
             {
                 // Hitting Esc resumes the game
-                if (Input.GetKeyUp(KeyCode.Escape))
+                if (Input.GetKeyUp(KeyCode.Escape) || player.GetButtonUp("Pause") || player.GetButtonUp("Back"))
                 {
                     Resume();
                 }
                 // Hitting enter executes the current pause option
-                else if (Input.GetKeyUp(KeyCode.Return))
+                else if (Input.GetKeyUp(KeyCode.Return) || (player.GetButtonUp("Interact") && !Input.GetMouseButton(0)))
                 {
                     // Debug.Log("Return");
                     switch (currentPauseOption)
@@ -97,13 +97,17 @@ public class PlayerInputDefaultState : State
                 else
                 {
                     bool selectionSwitched = false;
-                    if (Input.GetKeyDown(KeyCode.UpArrow) && !Input.GetKey(KeyCode.W) || Input.GetKeyDown(KeyCode.W) && !Input.GetKey(KeyCode.UpArrow))
+                    if (Input.GetKeyDown(KeyCode.UpArrow) && !Input.GetKey(KeyCode.W) || 
+                        Input.GetKeyDown(KeyCode.W) && !Input.GetKey(KeyCode.UpArrow) ||
+                        player.GetButtonDown("Pause Menu Up"))
                     {
                         currentPauseOption = (PauseOption)(((int)currentPauseOption - 1 + 2) % 2); // + 3) % 3);
                         // Debug.Log("Current Pause Option: " + currentPauseOption);
                         selectionSwitched = true;
                     }
-                    else if (Input.GetKeyDown(KeyCode.DownArrow) && !Input.GetKey(KeyCode.S) || Input.GetKeyDown(KeyCode.S) && !Input.GetKey(KeyCode.DownArrow))
+                    else if (Input.GetKeyDown(KeyCode.DownArrow) && !Input.GetKey(KeyCode.S) || 
+                             Input.GetKeyDown(KeyCode.S) && !Input.GetKey(KeyCode.DownArrow) ||
+                             player.GetButtonDown("Pause Menu Down"))
                     {
                         currentPauseOption = (PauseOption)(((int)currentPauseOption + 1) % 2); // % 3);
                         // Debug.Log("Current Pause Option: " + currentPauseOption);
@@ -129,7 +133,7 @@ public class PlayerInputDefaultState : State
             }
             else if (!isPaused)
             {
-                if (canPause && Input.GetKeyUp(KeyCode.Escape))
+                if (canPause && (Input.GetKeyUp(KeyCode.Escape) || player.GetButtonUp("Pause")))
                 {
                     Pause();
                     return;
