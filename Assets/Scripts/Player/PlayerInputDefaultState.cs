@@ -178,7 +178,7 @@ public class PlayerInputDefaultState : State
 
                     Vector3 moveVector = Vector3.forward * forward + Vector3.right * strafe;
                     moveVector = moveVector.sqrMagnitude > 1f ? moveVector.normalized : moveVector;
-                    bool isRunning = (Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.RightShift));
+                    bool isRunning = (Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.RightShift) || player.GetAxis("Run") > 0f);
                     movement.Move(moveVector, isRunning);
                 }
 
