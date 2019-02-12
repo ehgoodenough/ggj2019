@@ -1,12 +1,15 @@
 ﻿using UnityEngine;
 using UnityEngine.Playables;
+using UnityEngine.Timeline;
 using System.Collections;
 
 public class FinalCinematicStarter : MonoBehaviour
 {
     public bool playOnAwake = false;
     public bool playOnGameEnd = false;
+
     public PlayableDirector finalCinematicDirector;
+
     public Camera finalCinematicCamera;
     public GameObject friendPiecesApart;
     public GameObject assemblyParticleEffect;
@@ -37,7 +40,9 @@ public class FinalCinematicStarter : MonoBehaviour
         assemblyParticleEffect.SetActive(true);
         cinemachineVirtualCamera.SetActive(true);
         finalCinematicCamera.gameObject.SetActive(true);
+
         finalCinematicDirector.Play();
+
         StartCoroutine(WaitForFriendToFullyAssemble());
     }
 
