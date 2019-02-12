@@ -18,7 +18,8 @@ public class CinematicPlayer : MonoBehaviour
 
     private void Awake()
     {
-        director = FindObjectOfType<PlayableDirector>();
+        // director = FindObjectOfType<PlayableDirector>();
+        director = GameObject.Find("HUD").GetComponent<PlayableDirector>();
     }
 
     public void PlayOpeningCinematicIfNecessary()

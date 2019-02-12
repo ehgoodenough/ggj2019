@@ -8,6 +8,8 @@ public class FinalCinematicStarter : MonoBehaviour
     public bool playOnAwake = false;
     public bool playOnGameEnd = false;
 
+    public FinalCinematicDynamicTimelineBinding dynamicBinding;
+
     public PlayableDirector finalCinematicDirector;
 
     public Camera finalCinematicCamera;
@@ -32,6 +34,8 @@ public class FinalCinematicStarter : MonoBehaviour
 
     public void PlayFinalCinematic()
     {
+        if (dynamicBinding) dynamicBinding.BindTimelineTracks();
+
         // Disable photo object before cinematic plays
         Photo photo = FindObjectOfType<Photo>();
         if (photo) photo.gameObject.SetActive(false);
