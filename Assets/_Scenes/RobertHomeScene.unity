@@ -44,7 +44,7 @@ RenderSettings:
 LightmapSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 11
-  m_GIWorkflowMode: 0
+  m_GIWorkflowMode: 1
   m_GISettings:
     serializedVersion: 2
     m_BounceScale: 1
@@ -88,7 +88,8 @@ LightmapSettings:
     m_PVRFilteringAtrousPositionSigmaIndirect: 2
     m_PVRFilteringAtrousPositionSigmaAO: 1
     m_ShowResolutionOverlay: 1
-  m_LightingDataAsset: {fileID: 0}
+  m_LightingDataAsset: {fileID: 112000000, guid: 8d6c8471b81e4cb48afaec179fc06238,
+    type: 2}
   m_UseShadowmask: 1
 --- !u!196 &4
 NavMeshSettings:
@@ -2669,21 +2670,6 @@ PrefabInstance:
       propertyPath: m_LocalPosition.z
       value: 0.3545985
       objectReference: {fileID: 0}
-    - target: {fileID: 4296232579045578639, guid: 8a8ea45127477d849805c72d9d7213ba,
-        type: 3}
-      propertyPath: m_SceneBindings.Array.data[3].value
-      value: 
-      objectReference: {fileID: 477262158}
-    - target: {fileID: 4296232579045578639, guid: 8a8ea45127477d849805c72d9d7213ba,
-        type: 3}
-      propertyPath: m_SceneBindings.Array.data[4].value
-      value: 
-      objectReference: {fileID: 437851297}
-    - target: {fileID: 4296232579045578639, guid: 8a8ea45127477d849805c72d9d7213ba,
-        type: 3}
-      propertyPath: m_SceneBindings.Array.data[8].value
-      value: 
-      objectReference: {fileID: 1732217186}
     - target: {fileID: 4296232579391080283, guid: 8a8ea45127477d849805c72d9d7213ba,
         type: 3}
       propertyPath: m_LocalRotation.x
@@ -2704,5 +2690,20 @@ PrefabInstance:
       propertyPath: m_LocalRotation.z
       value: -0.15725361
       objectReference: {fileID: 0}
+    - target: {fileID: 4296232579045578639, guid: 8a8ea45127477d849805c72d9d7213ba,
+        type: 3}
+      propertyPath: m_SceneBindings.Array.data[3].value
+      value: 
+      objectReference: {fileID: 477262158}
+    - target: {fileID: 4296232579045578639, guid: 8a8ea45127477d849805c72d9d7213ba,
+        type: 3}
+      propertyPath: m_SceneBindings.Array.data[4].value
+      value: 
+      objectReference: {fileID: 437851297}
+    - target: {fileID: 4296232579045578639, guid: 8a8ea45127477d849805c72d9d7213ba,
+        type: 3}
+      propertyPath: m_SceneBindings.Array.data[8].value
+      value: 
+      objectReference: {fileID: 1732217186}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8a8ea45127477d849805c72d9d7213ba, type: 3}

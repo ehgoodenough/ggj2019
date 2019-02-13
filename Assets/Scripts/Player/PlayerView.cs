@@ -2,7 +2,7 @@
 
 public class PlayerView : MonoBehaviour
 {
-    public Camera playerCamera;
+    public GameObject virtualCamera;
     public float lookSpeed = 1f;
     public float verticalRotationMaxLimit = 89f;
     public float verticalRotationMinLimit = -89f;
@@ -12,9 +12,9 @@ public class PlayerView : MonoBehaviour
 
     void Start()
     {
-        Debug.Assert(playerCamera != null, "PlayerView requires a reference to the player Camera");
+        Debug.Assert(virtualCamera != null, "PlayerView requires a reference to the player Virtual Camera");
 
-        cameraRotation = playerCamera.transform.rotation.eulerAngles.x;
+        cameraRotation = virtualCamera.transform.rotation.eulerAngles.x;
 
         EventBus.Subscribe<PhotoLoweredAtStartEvent>(OnPhotoLoweredAtStartEvent);
         EventBus.Subscribe<PlayerHasWonEvent>(OnPlayerHasWonEvent);
@@ -26,7 +26,7 @@ public class PlayerView : MonoBehaviour
         {
             // Note that looking up / down only affects the camera rotation and should not affect entire player object
             cameraRotation = Mathf.Clamp(cameraRotation - lookVector.y * lookSpeed, verticalRotationMinLimit, verticalRotationMaxLimit);
-            playerCamera.transform.localRotation = Quaternion.AngleAxis(cameraRotation, Vector3.right);
+            virtualCamera.transform.localRotation = Quaternion.AngleAxis(cameraRotation, Vector3.right);
         }
     }
 
@@ -44,6 +44,7 @@ public class PlayerView : MonoBehaviour
         isViewRestricted = restrictView;
     }
 
+    /*
     public void EnablePlayerCamera()
     {
         playerCamera.enabled = true;
@@ -58,11 +59,12 @@ public class PlayerView : MonoBehaviour
     {
         return playerCamera.enabled;
     }
+    */
 
     public void ResetCamera()
     {
         cameraRotation = 0;
-        playerCamera.transform.localRotation = Quaternion.Euler(new Vector3(0, 0, 0));
+        virtualCamera.transform.localRotation = Quaternion.Euler(new Vector3(0, 0, 0));
     }
 
     // TODO: Turn player in fluid motion toward robot friend

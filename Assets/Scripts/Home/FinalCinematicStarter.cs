@@ -42,17 +42,15 @@ public class FinalCinematicStarter : MonoBehaviour
 
         friendPiecesApart.SetActive(true);
         assemblyParticleEffect.SetActive(true);
-        cinemachineVirtualCamera.SetActive(true);
-        finalCinematicCamera.gameObject.SetActive(true);
 
+        finalCinematicDirector.stopped += OnCinematicEnd;
         finalCinematicDirector.Play();
-
-        StartCoroutine(WaitForFriendToFullyAssemble());
     }
 
-    private IEnumerator WaitForFriendToFullyAssemble()
+    private void OnCinematicEnd(PlayableDirector director)
     {
-        yield return new WaitForSeconds(12f);
         EventBus.PublishEvent(new FriendFullyAssembledEvent()); // This event kicks off the end credits
     }
+
+
 }
