@@ -7,24 +7,24 @@ public static class GameProgress
     public static float homeSaturationLevel = 0;
     
     // Track collected IDs
-    public static HashSet<string> collectedIds = new HashSet<string>();
+    public static HashSet<Vector3> collectedSet = new HashSet<Vector3>();
 
     public static int NumCollected
     {
         get
         {
-            return collectedIds.Count;
+            return collectedSet.Count;
         }
     }
 
-    public static bool IsIdCollected(string id)
+    public static bool IsIdCollected(Vector3 position)
     {
-        return collectedIds.Contains(id);
+        return collectedSet.Contains(position);
     }
 
-    public static void Collect(string id)
+    public static void Collect(Vector3 position)
     {
-        collectedIds.Add(id);
+        collectedSet.Add(position);
     }
 
     // Track objective types completed
