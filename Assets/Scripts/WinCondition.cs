@@ -59,7 +59,6 @@ public class WinCondition : MonoBehaviour
 
     private IEnumerator PlayFinalCinematic()
     {
-
         FinalCinematicStarter newFinalCinematic = FindObjectOfType<FinalCinematicStarter>();
         if (newFinalCinematic && newFinalCinematic.playOnGameEnd)
         {

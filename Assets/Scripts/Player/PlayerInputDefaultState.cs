@@ -47,7 +47,7 @@ public class PlayerInputDefaultState : State
         gameStateMachine = FindObjectOfType<GameStateTitleScreen>().GetComponent<StateMachine>();
 
         EventBus.Subscribe<PhotoLoweredAtStartEvent>(e => canPause = true);
-        EventBus.Subscribe<PlayerHasWonEvent>(e => canPause = true);
+        EventBus.Subscribe<PlayerHasWonEvent>(e => canPause = false);
     }
 
     protected override void DoEnter()
