@@ -39,9 +39,12 @@ public class SaturationWaveSequencer : MonoBehaviour
 
     public void IncreaseSaturationLevel()
     {
+        Debug.Log("Increment Home Saturation Level in Game Progress");
+        GameProgress.homeSaturationLevel += saturationIncrement;
+
         if (!effectIsActive)
         {
-            colorEffectMat.SetFloat("_TargetSaturationLevel", GameProgress.homeSaturationLevel + saturationIncrement);
+            colorEffectMat.SetFloat("_TargetSaturationLevel", GameProgress.homeSaturationLevel);
             StartCoroutine(DoEffect());
         }
     }
@@ -63,7 +66,6 @@ public class SaturationWaveSequencer : MonoBehaviour
             yield return null;
         }
 
-        GameProgress.homeSaturationLevel += saturationIncrement;
         colorEffectMat.SetFloat("_SaturationLevel", GameProgress.homeSaturationLevel);
         colorEffectMat.SetFloat("_ScanDistance", 0);
         effectIsActive = false;
