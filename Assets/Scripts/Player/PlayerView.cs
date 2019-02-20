@@ -44,23 +44,6 @@ public class PlayerView : MonoBehaviour
         isViewRestricted = restrictView;
     }
 
-    /*
-    public void EnablePlayerCamera()
-    {
-        playerCamera.enabled = true;
-    }
-
-    public void DisablePlayerCamera()
-    {
-        playerCamera.enabled = false;
-    }
-
-    public bool IsPlayerCameraEnabled()
-    {
-        return playerCamera.enabled;
-    }
-    */
-
     public void ResetCamera()
     {
         cameraRotation = 0;

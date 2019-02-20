@@ -70,6 +70,10 @@ public struct SwitchFocusToResumeOptionEvent { }
 
 public struct SwitchFocusToQuitOptionEvent { }
 
+public struct ObjectiveCompletedCutsceneStartEvent { }
+
+public struct ObjectiveCompletedCutsceneEndEvent { }
+
 public struct PlayerHasWonEvent { }
 
 public struct FriendFullyAssembledEvent { }

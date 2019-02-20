@@ -47,6 +47,8 @@ public class PlayerInputDefaultState : State
         gameStateMachine = FindObjectOfType<GameStateTitleScreen>().GetComponent<StateMachine>();
 
         EventBus.Subscribe<PhotoLoweredAtStartEvent>(e => canPause = true);
+        EventBus.Subscribe<ObjectiveCompletedCutsceneStartEvent>(e => canPause = false);
+        EventBus.Subscribe<ObjectiveCompletedCutsceneEndEvent>(e => canPause = true);
         EventBus.Subscribe<PlayerHasWonEvent>(e => canPause = false);
     }
 

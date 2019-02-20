@@ -16,6 +16,8 @@ public class WinCondition : MonoBehaviour
     {
         if (GameProgress.hasJustCompletedObjective)
         {
+            EventBus.PublishEvent(new ObjectiveCompletedCutsceneStartEvent());
+
             GameProgress.hasJustCompletedObjective = false;
             PlayerView playaView = FindObjectOfType<PlayerView>();
             playaView.RestrictView(true);
@@ -42,6 +44,8 @@ public class WinCondition : MonoBehaviour
 
             playaView.RestrictView(false);
             movement.RestrictMovement(false);
+
+            EventBus.PublishEvent(new ObjectiveCompletedCutsceneEndEvent());
         }
 
         if (GameProgress.isObjectiveComplete(ObjectivePickupable.Type.Chair)
