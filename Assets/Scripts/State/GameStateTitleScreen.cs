@@ -36,10 +36,10 @@ public class GameStateTitleScreen : State
 
         // EventBus.PublishEvent(new TitleScreenStartEvent(playerObj));
         titleCanvas.alpha = 0;
-        StartCoroutine(RevealCanvas(titleCanvas, 0.1f));
+        StartCoroutine(RevealCanvas(titleCanvas, 2f));
 
         startPromptCanvas.alpha = 0;
-        StartCoroutine(RevealCanvas(startPromptCanvas, 3.5f));
+        StartCoroutine(RevealCanvas(startPromptCanvas, 5.5f));
     }
 
     protected override void DoEnter()

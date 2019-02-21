@@ -12,7 +12,7 @@ public class StartPrompt_FadeText : MonoBehaviour
     {
         // EventBus.PublishEvent(new TitleScreenStartEvent(playerObj));
         startPromptCanvas.alpha = 0;
-        StartCoroutine(RevealCanvas(startPromptCanvas, 5.5f));
+        StartCoroutine(RevealCanvas(startPromptCanvas, 7.5f));
     }
 
     IEnumerator RevealCanvas(CanvasGroup canvas, float delay = 0f)
