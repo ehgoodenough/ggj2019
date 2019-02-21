@@ -39,6 +39,22 @@ ModelImporter:
     100066: joint72
     100068: joint73
     100070: joint74
+    100072: hips
+    100074: ikHandle10
+    100076: ikHandle11
+    100078: ikHandle12
+    100080: ikHandle13
+    100082: ikHandle14
+    100084: ikHandle8
+    100086: ikHandle9
+    100088: L_foot
+    100090: L_hand
+    100092: L_knee
+    100094: main_dog_control
+    100096: R_foot
+    100098: R_hand
+    100100: R_knee
+    100102: tail
     400000: dog
     400002: //RootNode
     400004: joint41
@@ -75,12 +91,32 @@ ModelImporter:
     400066: joint72
     400068: joint73
     400070: joint74
+    400072: hips
+    400074: ikHandle10
+    400076: ikHandle11
+    400078: ikHandle12
+    400080: ikHandle13
+    400082: ikHandle14
+    400084: ikHandle8
+    400086: ikHandle9
+    400088: L_foot
+    400090: L_hand
+    400092: L_knee
+    400094: main_dog_control
+    400096: R_foot
+    400098: R_hand
+    400100: R_knee
+    400102: tail
     2100000: lambert1
     4300000: dog
-    7400000: Trot
-    7400002: Idle (Sniffing)
-    7400004: Approach-Bark
-    7400006: Run
+    7400000: Trot (loop)
+    7400002: Idle-Sniffing (loop)
+    7400004: Approach-Bark (loop)
+    7400006: Run (loop)
+    7400008: Sniffing-Standing
+    7400010: Alert
+    7400012: Sniffing-Walking (startup)
+    7400014: Sniffing-Walking (loop)
     9500000: //RootNode
     13700000: dog
   externalObjects: {}
@@ -112,7 +148,7 @@ ModelImporter:
     extraUserProperties: []
     clipAnimations:
     - serializedVersion: 16
-      name: Trot
+      name: Trot (loop)
       takeName: Take 001
       firstFrame: 60
       lastFrame: 100
@@ -140,7 +176,7 @@ ModelImporter:
       maskSource: {instanceID: 0}
       additiveReferencePoseFrame: 0
     - serializedVersion: 16
-      name: Idle (Sniffing)
+      name: Idle-Sniffing (loop)
       takeName: Take 001
       firstFrame: 110
       lastFrame: 290
@@ -168,7 +204,7 @@ ModelImporter:
       maskSource: {instanceID: 0}
       additiveReferencePoseFrame: 0
     - serializedVersion: 16
-      name: Approach-Bark
+      name: Approach-Bark (loop)
       takeName: Take 001
       firstFrame: 400
       lastFrame: 540
@@ -196,10 +232,122 @@ ModelImporter:
       maskSource: {instanceID: 0}
       additiveReferencePoseFrame: 0
     - serializedVersion: 16
-      name: Run
+      name: Run (loop)
       takeName: Take 001
       firstFrame: 550
       lastFrame: 590
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 1
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: Sniffing-Standing
+      takeName: Take 001
+      firstFrame: 600
+      lastFrame: 839
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: Alert
+      takeName: Take 001
+      firstFrame: 839
+      lastFrame: 1085
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: Sniffing-Walking (startup)
+      takeName: Take 001
+      firstFrame: 1100
+      lastFrame: 1149
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: Sniffing-Walking (loop)
+      takeName: Take 001
+      firstFrame: 1150
+      lastFrame: 1398
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
