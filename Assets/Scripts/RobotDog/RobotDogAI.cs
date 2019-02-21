@@ -13,7 +13,6 @@ public class RobotDogAI : MonoBehaviour
     public float startFollowingHysteresis = 2f;
     public float aheadBehindDuration = 6f;
 
-
     [Header("Follow Ahead Parameters")]
     public float minimumDistanceToFollowAhead = 5f;
     public float speedDependentDistanceToFollowAhead = 5f;
@@ -40,16 +39,13 @@ public class RobotDogAI : MonoBehaviour
     tree "Root"
 	fallback
 		while IsValidObjectiveInRange
-			tree "InvestigateObjectiveItem"
+			GoToPointNearObjective
 		while not IsValidObjectiveInRange
-            fallback
-                while ShouldFollowPlayerAhead
-                    FollowPlayerAhead
-                while not ShouldFollowPlayerAhead
-			        FollowPlayerBehind
-
-    tree "InvestigateObjectiveItem"
-	    GoToPointNearObjective
+			fallback
+				while ShouldFollowPlayerAhead
+					FollowPlayerAhead
+				while not ShouldFollowPlayerAhead
+					FollowPlayerBehind
     */
 
     void Awake()

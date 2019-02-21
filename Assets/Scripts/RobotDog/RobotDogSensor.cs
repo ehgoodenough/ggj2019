@@ -37,17 +37,24 @@ public class RobotDogSensor : MonoBehaviour
             Collider[] colliders = Physics.OverlapSphere(dorgAI.player.transform.position, sensorRadius, detectionLayers);
 
             // Debug.Log("# Colliders: " + colliders.Length);
-            foreach (Collider collider in colliders)
+            if (colliders.Length > 0)
             {
-                ObjectivePickupable objectiveItem = collider.GetComponent<ObjectivePickupable>();
-                // Debug.Log("objectiveItem: " + objectiveItem);
-                if (objectiveItem && objectiveItem != lastDetectedObjectiveItem && !GameProgress.HasObjectiveItemBeenPickedUp(objectiveItem.type))
+                foreach (Collider collider in colliders)
                 {
-                    // TODO: Have Dorg investigate and call attention to this object
-                    Debug.Log("Objective not yet picked up DETECTED");
-                    lastDetectedObjectiveItem = objectiveItem;
-                    EventBus.PublishEvent(new UntouchedObjectiveItemDetectedEvent(objectiveItem));
+                    ObjectivePickupable objectiveItem = collider.GetComponent<ObjectivePickupable>();
+                    // Debug.Log("objectiveItem: " + objectiveItem);
+                    if (objectiveItem && objectiveItem != lastDetectedObjectiveItem && !GameProgress.HasObjectiveItemBeenPickedUp(objectiveItem.type))
+                    {
+                        // TODO: Have Dorg investigate and call attention to this object
+                        Debug.Log("Objective not yet picked up DETECTED");
+                        lastDetectedObjectiveItem = objectiveItem;
+                        EventBus.PublishEvent(new UntouchedObjectiveItemDetectedEvent(objectiveItem));
+                    }
                 }
+            }
+            else
+            {
+                lastDetectedObjectiveItem = null;
             }
 
             yield return new WaitForSeconds(checkFrequency);
@@ -65,7 +72,7 @@ public class RobotDogSensor : MonoBehaviour
     {
         if (dorgAI && dorgAI.player)
         {
-            Gizmos.color = Color.magenta;
+            Gizmos.color = Color.Lerp(Color.red, Color.yellow, 0.5f);
             Gizmos.DrawWireSphere(dorgAI.player.transform.position, sensorRadius);
         }
     }

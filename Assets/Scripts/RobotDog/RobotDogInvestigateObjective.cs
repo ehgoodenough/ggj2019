@@ -18,7 +18,7 @@ public class RobotDogInvestigateObjective : MonoBehaviour
 		        CallAttentionToObjective
     */
 
-    public float sensorRangeHysteresis = 2f;
+    public float sensorRangeHysteresis = 5f;
     public float timeInRangeToBeValid = 2f;
 
     private NavMeshAgent agent;
