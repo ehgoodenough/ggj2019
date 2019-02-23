@@ -9,5 +9,6 @@ public class PhotoCamera : MonoBehaviour
     private void Awake()
     {
         EventBus.Subscribe<EnterHomeEvent>(e => cam.enabled = true);
+        EventBus.Subscribe<EnterTitleScreenEvent>(e => cam.enabled = false);
     }
 }
