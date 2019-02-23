@@ -18,6 +18,12 @@ public struct TestOpenGateEvent
     public TestOpenGateEvent(Button buttonPressed) { this.buttonPressed = buttonPressed; }
 }
 
+public struct EnterTitleScreenEvent
+{
+    GameStateTitleScreen titleScreenState;
+    public EnterTitleScreenEvent(GameStateTitleScreen titleScreenState) { this.titleScreenState = titleScreenState; }
+}
+
 public struct EnterHomeEvent
 {
     public GameStateHome homeState;

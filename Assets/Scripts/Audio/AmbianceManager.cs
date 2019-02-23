@@ -25,21 +25,42 @@ public class AmbianceManager : MonoBehaviour
 
     void Start()
     {
+        // Debug.Log("AmbienceManager.Start()");
         thunderAmbianceInstance = FMODUnity.RuntimeManager.CreateInstance(ThunderAmbianceEvent);
         homeMusicInstance = FMODUnity.RuntimeManager.CreateInstance(HomeMusicEvent);
-
-        thunderAmbianceInstance.start();
+        
+        InitializeTitleScreenAmbience();
 
         EventBus.Subscribe<EnterHomeEvent>(OnEnterHome);
         EventBus.Subscribe<EnterCityEvent>(OnEnterCity);
+        EventBus.Subscribe<EnterTitleScreenEvent>(OnEnterTitleScreen);
     }
 
-    private void OnEnterHome(EnterHomeEvent e) {
+    private void InitializeTitleScreenAmbience()
+    {
         cityMusicInstance.stop(FMOD.Studio.STOP_MODE.IMMEDIATE);
         cityMusicInstance.release();
+
+        homeMusicInstance.stop(FMOD.Studio.STOP_MODE.IMMEDIATE);
+
+        thunderAmbianceInstance.setTimelinePosition(0);
+        thunderAmbianceInstance.start();
+    }
+
+    private void OnEnterTitleScreen(EnterTitleScreenEvent e)
+    {
+        InitializeTitleScreenAmbience();
+    }
+
+    private void OnEnterHome(EnterHomeEvent e)
+    {
+        cityMusicInstance.stop(FMOD.Studio.STOP_MODE.IMMEDIATE);
+        cityMusicInstance.release();
+
         FMOD.Studio.ParameterInstance param;
         thunderAmbianceInstance.getParameter("Location", out param);
         param.setValue(100);
+
         homeMusicInstance.getParameter("Collection_Phase", out param);
         param.setValue(30 * GameProgress.NumObjectivesComplete);
         homeMusicInstance.setTimelinePosition(0);
@@ -48,11 +69,13 @@ public class AmbianceManager : MonoBehaviour
 
     private void OnEnterCity(EnterCityEvent e)
     {
-        cityMusicInstance = FMODUnity.RuntimeManager.CreateInstance(CityMusicEvent);
         homeMusicInstance.stop(FMOD.Studio.STOP_MODE.IMMEDIATE);
+
         FMOD.Studio.ParameterInstance param;
         thunderAmbianceInstance.getParameter("Location", out param);
         param.setValue(0);
+
+        cityMusicInstance = FMODUnity.RuntimeManager.CreateInstance(CityMusicEvent);
         cityMusicInstance.start();
     }
 }

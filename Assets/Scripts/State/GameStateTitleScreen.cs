@@ -42,6 +42,8 @@ public class GameStateTitleScreen : State
     protected override void DoEnter()
     {
         // Do stuff here that should always happen when you first enter the title screen
+        // Debug.Log("GameStateTitleScreen.DoEnter()");
+        EventBus.PublishEvent(new EnterTitleScreenEvent(this));
     }
 
     public override void DoUpdate()
