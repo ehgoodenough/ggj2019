@@ -7,10 +7,14 @@ public class PlayerInputTitleScreenState : PlayerInputState
     {
         // Debug.Log("PlayerInputTitleScreenState.DoAwake()");
         base.DoAwake();
+
+        Cursor.visible = false;
+        Cursor.lockState = CursorLockMode.Locked;
     }
 
     public override void DoUpdate()
     {
+        // Now that this has been refactored, we probably do not need to check the game state like this
         if (gameStateMachine.currentState.GetType() == typeof(GameStateTitleScreen))
         {
             if (Input.GetKeyDown(KeyCode.Return) || (player.GetButtonDown("Interact") && !Input.GetMouseButton(0)))
