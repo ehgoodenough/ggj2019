@@ -7,6 +7,8 @@ using UnityEngine.SceneManagement;
 [RequireComponent(typeof(PlayerView))]
 public class PlayerInputDefaultState : PlayerInputState
 {
+    public bool debugCheatsEnabled = false;
+
     private PlayerMovement movement;
     private PlayerView playerView;
     private InteractionDetector interactionDetector;
@@ -49,18 +51,21 @@ public class PlayerInputDefaultState : PlayerInputState
         }
 
         // Hold back tick, then press 'O' to cheat an objective item in front of you
-        if (Input.GetKey(KeyCode.BackQuote) && Input.GetKeyDown(KeyCode.O))
+        if (debugCheatsEnabled)
         {
-            // Debug.Log("Cheat Keys Hit");
-            ObjectivePickupable objectiveItem = GameObject.FindObjectOfType<ObjectivePickupable>();
-            if (objectiveItem)
+            if (Input.GetKey(KeyCode.BackQuote) && Input.GetKeyDown(KeyCode.O))
             {
-                // Debug.Log("Objective Item Found");
-                if (Vector3.Distance(movement.transform.position, objectiveItem.transform.position) > 5f)
+                // Debug.Log("Cheat Keys Hit");
+                ObjectivePickupable objectiveItem = GameObject.FindObjectOfType<ObjectivePickupable>();
+                if (objectiveItem)
                 {
-                    Debug.Log("Dropping " + objectiveItem + " in front of player.");
-                    Vector3 playerForwardDirection = movement.transform.TransformDirection(Vector3.forward);
-                    objectiveItem.transform.position = movement.transform.position + (playerForwardDirection * 3f) + Vector3.up;
+                    // Debug.Log("Objective Item Found");
+                    if (Vector3.Distance(movement.transform.position, objectiveItem.transform.position) > 5f)
+                    {
+                        Debug.Log("Dropping " + objectiveItem + " in front of player.");
+                        Vector3 playerForwardDirection = movement.transform.TransformDirection(Vector3.forward);
+                        objectiveItem.transform.position = movement.transform.position + (playerForwardDirection * 3f) + Vector3.up;
+                    }
                 }
             }
         }
