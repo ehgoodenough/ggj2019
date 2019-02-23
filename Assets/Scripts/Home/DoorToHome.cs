@@ -7,9 +7,6 @@ public class DoorToHome : Interactable
 {
     public CanvasGroup sceneTransitionFade;
     public float fadeDuration = 1f;
-    // public Transform Item1;
-    // public Transform Item2;
-    // public Transform Item3;
 
     void Start()
     {
