@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class ColorEffect : MonoBehaviour
 {
@@ -18,12 +19,18 @@ public class ColorEffect : MonoBehaviour
         cam.depthTextureMode = DepthTextureMode.Depth;
 
         colorBufferCam = PostProcessUtils.GenerateBufferCamera(1 << LayerMask.NameToLayer("Color") | 1 << LayerMask.NameToLayer("ColorAndOutline"), "Color", cam);
+        SceneManager.sceneLoaded += OnSceneWasLoaded;
     }
 
-    void OnLevelWasLoaded(int level)
+    void OnSceneWasLoaded(Scene scene, LoadSceneMode mode)
     {
+        // Debug.Log("OnSceneWasLoaded()");
         // settin dat wave origin YO.
-        SetWaveOrigin(GameObject.Find("WaveOrigin").transform);
+        GameObject waveOrigin = GameObject.Find("WaveOrigin");
+        if (waveOrigin)
+        {
+            SetWaveOrigin(waveOrigin.transform);
+        }
     }
 
     void Update()
@@ -34,6 +41,7 @@ public class ColorEffect : MonoBehaviour
 
     public void SetWaveOrigin(Transform waveOrigin)
     {
+        // Debug.Log("Wave Origin Transform: " + waveOrigin);
         saturationWaveOrigin = waveOrigin;
     }
 
@@ -52,6 +60,7 @@ public class ColorEffect : MonoBehaviour
         //Graphics.Blit(source, destination, halftoneMat);
         RaycastCornerBlit(source, destination, halftoneMat);
     }
+
     void RaycastCornerBlit(RenderTexture source, RenderTexture dest, Material mat)
     {
         // Compute Frustum Corners
