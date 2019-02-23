@@ -14,7 +14,7 @@ public class SaturationWaveSequencer : MonoBehaviour
     private float saturationIncrement = 1f/3f; // TODO: should be 1 / numItems
 
     [SubscribeGlobal]
-    void ExitHome(LeaveHomeEvent e) // change to OnDestroy, if we're just changing scenes?
+    void ExitHome(ExitHomeEvent e) // change to OnDestroy, if we're just changing scenes?
     {
         StopCoroutine(DoEffect());
         colorEffectMat.SetFloat("_ScanDistance", 0);
@@ -23,6 +23,7 @@ public class SaturationWaveSequencer : MonoBehaviour
 
     private void Awake()
     {
+        // Debug.Log("SaturationWaveSequencer.Awake()");
         colorEffectMat.SetFloat("_ScanDistance", 0);
         colorEffectMat.SetFloat("_SaturationLevel", GameProgress.homeSaturationLevel);
         colorEffectMat.SetFloat("_TargetSaturationLevel", GameProgress.homeSaturationLevel + saturationIncrement);
@@ -39,7 +40,7 @@ public class SaturationWaveSequencer : MonoBehaviour
 
     public void IncreaseSaturationLevel()
     {
-        Debug.Log("Increment Home Saturation Level in Game Progress");
+        // Debug.Log("Increment Home Saturation Level in Game Progress");
         GameProgress.homeSaturationLevel += saturationIncrement;
 
         if (!effectIsActive)
@@ -51,7 +52,9 @@ public class SaturationWaveSequencer : MonoBehaviour
 
     void OnDestroy()
     {
+        StopCoroutine(DoEffect());
         colorEffectMat.SetFloat("_ScanDistance", 0);
+        colorEffectMat.SetFloat("_SaturationLevel", 0);
     }
 
     IEnumerator DoEffect()
