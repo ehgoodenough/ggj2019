@@ -1,0 +1,34 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7e95d7957c1fa6c4b8ec29c3aeb732c8, type: 3}
+  m_Name: MouseGlyphMap
+  m_EditorClassIdentifier: 
+  mouseXAxis:
+    elementId: 0
+    mainGlyph: {fileID: 0}
+    negativeGlyph: {fileID: 0}
+    positiveGlyph: {fileID: 0}
+  mouseYAxis:
+    elementId: 0
+    mainGlyph: {fileID: 0}
+    negativeGlyph: {fileID: 0}
+    positiveGlyph: {fileID: 0}
+  mouseScrollAxis:
+    elementId: 0
+    mainGlyph: {fileID: 0}
+    negativeGlyph: {fileID: 0}
+    positiveGlyph: {fileID: 0}
+  leftMouseButton: {fileID: 0}
+  rightMouseButton: {fileID: 0}
+  middleMouseButton: {fileID: 0}
+  mouseButton4: {fileID: 0}
+  mouseButton5: {fileID: 0}
