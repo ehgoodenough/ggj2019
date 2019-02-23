@@ -49,10 +49,10 @@ public class PlayerInputDefaultState : PlayerInputState
             this.stateMachine.ChangeState(pauseMenuState);
             return;
         }
-
-        // Hold back tick, then press 'O' to cheat an objective item in front of you
+        
         if (debugCheatsEnabled)
         {
+            // Hold back tick, then press 'O' to cheat an objective item in front of you
             if (Input.GetKey(KeyCode.BackQuote) && Input.GetKeyDown(KeyCode.O))
             {
                 // Debug.Log("Cheat Keys Hit");

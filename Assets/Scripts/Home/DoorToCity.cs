@@ -9,17 +9,17 @@ public class DoorToCity : Interactable
     public CanvasGroup sceneTransitionFade;
     public float fadeDuration = 1f;
 
-    private static bool enteredFromTitleScreen = true;
+    public static bool enteringFromTitleScreen = true;
 
     void Start()
     {
-        if (!enteredFromTitleScreen)
+        if (!enteringFromTitleScreen)
         {
             FMODUnity.RuntimeManager.PlayOneShot("event:/SFX/Interactables/Door_Close", transform.position);
         }
         else
         {
-            enteredFromTitleScreen = false; // all other transitions will be between city and home
+            enteringFromTitleScreen = false; // subsequent transitions will be between city and home
         }
     }
 

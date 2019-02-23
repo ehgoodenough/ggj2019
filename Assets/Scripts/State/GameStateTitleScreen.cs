@@ -74,6 +74,8 @@ public class GameStateTitleScreen : State
 
     private void OnGameStartEvent(StartGameEvent e)
     {
+        // Note that this event should be for starting the game from scratch, not necessarily loading a saved game
+        DoorToCity.enteringFromTitleScreen = true; // This ensures that the door closing sound does not play during boot up sequence
         SceneManager.LoadScene("RobertHomeScene");
         stateMachine.ChangeState(homeState);
     }

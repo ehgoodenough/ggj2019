@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.SceneManagement;
 using System.Collections;
 
 public class PlayerInputPauseMenuState : PlayerInputState
@@ -25,6 +26,13 @@ public class PlayerInputPauseMenuState : PlayerInputState
 
     public override void DoUpdate()
     {
+        // For now, restart is a cheat executed from the pause menu
+        if (Input.GetKey(KeyCode.BackQuote) && Input.GetKeyDown(KeyCode.R))
+        {
+            Restart();
+            return;
+        }
+
         // Hitting Esc resumes the game
         if (Input.GetKeyUp(KeyCode.Escape) || player.GetButtonUp("Pause") || player.GetButtonUp("Back"))
         {
@@ -117,15 +125,21 @@ public class PlayerInputPauseMenuState : PlayerInputState
         this.stateMachine.ChangeState(defaultState);
     }
 
-    /*
     public void Restart()
     {
-        // Debug.Log("Restart Game");
+        Debug.Log("Restart Game");
+        EventBus.PublishEvent(new PauseMenuDisengagedEvent());
+
+        foreach (Rigidbody rb in FindObjectsOfType<Rigidbody>())
+        {
+            rb.WakeUp();
+        }
+
         // TODO: Figure out all the things we're going to need to reset to handle at restart
-        SceneManager.LoadScene("RobertTitleScreen");
+        SceneManager.LoadScene("RobertTitleScreen"); // TODO: Listen for an event in game state machine to handle this
+        gameStateMachine.ChangeState(gameStateMachine.GetState<GameStateTitleScreen>());
         this.stateMachine.ChangeState(titleScreenState);
     }
-    */
 
     private void Quit()
     {
