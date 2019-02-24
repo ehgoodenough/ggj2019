@@ -50,6 +50,12 @@ public class GameStateTitleScreen : State
             startPromptCanvas.alpha = 0;
             StartCoroutine(RevealCanvas(startPromptCanvas, 5f));
         }
+
+        // Not the ideal way to do this, but it'll serve for now
+        if (titleCanvasObj && startPromptCanvasObj)
+        {
+            EventBus.PublishEvent(new TitleScreenLoadedEvent());
+        }
     }
 
     protected override void DoEnter()

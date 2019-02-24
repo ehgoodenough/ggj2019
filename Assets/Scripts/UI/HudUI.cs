@@ -10,9 +10,16 @@ public class HudUI : MonoBehaviour
 
     private void Awake()
     {
-        if (partsCanvasGroup) partsCanvasGroup.alpha = 0f;
-        if (batteryCanvasGroup) partsCanvasGroup.alpha = 0f;
+        Initialize();
         EventBus.Subscribe<ExitTitleScreenEvent>(OnExitTitleScreenEvent);
+        EventBus.Subscribe<TitleScreenLoadedEvent>(e => Initialize());
+    }
+
+    private void Initialize()
+    {
+        // Debug.Log("HudUI.Initialize()");
+        if (partsCanvasGroup) partsCanvasGroup.alpha = 0f;
+        if (batteryCanvasGroup) batteryCanvasGroup.alpha = 0f;
     }
 
     private void OnExitTitleScreenEvent(ExitTitleScreenEvent e)
@@ -31,10 +38,6 @@ public class HudUI : MonoBehaviour
         {
             canvasGroup.alpha += Time.deltaTime / canvasGroupFadeDuration;
             yield return null;
-            while (canvasGroup == null)
-            {
-                yield return null;
-            }
         }
     }
 }
