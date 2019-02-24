@@ -13,14 +13,6 @@ public class SaturationWaveSequencer : MonoBehaviour
     [SerializeField]
     private float saturationIncrement = 1f/3f; // TODO: should be 1 / numItems
 
-    [SubscribeGlobal]
-    void ExitHome(ExitHomeEvent e) // change to OnDestroy, if we're just changing scenes?
-    {
-        StopCoroutine(DoEffect());
-        colorEffectMat.SetFloat("_ScanDistance", 0);
-        colorEffectMat.SetFloat("_SaturationLevel", 0);
-    }
-
     private void Awake()
     {
         // Debug.Log("SaturationWaveSequencer.Awake()");
