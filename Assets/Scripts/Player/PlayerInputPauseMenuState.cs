@@ -6,9 +6,9 @@ public class PlayerInputPauseMenuState : PlayerInputState
 {
     enum PauseOption
     {
-        // Restart = 0,
         Resume = 0,
-        Quit = 1
+        Restart = 1,
+        Quit = 2
     }
 
     private PauseOption currentPauseOption = PauseOption.Resume;
@@ -44,9 +44,9 @@ public class PlayerInputPauseMenuState : PlayerInputState
             // Debug.Log("Return");
             switch (currentPauseOption)
             {
-                // case PauseOption.Restart:
-                //     Restart();
-                //    break;
+                case PauseOption.Restart:
+                    Restart();
+                    break;
                 case PauseOption.Resume:
                     Resume();
                     break;
@@ -63,7 +63,7 @@ public class PlayerInputPauseMenuState : PlayerInputState
                 Input.GetKeyDown(KeyCode.W) && !Input.GetKey(KeyCode.UpArrow) ||
                 player.GetButtonDown("Pause Menu Up"))
             {
-                currentPauseOption = (PauseOption)(((int)currentPauseOption - 1 + 2) % 2); // + 3) % 3);
+                currentPauseOption = (PauseOption)(((int)currentPauseOption - 1 + 3) % 3); // + 2) % 2);
                 // Debug.Log("Current Pause Option: " + currentPauseOption);
                 selectionSwitched = true;
             }
@@ -71,7 +71,7 @@ public class PlayerInputPauseMenuState : PlayerInputState
                         Input.GetKeyDown(KeyCode.S) && !Input.GetKey(KeyCode.DownArrow) ||
                         player.GetButtonDown("Pause Menu Down"))
             {
-                currentPauseOption = (PauseOption)(((int)currentPauseOption + 1) % 2); // % 3);
+                currentPauseOption = (PauseOption)(((int)currentPauseOption + 1) % 3); // % 2);
                 // Debug.Log("Current Pause Option: " + currentPauseOption);
                 selectionSwitched = true;
             }
@@ -80,9 +80,9 @@ public class PlayerInputPauseMenuState : PlayerInputState
             {
                 switch (currentPauseOption)
                 {
-                    // case PauseOption.Restart:
-                    //     EventBus.PublishEvent(new SwitchFocusToRestartOptionEvent());
-                    //     break;
+                    case PauseOption.Restart:
+                        EventBus.PublishEvent(new SwitchFocusToRestartOptionEvent());
+                        break;
                     case PauseOption.Resume:
                         EventBus.PublishEvent(new SwitchFocusToResumeOptionEvent());
                         break;
@@ -133,8 +133,7 @@ public class PlayerInputPauseMenuState : PlayerInputState
         {
             rb.WakeUp();
         }
-
-        // TODO: Figure out all the things we're going to need to reset to handle at restart
+        
         SceneManager.LoadScene("RobertTitleScreen"); // TODO: Listen for an event in game state machine to handle this
         gameStateMachine.ChangeState(gameStateMachine.GetState<GameStateTitleScreen>());
         this.stateMachine.ChangeState(titleScreenState);
