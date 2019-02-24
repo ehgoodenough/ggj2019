@@ -4,7 +4,6 @@ using UnityEngine.SceneManagement;
 
 public class GameStateCity : State
 {
-    public CanvasGroup sceneTransitionFade;
     public float fadeDuration = 1f;
 
     private GameStateTitleScreen titleState;
@@ -49,7 +48,7 @@ public class GameStateCity : State
 
     IEnumerator FadeIn()
     {
-        sceneTransitionFade = GameObject.Find("SceneTransitionFade").GetComponent<CanvasGroup>();
+        CanvasGroup sceneTransitionFade = GameObject.Find("SceneTransitionFade").GetComponent<CanvasGroup>();
 
         while (sceneTransitionFade.alpha > 0)
         {

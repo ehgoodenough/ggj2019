@@ -4,7 +4,6 @@ using UnityEngine.SceneManagement;
 
 public class GameStateHome : State
 {
-    public CanvasGroup sceneTransitionFade;
     public float fadeDuration = 1f;
 
     private GameStateTitleScreen titleState;
@@ -53,7 +52,7 @@ public class GameStateHome : State
 
     IEnumerator FadeIn()
     {
-        sceneTransitionFade = GameObject.Find("SceneTransitionFade").GetComponent<CanvasGroup>();
+        CanvasGroup sceneTransitionFade = GameObject.Find("SceneTransitionFade").GetComponent<CanvasGroup>();
         CanvasGroup otherCanvasGroup = GameObject.Find("FadePanel").GetComponent<CanvasGroup>();
         CanvasGroup powerDownTextCanvasGroup = GameObject.Find("PowerDownText").GetComponent<CanvasGroup>();
 
