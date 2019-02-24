@@ -30,7 +30,7 @@ public class GameStateHome : State
         EventBus.PublishEvent(new EnterHomeEvent(this));
 
         Debug.Log("start dat coroutine");
-        FindObjectOfType<GlitchEffect>().enabled = false;
+        FindObjectOfType<GlitchEffect>().enabled = false; // Why is this being set to false?
     }
 
     public override void DoUpdate()
@@ -47,10 +47,7 @@ public class GameStateHome : State
     private void OnLeaveHomeEvent(LeaveHomeEvent e)
     {
         // Debug.Log("GameStateHome.OnLeaveHomeEvent");
-        // Does the order of LoadScene() and ChangeState() matter?
-        // SceneManager.UnloadSceneAsync("RobertHomeScene");
         SceneManager.LoadScene("RobertCityScene");
-        // SceneManager.LoadScene("CityScene");
         stateMachine.ChangeState(cityState);
     }
 

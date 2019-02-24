@@ -43,18 +43,9 @@ public class PowerDown : MonoBehaviour
         StartCoroutine(FadeOut());
     }
 
-    void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.Keypad8))
-        {
-            // uncomment to test
-            // HandlePowerDown(new PowerDownEvent());
-        }
-    }
-
     IEnumerator FadeOut()
     {
-        Destroy(GameObject.Find("BootupText"));
+        Destroy(GameObject.Find("BootupText")); // Why are we doing this? So the glitch effect plays?
         Debug.Log("IT'S Gone");
         textCanvasGrewp.alpha = 0;
 

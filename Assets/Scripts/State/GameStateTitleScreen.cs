@@ -6,13 +6,13 @@ public class GameStateTitleScreen : State
 {
     public GameObject playerPrefab;
     public float titleFadeDuration;
-    public CanvasGroup titleCanvas;
-    public CanvasGroup startPromptCanvas;
 
     private GameObject playerObj;
 
     private GameStateHome homeState;
     private GameStateCity cityState;
+
+    private int titleScreenHandle;
 
     protected override void DoAwake()
     {
@@ -20,6 +20,7 @@ public class GameStateTitleScreen : State
         cityState = stateMachine.GetState<GameStateCity>();
 
         EventBus.Subscribe<StartGameEvent>(OnGameStartEvent);
+        SceneManager.sceneLoaded += OnSceneWasLoaded;
     }
 
     protected override void DoStart()
@@ -30,13 +31,25 @@ public class GameStateTitleScreen : State
             // Debug.Log("playerObj: " + playerObj);
             // Debug.Log("Player Position: " + playerObj.transform.position);
         }
+    }
 
-        // EventBus.PublishEvent(new TitleScreenStartEvent(playerObj));
-        titleCanvas.alpha = 0;
-        StartCoroutine(RevealCanvas(titleCanvas, 2f));
+    private void OnSceneWasLoaded(Scene scene, LoadSceneMode mode)
+    {
+        GameObject titleCanvasObj = GameObject.Find("TitleGroup");
+        if (titleCanvasObj)
+        {
+            CanvasGroup titleCanvas = titleCanvasObj.GetComponent<CanvasGroup>();
+            titleCanvas.alpha = 0;
+            StartCoroutine(RevealCanvas(titleCanvas, 1.5f));
+        }
 
-        startPromptCanvas.alpha = 0;
-        StartCoroutine(RevealCanvas(startPromptCanvas, 5.5f));
+        GameObject startPromptCanvasObj = GameObject.Find("StartPromptGroup");
+        if (startPromptCanvasObj)
+        {
+            CanvasGroup startPromptCanvas = startPromptCanvasObj.GetComponent<CanvasGroup>();
+            startPromptCanvas.alpha = 0;
+            StartCoroutine(RevealCanvas(startPromptCanvas, 5f));
+        }
     }
 
     protected override void DoEnter()

@@ -43,9 +43,6 @@ public class GameStateCity : State
     private void OnReturnHomeEvent(ReturnHomeEvent e)
     {
         // Debug.Log("GameStateCity.OnReturnHomeEvent");
-        // Does the order of LoadScene() and ChangeState() matter?
-        // SceneManager.LoadScene("HomeScene");
-        // SceneManager.UnloadSceneAsync("RobertCityScene");
         SceneManager.LoadScene("RobertHomeScene");
         stateMachine.ChangeState(homeState);
     }
