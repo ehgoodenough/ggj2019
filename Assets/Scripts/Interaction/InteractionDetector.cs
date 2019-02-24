@@ -95,7 +95,7 @@ public class InteractionDetector : MonoBehaviour
         Interactable interactable = other.GetComponent<Interactable>();
         if (interactable != null)
         {
-            Debug.Log("OnTriggerEnter: " + other);
+            // Debug.Log("OnTriggerEnter: " + other);
             interactablesInRange.Add(interactable);
         }
     }
@@ -142,11 +142,10 @@ public class InteractionDetector : MonoBehaviour
             OutlineManager.Instance.UnapplyOutline(interactableInFocus.gameObject);
         }
     }
-
     
     private void OnExitCityEvent(ExitCityEvent e)
     {
-        Debug.Log("InteractionDetector.OnExitCityEvent");
+        // Debug.Log("InteractionDetector.OnExitCityEvent");
         interactablesInRange.Clear();
     }
 
