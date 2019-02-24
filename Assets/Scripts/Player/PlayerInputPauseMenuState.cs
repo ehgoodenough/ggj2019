@@ -134,7 +134,7 @@ public class PlayerInputPauseMenuState : PlayerInputState
             rb.WakeUp();
         }
         
-        SceneManager.LoadScene("RobertTitleScreen"); // TODO: Listen for an event in game state machine to handle this
+        SceneManager.LoadScene("RobertTitleScreen2"); // TODO: Listen for an event in game state machine to handle this
         gameStateMachine.ChangeState(gameStateMachine.GetState<GameStateTitleScreen>());
         this.stateMachine.ChangeState(titleScreenState);
     }

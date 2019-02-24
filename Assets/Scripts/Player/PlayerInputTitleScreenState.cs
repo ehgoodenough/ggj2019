@@ -17,7 +17,8 @@ public class PlayerInputTitleScreenState : PlayerInputState
         // Now that this has been refactored, we probably do not need to check the game state like this
         if (gameStateMachine.currentState.GetType() == typeof(GameStateTitleScreen))
         {
-            if (Input.GetKeyDown(KeyCode.Return) || (player.GetButtonDown("Interact") && !Input.GetMouseButton(0)))
+            if (Input.anyKeyDown || player.GetButtonDown("Interact"))
+            // if (Input.GetKeyDown(KeyCode.Return) || (player.GetButtonDown("Interact") && !Input.GetMouseButton(0)))
             {
                 Debug.Log("StartGame");
                 EventBus.PublishEvent(new StartGameEvent());
