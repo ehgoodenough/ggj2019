@@ -64,6 +64,7 @@ public class Photo : MonoBehaviour
         StopCoroutine(HoldUpPhotoAtStart());
         introVoiceOverInstance.stop(FMOD.Studio.STOP_MODE.IMMEDIATE);
         introVoiceOverInstance.release();
+        playerCanRaisePhoto = false;
     }
 
     private void OnExitTitleScreenEvent(ExitTitleScreenEvent e)
