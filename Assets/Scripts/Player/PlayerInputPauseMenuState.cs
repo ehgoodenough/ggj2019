@@ -128,7 +128,6 @@ public class PlayerInputPauseMenuState : PlayerInputState
     public void Restart()
     {
         Debug.Log("Restart Game");
-        EventBus.PublishEvent(new PauseMenuDisengagedEvent());
 
         foreach (Rigidbody rb in FindObjectsOfType<Rigidbody>())
         {

@@ -23,22 +23,13 @@ public class PauseUI : MonoBehaviour
     {
         pauseMenuGroup.alpha = 0f;
 
-        EventBus.Subscribe<PauseMenuEngagedEvent>(OnPauseMenuEngaged);
-        EventBus.Subscribe<PauseMenuDisengagedEvent>(OnPauseMenuDisengaged);
+        EventBus.Subscribe<PauseMenuEngagedEvent>(e => pauseMenuGroup.alpha = 1f);
+        EventBus.Subscribe<PauseMenuDisengagedEvent>(e => pauseMenuGroup.alpha = 0f);
+        EventBus.Subscribe<TitleScreenLoadedEvent>(e => pauseMenuGroup.alpha = 0f);
 
         EventBus.Subscribe<SwitchFocusToRestartOptionEvent>(OnSwitchFocusToRestart);
         EventBus.Subscribe<SwitchFocusToResumeOptionEvent>(OnSwitchFocusToResume);
         EventBus.Subscribe<SwitchFocusToQuitOptionEvent>(OnSwitchFocusToQuit);
-    }
-    
-    public void OnPauseMenuEngaged(PauseMenuEngagedEvent e)
-    {
-        pauseMenuGroup.alpha = 1f;
-    }
-
-    public void OnPauseMenuDisengaged(PauseMenuDisengagedEvent e)
-    {
-        pauseMenuGroup.alpha = 0f;
     }
 
     public void OnSwitchFocusToRestart(SwitchFocusToRestartOptionEvent e)
