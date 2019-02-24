@@ -10,35 +10,35 @@ public class FinalCinematicDynamicTimelineBinding : MonoBehaviour
     
     public void BindTimelineTracks()
     {
-        Debug.Log("Binding Timeline Tracks!");
+        // Debug.Log("Binding Timeline Tracks!");
         TimelineAsset timelineAsset = (TimelineAsset)director.playableAsset;
         // iterate through tracks and map the objects appropriately
 
         int i = 0;
         foreach (PlayableBinding binding in timelineAsset.outputs)
         {
-            Debug.Log("Binding[ " + i + " ]: " + binding);
-            Debug.Log("Track: " + binding.sourceObject);
-            Debug.Log("Object: " + director.GetGenericBinding(binding.sourceObject));
+            // Debug.Log("Binding[ " + i + " ]: " + binding);
+            // Debug.Log("Track: " + binding.sourceObject);
+            // Debug.Log("Object: " + director.GetGenericBinding(binding.sourceObject));
 
             if (director.GetGenericBinding(binding.sourceObject) == null)
             {
                 if (i == 1)
                 {
                     GameObject trackValue = GameObject.Find("friend_pieces");
-                    Debug.Log("Set Binding to: " + trackValue);
+                    // Debug.Log("Set Binding to: " + trackValue);
                     director.SetGenericBinding((TrackAsset)binding.sourceObject, trackValue);
                 }
                 else if (i == 4)
                 {
                     GameObject trackValue = GameObject.Find("friend_whole_parent").transform.GetChild(0).gameObject;
-                    Debug.Log("Set Binding to: " + trackValue);
+                    // Debug.Log("Set Binding to: " + trackValue);
                     director.SetGenericBinding((TrackAsset)binding.sourceObject, trackValue);
                 }
                 else if (i == 8)
                 {
                     GameObject trackValue = GameObject.Find("dorg");
-                    Debug.Log("Set Binding to: " + trackValue);
+                    // Debug.Log("Set Binding to: " + trackValue);
                     director.SetGenericBinding((TrackAsset)binding.sourceObject, trackValue);
                 }
             }
