@@ -24,7 +24,7 @@ public class Pickupable : Interactable
 
     public virtual void Pickup(Vector3 holdPoint, Transform parent)
     {
-        Debug.Log("Pickupable.Pickup()");
+        // Debug.Log("Pickupable.Pickup()");
         isHeld = true;
         rb.useGravity = false;
         rb.constraints = RigidbodyConstraints.FreezeAll;
