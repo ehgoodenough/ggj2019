@@ -25,14 +25,20 @@ public class ScrollingText : MonoBehaviour
     {
         stringToDisplay = textFile.text;
         text = GetComponent<Text>();
+
+        EventBus.Subscribe<EnterTitleScreenEvent>(e => Initialize());
+    }
+
+    private void Initialize()
+    {
+        lineTimer = 0.0f;
+        text.text = "";
     }
 
     public void StartScroll(System.Action onComplete)
     {
-        lineTimer = 0.0f;
-        text.text = "";
+        Initialize();
         this.onComplete = onComplete;
-
         this.enabled = true;
     }
 

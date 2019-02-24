@@ -18,15 +18,15 @@ public class CinematicPlayer : MonoBehaviour
 
     private void Awake()
     {
-        // director = FindObjectOfType<PlayableDirector>();
         director = GameObject.Find("HUD").GetComponent<PlayableDirector>();
+        EventBus.Subscribe<EnterTitleScreenEvent>(e => openingCinematicPlayed = false);
     }
 
     public void PlayOpeningCinematicIfNecessary()
     {
         if (!openingCinematicPlayed)
         {
-            Debug.Log("PLAYING CINEMATIC");
+            // Debug.Log("PLAYING CINEMATIC");
             director.playableAsset = openingCinematicPlayable;
             director.Play();
             var bootSound = FMODUnity.RuntimeManager.CreateInstance(bootSoundEvent);
