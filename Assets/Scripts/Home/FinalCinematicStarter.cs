@@ -51,6 +51,4 @@ public class FinalCinematicStarter : MonoBehaviour
     {
         EventBus.PublishEvent(new FriendFullyAssembledEvent()); // This event kicks off the end credits
     }
-
-
 }

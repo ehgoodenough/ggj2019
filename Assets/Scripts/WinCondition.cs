@@ -4,8 +4,6 @@ using UnityEngine;
 public class WinCondition : MonoBehaviour
 {
     public SaturationWaveSequencer wave;
-    public Transform waveOrigin;
-    public Transform playerStartPosition;
 
     private void Awake()
     {
@@ -17,16 +15,7 @@ public class WinCondition : MonoBehaviour
         if (GameProgress.hasJustCompletedObjective)
         {
             EventBus.PublishEvent(new ObjectiveCompletedCutsceneStartEvent());
-
             GameProgress.hasJustCompletedObjective = false;
-            PlayerView playaView = FindObjectOfType<PlayerView>();
-            playaView.RestrictView(true);
-
-            PlayerMovement movement = FindObjectOfType<PlayerMovement>();
-            GameObject playa = movement.gameObject;
-            playa.transform.SetPositionAndRotation(playerStartPosition.position, playerStartPosition.rotation);
-            playaView.ResetCamera();
-            movement.RestrictMovement(true);
 
             yield return new WaitForSeconds(1.5f);
 
@@ -42,9 +31,6 @@ public class WinCondition : MonoBehaviour
 
             yield return new WaitForSeconds(3);
 
-            playaView.RestrictView(false);
-            movement.RestrictMovement(false);
-
             EventBus.PublishEvent(new ObjectiveCompletedCutsceneEndEvent());
         }
 
@@ -54,7 +40,7 @@ public class WinCondition : MonoBehaviour
         {
             Debug.Log("WINNER IS YOU");
             EventBus.PublishEvent(new PlayerHasWonEvent());
-            // Invoke("PlayFinalCinematic", 4);
+            
             StartCoroutine(PlayFinalCinematic());
         }
 
@@ -66,7 +52,6 @@ public class WinCondition : MonoBehaviour
         FinalCinematicStarter newFinalCinematic = FindObjectOfType<FinalCinematicStarter>();
         if (newFinalCinematic && newFinalCinematic.playOnGameEnd)
         {
-            // yield return new WaitForSeconds(1.5f);
             newFinalCinematic.PlayFinalCinematic();
         }
         else

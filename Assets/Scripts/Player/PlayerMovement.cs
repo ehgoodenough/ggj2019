@@ -31,9 +31,11 @@ public class PlayerMovement : MonoBehaviour
     {
         slowingModifiers = GetComponents<ISlowingModifier>();
 
-        EventBus.Subscribe<PlayerStartPositionEvent>(OnPlayerStartPositionEvent);
-        EventBus.Subscribe<PhotoLoweredAtStartEvent>(OnPhotoLoweredAtStartEvent);
-        EventBus.Subscribe<PlayerHasWonEvent>(OnPlayerHasWonEvent);
+        EventBus.Subscribe<PlayerStartPositionEvent>(e => SpawnAtStartPosition(e.startTransform));
+        EventBus.Subscribe<PhotoLoweredAtStartEvent>(e => RestrictMovement(false));
+        EventBus.Subscribe<ObjectiveCompletedCutsceneStartEvent>(e => RestrictMovement(true));
+        EventBus.Subscribe<ObjectiveCompletedCutsceneEndEvent>(e => RestrictMovement(false));
+        EventBus.Subscribe<PlayerHasWonEvent>(e => RestrictMovement(true));
     }
 
     void Start()
@@ -109,19 +111,10 @@ public class PlayerMovement : MonoBehaviour
         isGravityRestricted = restrictGravity;
     }
 
-    private void OnPlayerStartPositionEvent(PlayerStartPositionEvent e)
+    private void SpawnAtStartPosition(Transform startTransform)
     {
+        this.transform.position = startTransform.position;
         RestrictGravity(false);
-    }
-
-    private void OnPhotoLoweredAtStartEvent(PhotoLoweredAtStartEvent e)
-    {
-        RestrictMovement(false);
-    }
-
-    private void OnPlayerHasWonEvent(PlayerHasWonEvent e)
-    {
-        RestrictMovement(true);
     }
 
     /// METHODS FOR DEBUGGING PURPOSES BELOW

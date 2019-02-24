@@ -16,8 +16,11 @@ public class PlayerView : MonoBehaviour
 
         cameraRotation = virtualCamera.transform.rotation.eulerAngles.x;
 
-        EventBus.Subscribe<PhotoLoweredAtStartEvent>(OnPhotoLoweredAtStartEvent);
-        EventBus.Subscribe<PlayerHasWonEvent>(OnPlayerHasWonEvent);
+        EventBus.Subscribe<PlayerStartPositionEvent>(e => SpawnAtStartPosition(e.startTransform));
+        EventBus.Subscribe<PhotoLoweredAtStartEvent>(e => RestrictView(false));
+        EventBus.Subscribe<ObjectiveCompletedCutsceneStartEvent>(e => RestrictView(true));
+        EventBus.Subscribe<ObjectiveCompletedCutsceneEndEvent>(e => RestrictView(false));
+        EventBus.Subscribe<PlayerHasWonEvent>(e => RestrictView(true));
     }
 
     public void Look(Vector2 lookVector)
@@ -50,14 +53,9 @@ public class PlayerView : MonoBehaviour
         virtualCamera.transform.localRotation = Quaternion.Euler(new Vector3(0, 0, 0));
     }
 
-    // TODO: Turn player in fluid motion toward robot friend
-    private void OnPlayerHasWonEvent(PlayerHasWonEvent e)
+    private void SpawnAtStartPosition(Transform startTransform)
     {
-        RestrictView(true);
-    }
-
-    private void OnPhotoLoweredAtStartEvent(PhotoLoweredAtStartEvent e)
-    {
-        RestrictView(false);
+        this.transform.rotation = startTransform.rotation;
+        ResetCamera();
     }
 }
