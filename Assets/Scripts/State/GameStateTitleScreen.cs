@@ -54,6 +54,7 @@ public class GameStateTitleScreen : State
         // Not the ideal way to do this, but it'll serve for now
         if (titleCanvasObj && startPromptCanvasObj)
         {
+            GameProgress.Reset();
             EventBus.PublishEvent(new TitleScreenLoadedEvent());
         }
     }

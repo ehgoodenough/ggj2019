@@ -5,7 +5,16 @@ using System.Collections.Generic;
 public static class GameProgress
 {
     public static float homeSaturationLevel = 0;
-    
+
+    public static void Reset()
+    {
+        homeSaturationLevel = 0;
+        collectedSet.Clear();
+        hasJustCompletedObjective = false;
+        completedObjectives.Clear();
+        pickedUpObjectives.Clear();
+    }
+
     // Track collected IDs
     public static HashSet<Vector3> collectedSet = new HashSet<Vector3>();
 
