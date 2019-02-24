@@ -16,7 +16,16 @@ public class EndingUI : MonoBehaviour
 
     private void Awake()
     {
-        Debug.Log("EndingUI.Awake()");
+        // Debug.Log("EndingUI.Awake()");
+        Initialize();
+
+        EventBus.Subscribe<FriendFullyAssembledEvent>(OnFriendFullyAssembled);
+        EventBus.Subscribe<TitleScreenLoadedEvent>(e => Initialize());
+    }
+
+    private void Initialize()
+    {
+        // Debug.Log("Initialize Ending UI");
         endingGroup.alpha = 0f;
         textBackgroundGroup.alpha = 0f;
         friendQuestionGroup.alpha = 0f;
@@ -26,9 +35,6 @@ public class EndingUI : MonoBehaviour
         thanksForPlayingGroup.alpha = 0f;
         creditsGroup.alpha = 0f;
         titleFollowQuitGroup.alpha = 0f;
-
-        EventBus.Subscribe<FriendFullyAssembledEvent>(OnFriendFullyAssembled);
-        // EventBus.Subscribe<PhotoLoweredAtStartEvent>(OnFriendFullyAssembled); // For testing only
     }
 
     private void OnFriendFullyAssembled(FriendFullyAssembledEvent e)
