@@ -40,8 +40,6 @@ public class Photo : MonoBehaviour
     {
         time = HOW_LONG_TO_KEEP_IT_UP_FOR_CINEMATICS; // Ensure that photo is down to start
 
-        introVoiceOverInstance = FMODUnity.RuntimeManager.CreateInstance("event:/VO/What_Is_Home_Intro");
-
         EventBus.Subscribe<ExitTitleScreenEvent>(OnExitTitleScreenEvent);
         EventBus.Subscribe<EnterTitleScreenEvent>(OnEnterTitleScreen);
     }
@@ -84,7 +82,7 @@ public class Photo : MonoBehaviour
 
         // Wait for boot up sequence to end
         yield return new WaitForSeconds(5.8f);
-        // introVoiceOverInstance = FMODUnity.RuntimeManager.CreateInstance("event:/VO/What_Is_Home_Intro");
+        introVoiceOverInstance = FMODUnity.RuntimeManager.CreateInstance("event:/VO/What_Is_Home_Intro");
         introVoiceOverInstance.start();
         introVoiceOverInstance.release();
         // While glitching, ask "What is home?"
