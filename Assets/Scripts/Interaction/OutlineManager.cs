@@ -17,6 +17,10 @@ public class OutlineManager : MonoBehaviour
         {
             Instance = this;
         }
+        else
+        {
+            DestroyImmediate(this.gameObject);
+        }
 
         cachedLayers = new Dictionary<GameObject, Dictionary<Renderer, int>>();
         Shader.SetGlobalFloat("isMac", Application.platform == RuntimePlatform.OSXPlayer ? 1 : 0);
