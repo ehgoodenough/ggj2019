@@ -16,6 +16,8 @@ public class Photo : MonoBehaviour
 
     private bool playerCanRaisePhoto = false;
 
+    private FMOD.Studio.EventInstance introVoiceOverInstance;
+
     // Only use this method for player input
     public void ShowPhoto()
     {
@@ -37,7 +39,11 @@ public class Photo : MonoBehaviour
     private void Awake()
     {
         time = HOW_LONG_TO_KEEP_IT_UP_FOR_CINEMATICS; // Ensure that photo is down to start
+
+        introVoiceOverInstance = FMODUnity.RuntimeManager.CreateInstance("event:/VO/What_Is_Home_Intro");
+
         EventBus.Subscribe<ExitTitleScreenEvent>(OnExitTitleScreenEvent);
+        EventBus.Subscribe<EnterTitleScreenEvent>(OnEnterTitleScreen);
     }
 
     void Update()
@@ -53,6 +59,13 @@ public class Photo : MonoBehaviour
                 transform.Rotate(new Vector3(1,0,0) * Time.deltaTime * rotationSpeed * 2.0f);
             }
         }
+    }
+
+    private void OnEnterTitleScreen(EnterTitleScreenEvent e)
+    {
+        StopCoroutine(HoldUpPhotoAtStart());
+        introVoiceOverInstance.stop(FMOD.Studio.STOP_MODE.IMMEDIATE);
+        introVoiceOverInstance.release();
     }
 
     private void OnExitTitleScreenEvent(ExitTitleScreenEvent e)
@@ -71,9 +84,9 @@ public class Photo : MonoBehaviour
 
         // Wait for boot up sequence to end
         yield return new WaitForSeconds(5.8f);
-        var intro = FMODUnity.RuntimeManager.CreateInstance("event:/VO/What_Is_Home_Intro");
-        intro.start();
-        intro.release();
+        // introVoiceOverInstance = FMODUnity.RuntimeManager.CreateInstance("event:/VO/What_Is_Home_Intro");
+        introVoiceOverInstance.start();
+        introVoiceOverInstance.release();
         // While glitching, ask "What is home?"
 
         // Wait until "Is this HOME?" to pull up photo
