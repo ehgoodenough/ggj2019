@@ -22,7 +22,6 @@ public class PlayerEnergy : MonoBehaviour
     public float baselineDepletionRate = 0.1f;
     public float walkingDepletionRate = 0.15f;
     public float runningDepletionRate = 0.3f;
-    // public float maxDepletionRate = 0.25f;
 
     private EnergyState currentEnergyState = EnergyState.Idle;
     private EnergyState previousEnergyState = EnergyState.Idle;
@@ -32,48 +31,48 @@ public class PlayerEnergy : MonoBehaviour
 
     private float logFrequency = 1f;
 
-    private StateMachine gameStateMachine;
-
     bool isPoweringDown = false;
 
     private void Awake()
     {
-        currentEnergy = startingEnergy;
-        currentMaxEnergy = initialMaxEnergy;
+        Initialize();
 
-        EventBus.Subscribe<EnterHomeEvent>(OnEnterHomeEvent);
-        EventBus.Subscribe<EnterCityEvent>(OnEnterCityEvent);
-        EventBus.Subscribe<ExitHomeEvent>(OnExitHomeEvent);
-        EventBus.Subscribe<ExitCityEvent>(OnExitCityEvent);
+        EventBus.Subscribe<EnterTitleScreenEvent>(e => Initialize());
+        EventBus.Subscribe<EnterHomeEvent>(e => currentEnergyState = EnergyState.Recharging);
+        EventBus.Subscribe<EnterCityEvent>(e => currentEnergyState = EnergyState.Depleting);
+        EventBus.Subscribe<ExitHomeEvent>(e => currentEnergyState = EnergyState.Idle);
+        EventBus.Subscribe<ExitCityEvent>(e => currentEnergyState = EnergyState.Idle);
 
         EventBus.Subscribe<PauseMenuEngagedEvent>(OnPauseMenuEngagedEvent);
         EventBus.Subscribe<PauseMenuDisengagedEvent>(OnPauseMenuDisengagedEvent);
 
         movement = GetComponent<PlayerMovement>();
         rb = GetComponent<Rigidbody>();
+    }
 
-        gameStateMachine = FindObjectOfType<GameStateTitleScreen>().GetComponent<StateMachine>();
+    private void Initialize()
+    {
+        previousEnergyState = EnergyState.Idle;
+        currentEnergyState = EnergyState.Idle;
+
+        currentEnergy = startingEnergy;
+        currentMaxEnergy = initialMaxEnergy;
     }
 
     private void Start()
     {
-        StartCoroutine(LogCurrentEnergy());
+        // StartCoroutine(LogCurrentEnergy());
     }
 
     private void Update()
     {
-        if (gameStateMachine.currentState.GetType() != typeof(GameStateTitleScreen))
+        if (currentEnergyState == EnergyState.Recharging)
         {
-            // if (gameStateMachine.currentState.GetType() == typeof(GameStateHome))
-            if (currentEnergyState == EnergyState.Recharging)
-            {
-                HandleRecharging();
-            }
-            // else if (gameStateMachine.currentState.GetType() == typeof(GameStateCity))
-            else if (currentEnergyState == EnergyState.Depleting)
-            {
-                HandleDepleting();
-            }
+            HandleRecharging();
+        }
+        else if (currentEnergyState == EnergyState.Depleting)
+        {
+            HandleDepleting();
         }
 
         /* Uncomment if you want to cheat
@@ -82,32 +81,6 @@ public class PlayerEnergy : MonoBehaviour
             currentEnergy = currentMaxEnergy;
         }
         */
-    }
-
-    IEnumerator LogCurrentEnergy()
-    {
-        while (true)
-        {
-            // Debug.Log("Current Energy: " + currentEnergy);
-            if (currentEnergyState == EnergyState.Depleting)
-            {
-                // Debug.Log("Current Speed: " + movement.GetCurrentSpeed());
-                // Debug.Log("Max Speed: " + movement.speed);
-                // Debug.Log("Normalized Speed: " + (movement.GetCurrentSpeed() / movement.speed));
-                // Debug.Log("Depletion Amount: " + CalculateDepletionAmount(logFrequency));
-            }
-            yield return new WaitForSeconds(logFrequency);
-        }
-    }
-
-    public float GetCurrentEnergy()
-    {
-        return currentEnergy;
-    }
-
-    public float GetCurrentMaxEnergy()
-    {
-        return currentMaxEnergy;
     }
 
     public void IncrementMaxEnergy()
@@ -142,12 +115,16 @@ public class PlayerEnergy : MonoBehaviour
         float runningNormalized = Mathf.Clamp01((currentSpeed - movement.walkingMaxSpeed) / (movement.runningMaxSpeed - movement.walkingMaxSpeed));
         float currentDepletionRate = baselineDepletionRate + (walkingDepletionRate * walkingNormalized) + (runningNormalized * runningNormalized);
         return currentDepletionRate * depletionTime;
+    }
 
-        /*
-        float normalizedSpeed = movement.GetCurrentSpeed() / movement.runningMaxSpeed;
-        float depletionAmount = (baselineDepletionRate + normalizedSpeed * (maxDepletionRate - baselineDepletionRate)) * depletionTime;
-        return depletionAmount;
-        */
+    public float GetCurrentEnergy()
+    {
+        return currentEnergy;
+    }
+
+    public float GetCurrentMaxEnergy()
+    {
+        return currentMaxEnergy;
     }
 
     private void OnPauseMenuEngagedEvent(PauseMenuEngagedEvent e)
@@ -161,27 +138,21 @@ public class PlayerEnergy : MonoBehaviour
         currentEnergyState = previousEnergyState;
     }
 
-    private void OnEnterHomeEvent(EnterHomeEvent e)
-    {
-        // Debug.Log("PlayerEnergy.OnEnterHomeEvent()");
-        currentEnergyState = EnergyState.Recharging;
-    }
+    /// METHODS BELOW FOR DEBUG PURPOSES ONLY
 
-    private void OnEnterCityEvent(EnterCityEvent e)
+    IEnumerator LogCurrentEnergy()
     {
-        // Debug.Log("PlayerEnergy.OnEnterCityEvent()");
-        currentEnergyState = EnergyState.Depleting;
-    }
-
-    private void OnExitHomeEvent(ExitHomeEvent e)
-    {
-        // Debug.Log("PlayerEnergy.OnExitHomeEvent()");
-        currentEnergyState = EnergyState.Idle;
-    }
-
-    private void OnExitCityEvent(ExitCityEvent e)
-    {
-        // Debug.Log("PlayerEnergy.OnExitCityEvent()");
-        currentEnergyState = EnergyState.Idle;
+        while (true)
+        {
+            // Debug.Log("Current Energy: " + currentEnergy);
+            if (currentEnergyState == EnergyState.Depleting)
+            {
+                Debug.Log("Current Speed: " + movement.GetCurrentSpeed());
+                Debug.Log("Max Speed: " + movement.GetCurrentMaxSpeed());
+                Debug.Log("Normalized Speed: " + (movement.GetCurrentSpeed() / movement.GetCurrentMaxSpeed()));
+                Debug.Log("Depletion Amount: " + CalculateDepletionAmount(logFrequency));
+            }
+            yield return new WaitForSeconds(logFrequency);
+        }
     }
 }
