@@ -31,6 +31,12 @@ public class PlayerMovement : MonoBehaviour
     {
         slowingModifiers = GetComponents<ISlowingModifier>();
 
+        EventBus.Subscribe<EnterTitleScreenEvent>(e =>
+        {
+            RestrictGravity(true);
+            RestrictMovement(true);
+        });
+
         EventBus.Subscribe<PlayerStartPositionEvent>(e => SpawnAtStartPosition(e.startTransform));
         EventBus.Subscribe<PhotoLoweredAtStartEvent>(e => RestrictMovement(false));
         EventBus.Subscribe<ObjectiveCompletedCutsceneStartEvent>(e => RestrictMovement(true));
