@@ -44,6 +44,9 @@ public class AmbianceManager : MonoBehaviour
         homeMusicInstance.stop(FMOD.Studio.STOP_MODE.IMMEDIATE);
 
         thunderAmbianceInstance.setTimelinePosition(0);
+        FMOD.Studio.ParameterInstance param;
+        thunderAmbianceInstance.getParameter("Location", out param);
+        param.setValue(0);
         thunderAmbianceInstance.start();
     }
 
