@@ -16,6 +16,7 @@ public class PlayerView : MonoBehaviour
 
         cameraRotation = virtualCamera.transform.rotation.eulerAngles.x;
 
+        EventBus.Subscribe<EnterTitleScreenEvent>(e => RestrictView(true));
         EventBus.Subscribe<PlayerStartPositionEvent>(e => SpawnAtStartPosition(e.startTransform));
         EventBus.Subscribe<PhotoLoweredAtStartEvent>(e => RestrictView(false));
         EventBus.Subscribe<ObjectiveCompletedCutsceneStartEvent>(e => RestrictView(true));
@@ -47,15 +48,15 @@ public class PlayerView : MonoBehaviour
         isViewRestricted = restrictView;
     }
 
-    public void ResetCamera()
-    {
-        cameraRotation = 0;
-        virtualCamera.transform.localRotation = Quaternion.Euler(new Vector3(0, 0, 0));
-    }
-
     private void SpawnAtStartPosition(Transform startTransform)
     {
         this.transform.rotation = startTransform.rotation;
         ResetCamera();
+    }
+
+    private void ResetCamera()
+    {
+        cameraRotation = 0;
+        virtualCamera.transform.localRotation = Quaternion.Euler(new Vector3(0, 0, 0));
     }
 }

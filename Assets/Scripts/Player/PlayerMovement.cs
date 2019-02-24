@@ -104,6 +104,7 @@ public class PlayerMovement : MonoBehaviour
     
     public Vector3 GetCurrentMovementVectorInWorldSpace()
     {
+        if (isMovementRestricted) return Vector3.zero;
         return this.transform.TransformDirection(movementVector.normalized);
     }
 
