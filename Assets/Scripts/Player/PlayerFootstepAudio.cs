@@ -18,14 +18,21 @@ public class PlayerFootstepAudio : MonoBehaviour
 
     private void Awake()
     {
-        // Debug.Log("PlayerFootstepAudio.Awake()");
+        Initialize();
 
         playerMovement = GetComponent<PlayerMovement>();
 
+        EventBus.Subscribe<EnterTitleScreenEvent>(e => Initialize());
         EventBus.Subscribe<EnterHomeEvent>(OnEnterHomeEvent);
         EventBus.Subscribe<EnterCityEvent>(OnEnterCityEvent);
         EventBus.Subscribe<ExitHomeEvent>(OnExitHomeEvent);
         EventBus.Subscribe<ExitCityEvent>(OnExitCityEvent);
+    }
+
+    private void Initialize()
+    {
+        muteFootsteps = true;
+        outside = false;
     }
 
     void FixedUpdate()
