@@ -16,7 +16,7 @@ public class PlayerInputDefaultState : PlayerInputState
     private Photo photo;
 
     private bool canPause = false;
-
+    
     protected override void DoAwake()
     {
         // Debug.Log("PlayerInputDefaultState.DoAwake()");
@@ -30,6 +30,7 @@ public class PlayerInputDefaultState : PlayerInputState
 
         // gameStateMachine = FindObjectOfType<GameStateTitleScreen>().GetComponent<StateMachine>();
 
+        EventBus.Subscribe<EnterTitleScreenEvent>(e => canPause = false);
         EventBus.Subscribe<PhotoLoweredAtStartEvent>(e => canPause = true);
         EventBus.Subscribe<ObjectiveCompletedCutsceneStartEvent>(e => canPause = false);
         EventBus.Subscribe<ObjectiveCompletedCutsceneEndEvent>(e => canPause = true);
