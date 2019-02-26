@@ -78,6 +78,18 @@ public struct SwitchFocusToResumeOptionEvent { }
 
 public struct SwitchFocusToQuitOptionEvent { }
 
+public struct PlayerHitsGroundEvent
+{
+    public Vector3 velocity;
+    public PlayerHitsGroundEvent(Vector3 velocity) { this.velocity = velocity; }
+}
+
+public struct PlayerLeavesGroundEvent
+{
+    public Vector3 velocity;
+    public PlayerLeavesGroundEvent(Vector3 velocity) { this.velocity = velocity; }
+}
+
 public struct ObjectiveCompletedCutsceneStartEvent { }
 
 public struct ObjectiveCompletedCutsceneEndEvent { }

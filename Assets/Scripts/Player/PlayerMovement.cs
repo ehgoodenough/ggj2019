@@ -9,6 +9,7 @@ public interface ISlowingModifier
 }
 
 [RequireComponent(typeof(Rigidbody))]
+[RequireComponent(typeof(PlayerGroundChecker))]
 public class PlayerMovement : MonoBehaviour
 {
     // Base movement speeds
@@ -27,6 +28,8 @@ public class PlayerMovement : MonoBehaviour
     private Rigidbody rb;
     private ISlowingModifier[] slowingModifiers;
 
+    /// MONOBEHAVIOR METHODS
+
     private void Awake()
     {
         slowingModifiers = GetComponents<ISlowingModifier>();
@@ -44,7 +47,7 @@ public class PlayerMovement : MonoBehaviour
         EventBus.Subscribe<PlayerHasWonEvent>(e => RestrictMovement(true));
     }
 
-    void Start()
+    private void Start()
     {
         // Debug.Log("PlayerMovement.Start()");
         movementVector = Vector3.zero;
@@ -65,7 +68,7 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
-    void FixedUpdate()
+    private void FixedUpdate()
     {
         if (!isMovementRestricted)
         {
@@ -80,6 +83,8 @@ public class PlayerMovement : MonoBehaviour
             rb.AddForce(Physics.gravity, ForceMode.Acceleration);
         }
     }
+
+    /// MOVEMENT PUBLIC METHODS
 
     public void Move(Vector3 movementVector, bool isRunning = false)
     {
@@ -108,12 +113,14 @@ public class PlayerMovement : MonoBehaviour
         return this.transform.TransformDirection(movementVector.normalized);
     }
 
-    public void RestrictMovement(bool restrictMovement)
+    /// MOVEMENT PRIVATE METHODS
+
+    private void RestrictMovement(bool restrictMovement)
     {
         isMovementRestricted = restrictMovement;
     }
 
-    public void RestrictGravity(bool restrictGravity)
+    private void RestrictGravity(bool restrictGravity)
     {
         isGravityRestricted = restrictGravity;
     }
