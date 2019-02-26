@@ -744,7 +744,7 @@ MonoBehaviour:
   groundLayers:
     serializedVersion: 2
     m_Bits: 11793
-  checkFrequency: 0.5
+  checkFrequency: 0.08
 --- !u!1 &8936142915627543873
 GameObject:
   m_ObjectHideFlags: 0

@@ -54,7 +54,7 @@ public class PlayerGroundChecker : MonoBehaviour
                     EventBus.PublishEvent(new PlayerLeavesGroundEvent(rb.velocity));
                 }
                 
-                Debug.Log("Is Grounded: " + isGrounded);
+                // Debug.Log("Is Grounded: " + isGrounded);
             }
             yield return new WaitForSeconds(checkFrequency);
         }

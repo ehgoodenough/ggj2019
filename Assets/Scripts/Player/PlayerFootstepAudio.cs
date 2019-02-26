@@ -27,6 +27,8 @@ public class PlayerFootstepAudio : MonoBehaviour
         EventBus.Subscribe<EnterCityEvent>(OnEnterCityEvent);
         EventBus.Subscribe<ExitHomeEvent>(OnExitHomeEvent);
         EventBus.Subscribe<ExitCityEvent>(OnExitCityEvent);
+        EventBus.Subscribe<PlayerLeavesGroundEvent>(e => muteFootsteps = true);
+        EventBus.Subscribe<PlayerHitsGroundEvent>(e => muteFootsteps = false);
     }
 
     private void Initialize()
