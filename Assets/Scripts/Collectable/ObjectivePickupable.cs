@@ -30,6 +30,8 @@ public class ObjectivePickupable : Pickupable
     {
         base.Pickup(holdPoint, parent);
 
+        // SetToLayer("HeldObjective"); // Uncomment to test rendering held objective over other layers
+
         FMODUnity.RuntimeManager.PlayOneShot("event:/SFX/Interactables/Grab_Item", transform.position);
         FMODUnity.RuntimeManager.PlayOneShot("event:/VO/Object_Found", transform.position);
 
@@ -43,6 +45,18 @@ public class ObjectivePickupable : Pickupable
     {
         base.Drop();
 
+        // SetToLayer("Color"); // Uncomment to test rendering held objective over other layers
+
         obstacle.enabled = true;
+    }
+
+    private void SetToLayer(string layerName)
+    {
+        Renderer[] rends = this.gameObject.GetComponentsInChildren<Renderer>(true);
+
+        foreach (Renderer rend in rends)
+        {
+            rend.gameObject.layer = LayerMask.NameToLayer(layerName);
+        }
     }
 }
