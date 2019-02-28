@@ -8,7 +8,8 @@ public class HeldObjectiveCamera : MonoBehaviour
 
     private void Awake()
     {
-        EventBus.Subscribe<EnterHomeEvent>(e => cam.enabled = true);
-        EventBus.Subscribe<EnterTitleScreenEvent>(e => cam.enabled = false);
+        // For now, let's keep this disabled
+        // EventBus.Subscribe<EnterHomeEvent>(e => cam.enabled = true);
+        // EventBus.Subscribe<EnterTitleScreenEvent>(e => cam.enabled = false);
     }
 }
