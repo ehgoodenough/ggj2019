@@ -10,7 +10,7 @@ public class PlayerEnergy : MonoBehaviour
         Idle
     }
 
-    public float startingEnergy = 10f;
+    public float startingEnergy = 5f;
     [SerializeField]
     private float currentEnergy;
 
@@ -18,7 +18,7 @@ public class PlayerEnergy : MonoBehaviour
     public float incrementMaxAmount = 10f;
     private float currentMaxEnergy;
 
-    public float rechargingRate = 1.25f;
+    public float rechargingRate = 3.0f;
     public float baselineDepletionRate = 0.1f;
     public float walkingDepletionRate = 0.15f;
     public float runningDepletionRate = 0.3f;
@@ -37,7 +37,12 @@ public class PlayerEnergy : MonoBehaviour
     {
         Initialize();
 
-        EventBus.Subscribe<EnterTitleScreenEvent>(e => Initialize());
+        EventBus.Subscribe<IntroBootUpTextCompleteEvent>(e => 
+            {
+                Initialize();
+                currentEnergyState = EnergyState.Recharging;
+            });
+
         EventBus.Subscribe<EnterHomeEvent>(e => currentEnergyState = EnergyState.Recharging);
         EventBus.Subscribe<EnterCityEvent>(e => currentEnergyState = EnergyState.Depleting);
         EventBus.Subscribe<ExitHomeEvent>(e => currentEnergyState = EnergyState.Idle);

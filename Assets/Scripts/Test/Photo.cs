@@ -82,7 +82,11 @@ public class Photo : MonoBehaviour
         // WHAT is home?
 
         // Wait for boot up sequence to end
-        yield return new WaitForSeconds(5.8f);
+        yield return new WaitForSeconds(5f);
+        EventBus.PublishEvent(new IntroBootUpTextCompleteEvent());
+
+        // Allow home to fade into view
+        yield return new WaitForSeconds(0.8f);
         introVoiceOverInstance = FMODUnity.RuntimeManager.CreateInstance("event:/VO/What_Is_Home_Intro");
         introVoiceOverInstance.start();
         introVoiceOverInstance.release();

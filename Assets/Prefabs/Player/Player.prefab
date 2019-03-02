@@ -722,7 +722,7 @@ MonoBehaviour:
   currentEnergy: 0
   initialMaxEnergy: 50
   incrementMaxAmount: 10
-  rechargingRate: 1.25
+  rechargingRate: 3
   baselineDepletionRate: 0.08
   walkingDepletionRate: 0.12
   runningDepletionRate: 0.24
@@ -862,8 +862,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8936142915627543873}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.5, z: 0}
+  m_LocalRotation: {x: -0.056812696, y: 0.7050934, z: 0.05685695, w: 0.70454454}
+  m_LocalPosition: {x: -59.5, y: 9.2, z: 44.435}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 8936142914703474574}
@@ -897,7 +897,7 @@ Camera:
     width: 1
     height: 1
   near clip plane: 0.1
-  far clip plane: 1000
+  far clip plane: 5000
   field of view: 60
   orthographic: 0
   orthographic size: 5

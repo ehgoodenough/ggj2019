@@ -66,7 +66,11 @@ public struct PlayerStartPositionEvent
     public PlayerStartPositionEvent(Transform startTransform) { this.startTransform = startTransform; }
 }
 
+public struct IntroBootUpTextCompleteEvent { }
+
 public struct PhotoLoweredAtStartEvent { }
+
+public struct OpeningVoiceLineDoneEvent { }
 
 public struct PauseMenuEngagedEvent { }
 
@@ -97,8 +101,6 @@ public struct ObjectiveCompletedCutsceneEndEvent { }
 public struct PlayerHasWonEvent { }
 
 public struct FriendFullyAssembledEvent { }
-
-public struct OpeningVoiceLineDoneEvent { }
 
 public struct ObjectiveItemPickedUpEvent
 {
